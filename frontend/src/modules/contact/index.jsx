@@ -1,8 +1,8 @@
 import React from 'react'
 
 import Logo from '../../ui/logo'
-import Link from '../../ui/link'
-import Title from '../../ui/title'
+import Link from '../../ui/links/link'
+import Title from '../../ui/titles/title'
 
 const Home = () => {
   return (<>

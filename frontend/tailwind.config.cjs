@@ -15,6 +15,9 @@ module.exports = {
                 },
                 night: '#111111',
                 white: '#ebebeb',
+                success: '#257428',
+                warning: '#a35321',
+                danger: '#9c0f0f',
             },
             fontFamily: {
                 display: ['Montserrat', 'sans-serif'],
