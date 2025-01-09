@@ -17,7 +17,7 @@ module.exports = {
                 white: '#ebebeb',
             },
             fontFamily: {
-                sans: ['Arial', 'sans-serif'],
+                display: ['Montserrat', 'sans-serif'],
             },
         },
     },
