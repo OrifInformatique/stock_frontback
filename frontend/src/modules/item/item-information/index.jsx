@@ -8,7 +8,7 @@ const ItemInformation = () => {
 
     return (
         <div>
-            <h1>Information for item {id}</h1>
+            <h1>{t('test')} {id}</h1>
         </div>
     );
 }
