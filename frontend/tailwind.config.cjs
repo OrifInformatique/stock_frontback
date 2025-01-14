@@ -14,7 +14,7 @@ module.exports = {
                     dark: '#a58d5f',
                 },
                 night: '#111111',
-                white: '#ebebeb',
+                white: '#ffffff',
                 success: '#257428',
                 warning: '#a35321',
                 danger: '#9c0f0f',

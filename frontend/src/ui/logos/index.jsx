@@ -1,10 +1,10 @@
-import React from 'react'
-import clsx from 'clsx'
+import React from 'react';
+import clsx from 'clsx';
 
-const Logo = ({ className}) => {
-  return (<>
-    <img className={clsx("w-48 sm:w-96", className)} src="images/logo.svg" />
-  </>)
+const Logo = ({ className }) => {
+  return (
+    <img className={clsx("h-10", className)} src="/images/logo.png" />
+  );
 }
 
-export default Logo
+export default Logo;
