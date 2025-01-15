@@ -1,7 +1,8 @@
 import React from "react";
 
 // Declinations
-import LinkAuth from './LinkAuth';
+import LinkAuth from "./LinkAuth";
+import LinkHistory from "./LinkHistory";
 
 const Link = ({ className, to, children }) => {
     return (
@@ -10,6 +11,7 @@ const Link = ({ className, to, children }) => {
 }
 
 Link.Auth = LinkAuth;
+Link.History = LinkHistory;
 
-export { Link, LinkAuth }
+export { Link, LinkAuth, LinkHistory }
 export default Link;

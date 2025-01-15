@@ -5,7 +5,9 @@ import Header from '../modules/header';
 const MainLayout = () => {
   return (<>
       <Header />
-      <Outlet />
+      <div className="m-4">
+        <Outlet />
+      </div>
   </>)
 }
 

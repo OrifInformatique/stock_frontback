@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 const Separator = ({ className }) => {
     return (
-        <hr className={clsx("border-secondary-light mx-2", className)} />
+        <hr className={clsx("border-secondary-light my-4", className)} />
     );
 }
 
