@@ -9,6 +9,7 @@ import ItemCommonDetail from "./item-common-detail";
 // UI elements
 import Button from "../../../ui/buttons";
 import Icon from "../../../ui/icons";
+import Image from "../../../ui/images";
 import Link from "../../../ui/links";
 import Separator from "../../../ui/separators";
 import Title from "../../../ui/titles";
@@ -19,19 +20,19 @@ const ItemInformation = () => {
     const { t } = useTranslation("itemInformation");
 
     return (
-        <div className="flex flex-col">
+        <div>
             {/* Toolbar */}
             <Toolbar>
                 <Button.Toolbar>
                     <Button.Icon className="rounded-l-full w-10">
-                        <Icon.Back className="h-6" />
+                        <Icon.Back className="h-8" />
                     </Button.Icon>
                     <Button.Label>{t("back")}</Button.Label>
                 </Button.Toolbar>
                 <Button.Toolbar>
                     <Button.Label>{t("scan")}</Button.Label>
                     <Button.Icon className="rounded-r-full w-10">
-                        <Icon.Scan className="h-6" />
+                        <Icon.Scan className="h-8" />
                     </Button.Icon>
                 </Button.Toolbar>
             </Toolbar>
@@ -60,6 +61,13 @@ const ItemInformation = () => {
                     </Button.Icon>
                 </Button.Outlined>
             </div>
+
+            {/* Item common image */}
+            <Image.ItemCommon src="/images/0307_picture.png" entity="Orif Vaulruz" itemCommonId={id} />
+
+            {/* Item and item common detail */}
+            <ItemDetail />
+            <ItemCommonDetail />
         </div>
     );
 }
