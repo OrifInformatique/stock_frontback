@@ -39,16 +39,26 @@ const ItemInformation = () => {
             <Separator />
 
             {/* Page title section */}
-            <div className="flex items-center justify-between gap-2">
-                <Title.Page className="flex-1">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                <Title.Page className="flex-1 min-w-48">
                     ASUS Carte Wireless Wi-Fi PCE-N15
                 </Title.Page>
                 <Link.History />
             </div>
 
             {/* Loan and control buttons */}
-            <div>
-                
+            <div className="flex justify-between gap-4 mt-2">
+                <Button.Filled>
+                    <Button.Label className="text-white">
+                        {t("new-loan")}
+                    </Button.Label>
+                </Button.Filled>
+                <Button.Outlined>
+                    <Button.Label>{t("control")}</Button.Label>
+                    <Button.Icon>
+                        <Icon.Add className="h-6" />
+                    </Button.Icon>
+                </Button.Outlined>
             </div>
         </div>
     );

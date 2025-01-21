@@ -7,7 +7,7 @@ import Text from "../texts";
 const ButtonLabel = ({ className, children }) => {
     return (
         <div className="mx-auto p-1">
-            <Text className={clsx("text-primary group-hover:text-primary-light", className)}>
+            <Text className={clsx("text-primary px-2 whitespace-nowrap group-hover:text-primary-light", className)}>
                 {children}
             </Text>
         </div>

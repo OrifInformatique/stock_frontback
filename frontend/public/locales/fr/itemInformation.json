@@ -1,4 +1,8 @@
 {
     "back": "Retour",
-    "scan": "Scan"
+    "scan": "Scan",
+
+    "control": "Contrôle",
+    "new-loan": "Nouveau prêt",
+    "return-loan": "Retour du prêt"
 }
