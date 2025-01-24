@@ -1,11 +1,12 @@
 import React from "react";
 import clsx from "clsx";
 
-const ButtonToolbar = ({ className, children }) => {
+const ButtonToolbar = ({ className, variant, children }) => {
     return (
-        <button className={clsx("group border border-primary hover:border-primary-light rounded-full min-w-32", className)}>
+        <button className={clsx(`group border border-primary hover:border-${variant} rounded-full min-w-32`, className)}>
             <div className="flex justify-start items-center rounded-full">
-                {children}
+                {React.Children.map(children, (child) => 
+                React.cloneElement(child, {variant}))}
             </div>
         </button>
     );

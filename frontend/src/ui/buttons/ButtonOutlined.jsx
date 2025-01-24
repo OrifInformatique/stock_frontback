@@ -1,11 +1,13 @@
 import React from "react";
 import clsx from "clsx";
 
-const ButtonOutlined = ({ className, children }) => {
+const ButtonOutlined = ({ className, variant, children }) => {
     return (
-        <button className={clsx("group rounded-sm border border-primary hover:border-primary-light min-w-34", className)}>
+        <button className={clsx(`group border border-primary bg-white rounded-sm hover:border-${variant} max-w-36`, className)}>
             <div className="flex">
-                {children}
+                {React.Children.map(children, (child) =>
+                    React.cloneElement(child, {variant})
+                )}
             </div>
         </button>
     );

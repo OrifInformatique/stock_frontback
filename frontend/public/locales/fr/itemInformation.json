@@ -5,6 +5,8 @@
     "control": "Contrôle",
     "new-loan": "Nouveau prêt",
     "return-loan": "Retour du prêt",
+    "edit": "Modifier",
+    "delete": "Supprimer",
 
     "image": "Image"
 }

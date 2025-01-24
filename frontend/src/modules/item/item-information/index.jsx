@@ -23,15 +23,15 @@ const ItemInformation = () => {
         <div>
             {/* Toolbar */}
             <Toolbar>
-                <Button.Toolbar>
+                <Button.Toolbar variant="primary-light">
                     <Button.Icon className="rounded-l-full w-10">
                         <Icon.Back className="h-8" />
                     </Button.Icon>
                     <Button.Label>{t("back")}</Button.Label>
                 </Button.Toolbar>
-                <Button.Toolbar>
+                <Button.Toolbar variant="primary-light">
                     <Button.Label>{t("scan")}</Button.Label>
-                    <Button.Icon className="rounded-r-full w-10">
+                    <Button.Icon className="rounded-r-full w-12">
                         <Icon.Scan className="h-8" />
                     </Button.Icon>
                 </Button.Toolbar>
@@ -48,13 +48,13 @@ const ItemInformation = () => {
             </div>
 
             {/* Loan and control buttons */}
-            <div className="flex justify-between gap-4 mt-2">
-                <Button.Filled>
+            <div className="flex gap-4 mt-2">
+                <Button.Filled variant="success">
                     <Button.Label className="text-white">
                         {t("new-loan")}
                     </Button.Label>
                 </Button.Filled>
-                <Button.Outlined>
+                <Button.Outlined variant="success">
                     <Button.Label>{t("control")}</Button.Label>
                     <Button.Icon>
                         <Icon.Add className="h-6" />
@@ -62,12 +62,12 @@ const ItemInformation = () => {
                 </Button.Outlined>
             </div>
 
-            {/* Item common image */}
-            <Image.ItemCommon src="/images/0307_picture.png" entity="Orif Vaulruz" itemCommonId={id} />
-
             {/* Item and item common detail */}
-            <ItemDetail />
             <ItemCommonDetail />
+
+            <Separator />
+
+            <ItemDetail />
         </div>
     );
 }
