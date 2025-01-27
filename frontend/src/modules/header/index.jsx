@@ -13,7 +13,7 @@ const Header = () => {
         <div className="flex w-full items-baseline gap-1 bg-primary shadow py-4 px-2">
             <Logo />
             <Title.App>{t('app-title')}</Title.App>
-            <Link.Auth className="ml-auto" to="" />
+            <Link.Auth className="text-white ml-auto" to="" />
         </div>
     );
 }

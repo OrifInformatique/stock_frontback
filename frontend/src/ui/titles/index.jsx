@@ -1,6 +1,7 @@
 import React from "react";
 
 // Declinations
+import Subtitle from "./Subtitle";
 import TitleApp from "./TitleApp";
 import TitlePage from "./TitlePage";
 
@@ -12,6 +13,7 @@ const Title = ({ children }) => {
 
 Title.App = TitleApp;
 Title.Page = TitlePage;
+Title.Sub = Subtitle;
 
-export {Title, TitleApp}
+export {Title, TitleApp, Subtitle}
 export default Title;

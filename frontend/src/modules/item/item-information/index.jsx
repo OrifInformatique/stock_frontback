@@ -23,16 +23,16 @@ const ItemInformation = () => {
         <div>
             {/* Toolbar */}
             <Toolbar>
-                <Button.Toolbar variant="primary-light">
+                <Button.Toolbar>
                     <Button.Icon className="rounded-l-full w-10">
-                        <Icon.Back className="h-8" />
+                        <Icon.Back className="text-white h-8" />
                     </Button.Icon>
                     <Button.Label>{t("back")}</Button.Label>
                 </Button.Toolbar>
-                <Button.Toolbar variant="primary-light">
+                <Button.Toolbar>
                     <Button.Label>{t("scan")}</Button.Label>
                     <Button.Icon className="rounded-r-full w-12">
-                        <Icon.Scan className="h-8" />
+                        <Icon.Scan className="text-white h-8" />
                     </Button.Icon>
                 </Button.Toolbar>
             </Toolbar>
@@ -57,15 +57,13 @@ const ItemInformation = () => {
                 <Button.Outlined variant="success">
                     <Button.Label>{t("control")}</Button.Label>
                     <Button.Icon>
-                        <Icon.Add className="h-6" />
+                        <Icon.Add className="text-white h-6" />
                     </Button.Icon>
                 </Button.Outlined>
             </div>
 
             {/* Item and item common detail */}
             <ItemCommonDetail />
-
-            <Separator />
 
             <ItemDetail />
         </div>

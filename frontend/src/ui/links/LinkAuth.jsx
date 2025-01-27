@@ -6,7 +6,7 @@ import Icon from "../icons";
 const LinkAuth = ({ className, to }) => {
     return (
         <a className={className} href={to}>
-            <Icon.Auth className="h-10" />
+            <Icon.User className="h-10" />
         </a>
     );
 }

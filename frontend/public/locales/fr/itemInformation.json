@@ -1,12 +1,18 @@
 {
-    "back": "Retour",
-    "scan": "Scan",
+    "back":                 "Retour",
+    "scan":                 "Scan",
+    "edit":                 "Modifier",
+    "delete":               "Supprimer",
 
-    "control": "Contrôle",
-    "new-loan": "Nouveau prêt",
-    "return-loan": "Retour du prêt",
-    "edit": "Modifier",
-    "delete": "Supprimer",
-
-    "image": "Image"
+    "control":              "Contrôle",
+    "last_control":         "Dernier contrôle",
+    "new-loan":             "Nouveau prêt",
+    "return-loan":          "Retour du prêt",
+    "stocking_place":       "Lieu de stockage",
+    "serial_number":        "Numéro de série",
+    "supplier":             "Fournisseur",
+    "buying_price":         "Prix d'achat",
+    "buying_date":          "Date d'achat",
+    "warranty_duration":    "Durée garantie",
+    "image":                "Image"
 }

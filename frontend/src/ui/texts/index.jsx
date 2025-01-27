@@ -1,9 +1,9 @@
 import React from "react";
 import clsx from "clsx";
 
-const Text = ({ className, children }) => {
+const Text = ({ className, color, children }) => {
     return (
-        <div className={clsx("text-night", className)}>{children}</div>
+        <div className={clsx(`text-${color || "night"}`, className)}>{children}</div>
     );
 }
 
