@@ -1,15 +1,14 @@
 import React from "react";
 
-// UI elements
-import Text from "../texts";
-
 // Declinations
 import SectionText from "./SectionText";
 
 const Section = ({ header, children }) => {
     return (
         <div>
-            <Text color="primary" className="font-semibold text-sm">{header}</Text>
+            <div className="text-primary font-semibold text-sm">
+                {header}
+            </div>
             {children}
         </div>
     );

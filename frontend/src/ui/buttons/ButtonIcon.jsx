@@ -5,7 +5,7 @@ const ButtonIcon = ({ className, variant, children }) => {
     return (
         <div
             className={clsx(
-                `flex justify-center items-center bg-primary group-hover:bg-${variant} p-1`,
+                "flex justify-center items-center bg-primary p-1",
                 {
                     "group-hover:bg-primary-light": !variant,
                     "group-hover:bg-success": variant === "success",

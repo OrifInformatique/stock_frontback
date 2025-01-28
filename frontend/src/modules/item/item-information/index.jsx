@@ -27,10 +27,14 @@ const ItemInformation = () => {
                     <Button.Icon className="rounded-l-full w-10">
                         <Icon.Back className="text-white h-8" />
                     </Button.Icon>
-                    <Button.Label>{t("back")}</Button.Label>
+                    <Button.Label className="text-primary">
+                        {t("back")}
+                    </Button.Label>
                 </Button.Toolbar>
                 <Button.Toolbar>
-                    <Button.Label>{t("scan")}</Button.Label>
+                    <Button.Label className="text-primary">
+                        {t("scan")}
+                    </Button.Label>
                     <Button.Icon className="rounded-r-full w-12">
                         <Icon.Scan className="text-white h-8" />
                     </Button.Icon>
@@ -49,13 +53,15 @@ const ItemInformation = () => {
 
             {/* Loan and control buttons */}
             <div className="flex gap-4 mt-2">
-                <Button.Filled variant="success">
+                <Button.Filled variant="success" className="flex-1">
                     <Button.Label className="text-white">
                         {t("new-loan")}
                     </Button.Label>
                 </Button.Filled>
-                <Button.Outlined variant="success">
-                    <Button.Label>{t("control")}</Button.Label>
+                <Button.Outlined variant="success" className="flex-1">
+                    <Button.Label className="text-primary">
+                        {t("control")}
+                    </Button.Label>
                     <Button.Icon>
                         <Icon.Add className="text-white h-6" />
                     </Button.Icon>

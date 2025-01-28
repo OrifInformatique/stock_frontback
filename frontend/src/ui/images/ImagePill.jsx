@@ -1,9 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 
-// UI elements
-import Text from "../texts";
-
 const ImagePill = ({ className, children }) => {
     return (
         <div
@@ -11,12 +8,11 @@ const ImagePill = ({ className, children }) => {
                 "absolute bg-primary bg-opacity-70 bottom-6 -left-2 rounded-r-full px-3 py-1",
                 className)}
         >
-            <Text
-                color="white"
-                className="text-sm font-medium"
+            <div
+                className="text-white text-sm font-medium"
             >
                 {children}
-            </Text>
+            </div>
         </div>
     );
 }

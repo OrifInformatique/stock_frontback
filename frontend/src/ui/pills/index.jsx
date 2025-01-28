@@ -1,21 +1,22 @@
 import React from "react";
 import clsx from "clsx";
 
-// UI elements
-import Text from "../texts";
-
 const Pill = ({ className, variant, children }) => {
     return (
-        <Text
-            color="white"
+        <div
             className={clsx(
-                `flex-wrap text-xs whitespace-nowrap rounded-full px-2 py-0.5`,
-                variant ? `bg-${variant}` : "bg-secondary-dark",
+                `flex-wrap text-white text-xs whitespace-nowrap rounded-full px-2 py-0.5`,
+                {
+                    "bg-night bg-opacity-80": !variant,
+                    "bg-success": variant === "success",
+                    "bg-warning": variant === "warning",
+                    "bg-danger": variant === "danger",
+                },
                 className
             )}
         >
             {children}
-        </Text>
+        </div>
     );
 }
 
