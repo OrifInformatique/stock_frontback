@@ -4,7 +4,7 @@ import clsx from "clsx";
 const Toolbar = ({ className, children }) => {
     return (
         <div className={clsx(
-            "flex items-center justify-between gap-4",
+            "flex items-center justify-between w-full gap-4",
             className)}
         >
             {children}

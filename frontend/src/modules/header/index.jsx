@@ -10,7 +10,7 @@ const Header = () => {
     const { t } = useTranslation();
 
     return (
-        <div className="flex w-full lg:px-60 xl:px-80 items-baseline gap-1 bg-primary py-4 px-2">
+        <div className="flex w-full items-baseline gap-1 bg-primary py-4 px-2">
             <Logo />
             <Title.App>{t('app-title')}</Title.App>
             <Link.Auth className="text-white ml-auto" to="" />

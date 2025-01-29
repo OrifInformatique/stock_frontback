@@ -3,16 +3,22 @@
     "scan":                 "Scan",
     "edit":                 "Modifier",
     "delete":               "Supprimer",
+    "loading":              "Chargement",
+    "none":                 "Aucun",
+    "month":                "mois",
 
     "control":              "Contrôle",
-    "last_control":         "Dernier contrôle",
-    "new-loan":             "Nouveau prêt",
-    "return-loan":          "Retour du prêt",
-    "stocking_place":       "Lieu de stockage",
-    "serial_number":        "Numéro de série",
+    "lastControl":          "Dernier contrôle",
+    "newLoan":              "Nouveau prêt",
+    "returnLoan":           "Retour du prêt",
+    "stockingPlace":        "Lieu de stockage",
+    "serialNumber":         "Numéro de série",
     "supplier":             "Fournisseur",
-    "buying_price":         "Prix d'achat",
-    "buying_date":          "Date d'achat",
-    "warranty_duration":    "Durée garantie",
-    "image":                "Image"
+    "buyingPrice":          "Prix d'achat",
+    "buyingDate":           "Date d'achat",
+    "warrantyDuration":     "Durée garantie",
+    "itemCommonImage":      "Image de l'objet",
+
+    "itemNotFound":         "L'objet n'a pas été trouvé.",
+    "noDescription":        "Pas de description"
 }

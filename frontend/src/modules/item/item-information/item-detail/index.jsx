@@ -8,74 +8,114 @@ import Pill from "../../../../ui/pills";
 import Section from "../../../../ui/sections";
 import Title from "../../../../ui/titles";
 
-const ItemDetail = () => {
+const ItemDetail = ({ data }) => {
     const { t } = useTranslation("itemInformation");
+    const conditionStyleMap = {
+        10: "success",
+        30: "warning",
+        40: "danger"
+    }
+    const loanStyleMap = {
+        "Pas de prêt en cours": "success",
+        "En prêt":              "warning",
+        "Prêt en retard":       "danger"
+    }
+    const warrantyStyleMap = {
+        "Sous garantie":    "success",
+        "Échéance proche":  "warning",
+        "Garantie expirée": "danger"
+    }
+
+    const formatDate = (date) => {
+        const [year, month, day] = date.split("-");
+        return `${day}.${month}.${year}`;
+    } 
 
     return (
-        <div className="flex flex-col border border-primary border-opacity-70 p-2 my-2">
+        <div className="flex flex-col border border-primary border-opacity-70 p-3 my-2">
             {/* Edit and delete buttons */}
-            <div className="flex flex-1 gap-3">
+            <div className="flex justify-between flex-1 gap-3">
                 <Button.Outlined className="flex-1" variant="warning">
-                    <Button.Label className="text-primary text-sm">{t("edit")}</Button.Label>
+                    <Button.Label className="text-primary text-sm">
+                        {t("edit")}
+                    </Button.Label>
                     <Button.Icon className="w-8">
                         <Icon.Edit className="text-white h-4" />
                     </Button.Icon>
                 </Button.Outlined>
                 <Button.Outlined className="flex-1" variant="danger">
-                    <Button.Label className="text-primary text-sm">{t("delete")}</Button.Label>
+                    <Button.Label className="text-primary text-sm">
+                        {t("delete")}
+                    </Button.Label>
                     <Button.Icon className="text-white w-8">
                         <Icon.Delete className="h-4" />
                     </Button.Icon>
                 </Button.Outlined>
             </div>
+            {/* Item name and states */}
             <div className="flex flex-col py-2 gap-y-2">
-                <Title.Sub className="mr-auto">ORP.OBNET14.0355</Title.Sub>
+                <Title.Sub className="mr-auto">{data.inventory_nb}</Title.Sub>
                 <div className="flex flex-wrap gap-1">
-                    <Pill variant="danger">Plus disponible</Pill>
-                    <Pill variant="success">Pas de prêt en cours</Pill>
+                    <Pill variant={conditionStyleMap[data.condition.item_condition_id]}>
+                        {data.condition.name}
+                    </Pill>
+                    <Pill variant={loanStyleMap[data.current_loan.status]}>
+                        {data.current_loan.status}
+                    </Pill>
                 </div>
             </div>
-            <div className="flex flex-wrap gap-x-20">
-                <div>
-                    <Section header={t("stocking_place")}>
-                        <Section.Text>Armoire 35</Section.Text>
-                    </Section>
-                    <Section header={t("last_control")}>
-                        <div className="flex items-center gap-1">
-                            <Icon.Date className="text-secondary-dark w-4" />
-                            <Section.Text>23.01.2025</Section.Text>
-                            <Icon.User className="text-secondary-dark w-4" />
-                            <Section.Text>AbCd</Section.Text>
+            {/* Item detail */}
+            <div>
+                <Section header={t("stockingPlace")}>
+                    <Section.Text>{data.stocking_place.name}</Section.Text>
+                </Section>
+                <Section header={t("lastControl")}>
+                    {data.last_control ? (
+                        <div>
+                            <div className="flex items-center gap-1">
+                                <Icon.Date className="text-secondary-dark min-w-4 w-4" />
+                                <Section.Text>{formatDate(data.last_control.date)}</Section.Text>
+                                <Icon.User className="text-secondary-dark min-w-4 w-4" />
+                                <Section.Text>{data.last_control.controller.username}</Section.Text>
+                            </div>
+                            <div className="flex gap-1">
+                                <Icon.Message className="text-secondary-dark min-w-4 w-4" />
+                                <Section.Text>{data.last_control.remarks}</Section.Text>
+                            </div>
                         </div>
-                        <div className="flex gap-1">
-                            <Icon.Message className="text-secondary-dark w-4" />
-                            <Section.Text>Vu dans l'armoire 35</Section.Text>
-                        </div>
-                    </Section>
-                    <Section header={t("serial_number")}>
-                        <Section.Text>12CC0807024</Section.Text>
-                    </Section>
-                    <Section header={t("supplier")}>
-                        <Section.Text>Digitec AG</Section.Text>
-                    </Section>
-                </div>
-                <div>
-                    <Section header={t("buying_price")}>
-                        <Section.Text>CHF 1'499.-</Section.Text>
-                    </Section>
-                    <Section header={t("buying_date")}>
-                        <div className="flex gap-1">
-                            <Icon.Date className="text-secondary-dark w-4" />
-                            <Section.Text>20.09.2022</Section.Text>
-                        </div>
-                    </Section>
-                    <Section header={t("warranty_duration")}>
-                        <div className="flex items-center gap-2">
-                            <Section.Text>36 mois</Section.Text>
-                            <Pill variant="success">Sous garantie</Pill>
-                        </div>
-                    </Section>
-                </div>
+                    ) : (
+                        <Section.Text><em>{t("none")}</em></Section.Text>
+                    )}
+                </Section>
+                <Section header={t("serialNumber")}>
+                    <Section.Text>{data.serial_number
+                        ? data.serial_number
+                        : <em>{t("none")}</em>}
+                    </Section.Text>
+                </Section>
+                <Section header={t("supplier")}>
+                    <Section.Text>{data.supplier.name}</Section.Text>
+                </Section>
+            </div>
+            <div>
+                <Section header={t("buyingPrice")}>
+                    <Section.Text>CHF {data.buying_price}</Section.Text>
+                </Section>
+                <Section header={t("buyingDate")}>
+                    <div className="flex gap-1">
+                        <Icon.Date className="text-secondary-dark min-w-4 w-4" />
+                        <Section.Text>{formatDate(data.buying_date)}</Section.Text>
+                    </div>
+                </Section>
+                <Section header={t("warrantyDuration")}>
+                    <div className="flex items-center gap-2">
+                        <Section.Text>{data.warranty_duration} {t("month")}</Section.Text>
+                        {data.warranty_duration != 0 &&
+                            <Pill variant={warrantyStyleMap[data.warranty_status]}>
+                                {data.warranty_status}
+                            </Pill>}
+                    </div>
+                </Section>
             </div>
         </div>
     );

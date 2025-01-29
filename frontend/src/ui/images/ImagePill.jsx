@@ -5,7 +5,7 @@ const ImagePill = ({ className, children }) => {
     return (
         <div
             className={clsx(
-                "absolute bg-primary bg-opacity-70 bottom-6 -left-2 rounded-r-full px-3 py-1",
+                "absolute bg-primary bg-opacity-70 bottom-6 -left-3 rounded-r-full pl-5 pr-4 py-1",
                 className)}
         >
             <div

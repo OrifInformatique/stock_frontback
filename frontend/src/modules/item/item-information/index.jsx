@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
@@ -9,7 +9,6 @@ import ItemCommonDetail from "./item-common-detail";
 // UI elements
 import Button from "../../../ui/buttons";
 import Icon from "../../../ui/icons";
-import Image from "../../../ui/images";
 import Link from "../../../ui/links";
 import Separator from "../../../ui/separators";
 import Title from "../../../ui/titles";
@@ -19,8 +18,34 @@ const ItemInformation = () => {
     const { id } = useParams();
     const { t } = useTranslation("itemInformation");
 
+    // State variables
+    const [isDataLoading, setDataLoading] = useState(true);
+    const [itemData, setItemData] = useState(null);
+    const [itemCommonData, setItemCommonData] = useState(null);
+
+    useEffect(() => {
+        async function fetchData() {
+            setDataLoading(true);
+            try {
+                const itemResponse = await fetch(`http://localhost/stock/public/api/items/${id}`);
+                const { item } = await itemResponse.json();
+
+                const itemCommonResponse = await fetch(`http://localhost/stock/public/api/items/${id}/item_common`);
+                const { item_common } = await itemCommonResponse.json();
+
+                setItemData(item);
+                setItemCommonData(item_common);
+            } catch (err) {
+                console.log(err)
+            } finally {
+                setDataLoading(false);
+            }
+        }
+        fetchData();
+    }, []);
+
     return (
-        <div>
+        <div className="flex flex-col">
             {/* Toolbar */}
             <Toolbar>
                 <Button.Toolbar>
@@ -40,38 +65,47 @@ const ItemInformation = () => {
                     </Button.Icon>
                 </Button.Toolbar>
             </Toolbar>
-
             <Separator />
-
-            {/* Page title section */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-                <Title.Page className="flex-1 min-w-48">
-                    ASUS Carte Wireless Wi-Fi PCE-N15
-                </Title.Page>
-                <Link.History />
-            </div>
-
-            {/* Loan and control buttons */}
-            <div className="flex gap-4 mt-2">
-                <Button.Filled variant="success" className="flex-1">
-                    <Button.Label className="text-white">
-                        {t("new-loan")}
-                    </Button.Label>
-                </Button.Filled>
-                <Button.Outlined variant="success" className="flex-1">
-                    <Button.Label className="text-primary">
-                        {t("control")}
-                    </Button.Label>
-                    <Button.Icon>
-                        <Icon.Add className="text-white h-6" />
-                    </Button.Icon>
-                </Button.Outlined>
-            </div>
-
             {/* Item and item common detail */}
-            <ItemCommonDetail />
-
-            <ItemDetail />
+            {!isDataLoading ? (
+                itemCommonData && itemData ? (
+                    <div>
+                        {/* Page title section */}
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                            <Title.Page className="flex-1 min-w-48">
+                                {itemCommonData.name}
+                            </Title.Page>
+                            <Link.History />
+                        </div>
+                        {/* Loan and control buttons */}
+                        <div className="flex justify-between gap-4 mt-2">
+                            <Button.Filled variant="success" className="flex-1">
+                                <Button.Label className="text-white">
+                                    {itemData.current_loan.loan_id ? (
+                                        t("returnLoan")) : (t("newLoan")
+                                    )}
+                                </Button.Label>
+                            </Button.Filled>
+                            <Button.Outlined variant="success" className="flex-1">
+                                <Button.Label className="text-primary">
+                                    {t("control")}
+                                </Button.Label>
+                                <Button.Icon>
+                                    <Icon.Add className="text-white h-6" />
+                                </Button.Icon>
+                            </Button.Outlined>
+                        </div>
+                        <ItemCommonDetail data={itemCommonData} />
+                        <ItemDetail data={itemData} />
+                    </div>
+                ) : (
+                    <div>{t("itemNotFound")}</div>
+                )
+            ) : (
+                <div className="flex justify-center items-center">
+                    {t("loading")}...
+                </div>
+            )}
         </div>
     );
 }

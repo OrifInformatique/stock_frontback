@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
@@ -7,6 +7,11 @@ import ImagePill from "./ImagePill";
 
 const ImageItemCommon = ({ className, src, entity, itemCommonId }) => {
     const { t } = useTranslation("itemInformation");
+    const [isImageLoaded, setImageLoaded] = useState(false);
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    }
 
     return (
         <div className="relative">
@@ -14,9 +19,10 @@ const ImageItemCommon = ({ className, src, entity, itemCommonId }) => {
                 "mb-2 max-w-full min-w-52",
                 className)}
                 src={src}
-                alt={t("image") + " " + itemCommonId}
+                alt={t("itemCommonImage") + " " + itemCommonId}
+                onLoad={handleImageLoad}
             />
-            <ImagePill>{entity}</ImagePill>
+            {isImageLoaded && <ImagePill>{entity}</ImagePill>}
         </div>
     );
 }

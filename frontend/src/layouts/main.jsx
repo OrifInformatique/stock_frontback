@@ -6,9 +6,9 @@ import Header from "../modules/header";
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className="flex flex-col items-center">
             <Header />
-            <div className="m-4 lg:mx-60 xl:mx-80">
+            <div className="m-4 max-sm:max-w-sm">
                 <Outlet />
             </div>
         </div>
