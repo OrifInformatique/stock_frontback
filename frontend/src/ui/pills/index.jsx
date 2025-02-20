@@ -5,7 +5,7 @@ const Pill = ({ className, variant, children }) => {
     return (
         <div
             className={clsx(
-                "flex-wrap text-white text-xs whitespace-nowrap rounded-full px-2 pb-1 pt-0.5",
+                "flex-wrap text-white text-xs whitespace-nowrap rounded-full px-2 py-0.5",
                 {
                     "bg-night bg-opacity-80": !variant,
                     "bg-success": variant === "success",

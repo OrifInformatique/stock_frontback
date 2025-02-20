@@ -8,7 +8,7 @@ const MainLayout = () => {
     return (
         <div className="flex flex-col items-center">
             <Header />
-            <div className="m-4 max-sm:max-w-sm">
+            <div className="m-4">
                 <Outlet />
             </div>
         </div>

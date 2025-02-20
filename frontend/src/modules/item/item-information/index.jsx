@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // Modules
 import ItemDetail from "./item-detail";
@@ -16,13 +16,15 @@ import Toolbar from "../../../ui/toolbars";
 
 const ItemInformation = () => {
     const { id } = useParams();
-    const { t } = useTranslation("itemInformation");
+    const navigate = useNavigate();
+    const { t } = useTranslation(["itemInformation", "common"]);
 
     // State variables
     const [isDataLoading, setDataLoading] = useState(true);
     const [itemData, setItemData] = useState(null);
     const [itemCommonData, setItemCommonData] = useState(null);
 
+    // API calls
     useEffect(() => {
         async function fetchData() {
             setDataLoading(true);
@@ -48,17 +50,19 @@ const ItemInformation = () => {
         <div className="flex flex-col">
             {/* Toolbar */}
             <Toolbar>
-                <Button.Toolbar>
+                {/* Back button */}
+                <Button.Toolbar onClick={() => navigate(-1)}>
                     <Button.Icon className="rounded-l-full w-10">
                         <Icon.Back className="text-white h-8" />
                     </Button.Icon>
                     <Button.Label className="text-primary">
-                        {t("back")}
+                        {t("buttons.back", { ns:"common" })}
                     </Button.Label>
                 </Button.Toolbar>
+                {/* Scan button */}
                 <Button.Toolbar>
                     <Button.Label className="text-primary">
-                        {t("scan")}
+                        {t("buttons.scan", { ns:"common" })}
                     </Button.Label>
                     <Button.Icon className="rounded-r-full w-12">
                         <Icon.Scan className="text-white h-8" />
@@ -75,35 +79,38 @@ const ItemInformation = () => {
                             <Title.Page className="flex-1 min-w-48">
                                 {itemCommonData.name}
                             </Title.Page>
-                            <Link.History />
+                            <Link.History to="history" />
                         </div>
                         {/* Loan and control buttons */}
                         <div className="flex justify-between gap-4 mt-2">
                             <Button.Filled variant="success" className="flex-1">
                                 <Button.Label className="text-white">
-                                    {itemData.current_loan.loan_id ? (
-                                        t("returnLoan")) : (t("newLoan")
-                                    )}
+                                    {itemData.current_loan.loan_id
+                                        ? t("buttons.returnLoan", { ns:"common" })
+                                        : t("buttons.newLoan", { ns:"common" })}
                                 </Button.Label>
                             </Button.Filled>
                             <Button.Outlined variant="success" className="flex-1">
                                 <Button.Label className="text-primary">
-                                    {t("control")}
+                                    {t("buttons.control", { ns:"common" })}
                                 </Button.Label>
                                 <Button.Icon>
                                     <Icon.Add className="text-white h-6" />
                                 </Button.Icon>
                             </Button.Outlined>
                         </div>
+                        {/* Item and item common detail */}
                         <ItemCommonDetail data={itemCommonData} />
                         <ItemDetail data={itemData} />
                     </div>
                 ) : (
-                    <div>{t("itemNotFound")}</div>
+                    <div className="flex justify-center">
+                        {t("itemNotFound")}
+                    </div>
                 )
             ) : (
-                <div className="flex justify-center items-center">
-                    {t("loading")}...
+                <div className="flex justify-center">
+                    {t("loading", { ns:"common" })}...
                 </div>
             )}
         </div>

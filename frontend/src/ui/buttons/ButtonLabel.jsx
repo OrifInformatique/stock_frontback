@@ -1,7 +1,10 @@
 import React from "react";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 const ButtonLabel = ({ className, variant, children }) => {
+    const { t } = useTranslation();
+
     return (
         <div className={clsx(
             "whitespace-nowrap mx-auto py-1 px-2",

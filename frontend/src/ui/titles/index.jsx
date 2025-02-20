@@ -4,6 +4,7 @@ import React from "react";
 import Subtitle from "./Subtitle";
 import TitleApp from "./TitleApp";
 import TitlePage from "./TitlePage";
+import TitleTable from "./TitleTable";
 
 const Title = ({ children }) => {
     return (
@@ -14,6 +15,7 @@ const Title = ({ children }) => {
 Title.App = TitleApp;
 Title.Page = TitlePage;
 Title.Sub = Subtitle;
+Title.Table = TitleTable;
 
-export {Title, TitleApp, Subtitle}
+export {Title, TitleApp, Subtitle, TitleTable}
 export default Title;

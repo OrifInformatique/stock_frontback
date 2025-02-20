@@ -1,16 +1,8 @@
 {
-    "back":                 "Retour",
-    "scan":                 "Scan",
-    "edit":                 "Modifier",
-    "delete":               "Supprimer",
-    "loading":              "Chargement",
     "none":                 "Aucun",
     "month":                "mois",
 
-    "control":              "Contrôle",
     "lastControl":          "Dernier contrôle",
-    "newLoan":              "Nouveau prêt",
-    "returnLoan":           "Retour du prêt",
     "stockingPlace":        "Lieu de stockage",
     "serialNumber":         "Numéro de série",
     "supplier":             "Fournisseur",

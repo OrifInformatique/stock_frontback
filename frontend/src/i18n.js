@@ -15,8 +15,8 @@ i18n
       loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : ""}
         /locales/{{lng}}/{{ns}}.json`,
     },
-    ns: ["translation", "itemInformation", "itemHistory"],
-    defaultNB: "translation",
+    defaultNS: "common",
+    ns: ["common", "itemInformation", "itemHistory"],
     interpolation: {
       escapeValue: false,
     },

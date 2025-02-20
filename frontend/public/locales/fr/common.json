@@ -1,0 +1,13 @@
+{
+    "app-title":    "Stock",
+    "loading":      "Chargement",
+    "buttons": {
+        "back":         "Retour",
+        "scan":         "Scan",
+        "edit":         "Modifier",
+        "delete":       "Supprimer",
+        "newLoan":      "Nouveau prêt",
+        "returnLoan":   "Retour du prêt",
+        "control":      "Contrôle"
+    }
+}

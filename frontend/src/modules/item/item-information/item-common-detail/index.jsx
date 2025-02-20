@@ -8,7 +8,7 @@ import Image from "../../../../ui/images";
 import Pill from "../../../../ui/pills";
 
 const ItemCommonDetail = ({ data }) => {
-    const { t } = useTranslation("itemInformation");
+    const { t } = useTranslation(["itemInformation", "common"]);
 
     return (
         <div className="flex flex-col items-center border border-primary border-opacity-70 rounded-sm gap-x-4 p-3 my-2">
@@ -23,7 +23,7 @@ const ItemCommonDetail = ({ data }) => {
                 <div className="flex justify-between gap-3">
                     <Button.Outlined className="flex-1" variant="warning">
                         <Button.Label className="text-primary text-sm">
-                            {t("edit")}
+                            {t("buttons.edit", { ns:"common" })}
                         </Button.Label>
                         <Button.Icon className="w-8">
                             <Icon.Edit className="text-white h-4" />
@@ -31,7 +31,7 @@ const ItemCommonDetail = ({ data }) => {
                     </Button.Outlined>
                     <Button.Outlined className="flex-1" variant="danger">
                         <Button.Label className="text-primary text-sm">
-                            {t("delete")}
+                            {t("buttons.delete", { ns:"common" })}
                         </Button.Label>
                         <Button.Icon className="w-8">
                             <Icon.Delete className="text-white h-4" />

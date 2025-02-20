@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 
-const ButtonToolbar = ({ className, variant, children }) => {
+const ButtonToolbar = ({ className, onClick, variant, children }) => {
     return (
         <button className={clsx(
             "group border border-primary rounded-full min-w-32",
@@ -12,6 +12,7 @@ const ButtonToolbar = ({ className, variant, children }) => {
                 "hover:border-danger": variant === "danger",
             },
             className)}
+            onClick={onClick}
         >
             <div className="flex justify-start items-center rounded-full">
                 {React.Children.map(children, (child) => 
