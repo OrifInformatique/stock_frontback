@@ -17,12 +17,19 @@ import Toolbar from "../../../ui/toolbars";
 const ItemInformation = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { t } = useTranslation(["itemInformation", "common"]);
+    const { t, ready } = useTranslation(["itemInformation", "common"]);
 
     // State variables
     const [isDataLoading, setDataLoading] = useState(true);
     const [itemData, setItemData] = useState(null);
     const [itemCommonData, setItemCommonData] = useState(null);
+
+    // Change the title element of the page
+    useEffect(() => {
+        if (ready && itemCommonData) {
+            document.title = `${t("appTitle", { ns:"common" })} - ${itemCommonData.name}`;
+        }
+    }, [ready, itemCommonData]);
 
     // API calls
     useEffect(() => {
@@ -46,7 +53,7 @@ const ItemInformation = () => {
         fetchData();
     }, []);
 
-    return (
+    return (ready &&
         <div className="flex flex-col">
             {/* Toolbar */}
             <Toolbar>

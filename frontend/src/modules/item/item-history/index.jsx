@@ -17,7 +17,7 @@ import Pill from "../../../ui/pills";
 const ItemHistory = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { t } = useTranslation(["itemHistory", "common"]);
+    const { t, ready } = useTranslation(["itemHistory", "common"]);
 
     // State variables
     const [isDataLoading, setDataLoading] = useState(true);
@@ -97,7 +97,14 @@ const ItemHistory = () => {
 
         const [year, month, day] = date.split("-");
         return `${day}.${month}.${year}`;
-    } 
+    }
+
+    // Change the title element of the page
+    useEffect(() => {
+        if (ready && itemData.inventory_nb) {
+            document.title = `${t("appTitle", { ns:"common" })} - ${itemData.inventory_nb}`;
+        }
+    }, [ready, itemData.inventory_nb])
 
     // API calls
     useEffect(() => {
@@ -174,7 +181,7 @@ const ItemHistory = () => {
         setEntries(newEntries);
     }, [events]);
 
-    return (
+    return (ready &&
         <div className="flex flex-col">
             {/* Toolbar */}
             <Toolbar>

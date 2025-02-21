@@ -7,9 +7,9 @@ import Title from '../../ui/titles';
 import Link from '../../ui/links';
 
 const Header = () => {
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
 
-    return (
+    return (ready &&
         <div className="flex w-full items-baseline gap-1 bg-primary py-4 px-2">
             <Logo />
             <Title.App>{t('appTitle')}</Title.App>
