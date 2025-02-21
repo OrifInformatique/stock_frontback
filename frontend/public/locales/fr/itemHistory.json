@@ -1,12 +1,16 @@
 {
     "history":          "Historique",
-    "returnLoan":       "Retour du prêt",
+    "loansAndControls": "Prêts et contrôles",
+
+    "loanReturned":     "Retour du prêt à",
     "loanTo":           "Prêt à",
     "plannedReturn":    "Retour prévu",
     "loanBy":           "Prêté par",
     "location":         "Emplacement",
+    "loanDate":         "Date du prêt",
     "controlBy":        "Contrôle par",
     "remarks":          "Remarques",
 
-    "itemNotFound":     "L'objet n'a pas été trouvé."
+    "itemNotFound":     "L'objet n'a pas été trouvé",
+    "nothingToShow":    "Rien à afficher"
 }

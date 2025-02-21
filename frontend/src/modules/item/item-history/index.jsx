@@ -27,50 +27,74 @@ const ItemHistory = () => {
     const [entries, setEntries] = useState([]);
 
     // Functions
+    /**
+     * Formats the history data of the item for later use
+     * 
+     * @param {Object} historyData - The item history data fetched from the API
+     * @returns {array} The formatted array of objects
+     */
     const formatHistoryData = (historyData) => {
         let formattedData = [];
 
         historyData.loans && historyData.loans.forEach((loan) => {
-            formattedData.push({
-                eventType: "loan",
-                date: loan.date ?? "-",
-                content: {
-                    loaner: loan.loaner.username ?? "-",
-                    plannedReturnDate: loan.planned_return_date ?? "-",
-                    borrower: loan.borrower ? loan.borrower.username : "",
-                    borrowerEmail: loan.borrower_email ?? "",
-                    itemLocalisation: loan.item_localisation ?? "-"
-                }
-            });
-
             if (loan.real_return_date) {
                 formattedData.push({
                     eventType: "loanReturned",
-                    date: loan.real_return_date ?? "-",
-                    content: {}
+                    date: loan.real_return_date,
+                    content: {
+                        borrower: loan.borrower && loan.borrower.username || (loan.borrower_email ? "" : "-"),
+                        borrowerEmail: loan.borrower_email || "",
+                        loanDate: loan.date
+                    }
                 });
             }
+            formattedData.push({
+                eventType: "loan",
+                date: loan.date,
+                content: {
+                    loaner: loan.loaner && loan.loaner.username || "-",
+                    plannedReturnDate: loan.planned_return_date,
+                    borrower: loan.borrower && loan.borrower.username || (loan.borrower_email ? "" : "-"),
+                    borrowerEmail: loan.borrower_email || "",
+                    itemLocalisation: loan.item_localisation || "-"
+                }
+            });
         });
 
         historyData.controls && historyData.controls.forEach((control) => {
             formattedData.push({
                 eventType: "control",
-                date: control.date ?? "-",
+                date: control.date,
                 content: {
-                    controller: control.controller.username ?? "-",
-                    remarks: control.remarks ?? t("none", {ns: "common"})
+                    controller: control.controller.username || "-",
+                    remarks: control.remarks || t("noneF", { ns:"common" })
                 }
             })
         });
         return formattedData;
     }
 
+    /**
+     * Sorts an array of objects by their date property, in descending order
+     * 
+     * @param {array} array - The array of objects to be sorted
+     * @returns {array} The sorted array
+     */
     const sortByDate = (array) => {
         array.sort((a, b) => new Date(b.date) - new Date(a.date));
         return array;
     }
 
+    /**
+     * Formats a date (YYYY-MM-DD) in the format DD.MM.YYYY
+     * 
+     * @param {string} date - The date to be formatted
+     * @returns {string} The formatted date
+     */
     const formatDate = (date) => {
+        const regex = /^\d{4}-\d{2}-\d{2}$/;
+        if (!regex.test(date)) return "-";
+
         const [year, month, day] = date.split("-");
         return `${day}.${month}.${year}`;
     } 
@@ -99,21 +123,20 @@ const ItemHistory = () => {
         fetchData();
     }, []);
 
+    // Create an array of JSX elements that represent the history events
     useEffect(() => {
-        const newEntries = events.map((event, index) => {
+        const newEntries = events.length !== 0 ? (events.map((event, index) => {
             switch (event.eventType) {
                 case "loan":
                     return [
-                        <div key={`loan-${index}`} className="flex items-center gap-x-2">
-                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
-                            <div className="flex flex-wrap items-baseline gap-x-1">
-                                <span className="text-lg">{t("loanTo")} {event.content.borrower}</span>
-                                {event.content.borrowerEmail && (<em className="text-md">{event.content.borrowerEmail}</em>)}
-                            </div>
+                        <div key={`loan-${index}`} className="flex flex-wrap items-baseline gap-x-1">
+                            <Pill className="self-center min-w-20 h-6 mr-1">{formatDate(event.date)}</Pill>
+                            <span className="text-lg">{t("loanTo")} : {event.content.borrower}</span>
+                            <span className="text-sm break-all"><em>{event.content.borrowerEmail}</em></span>
                         </div>,
-                        <div key={`loanDetail-${index}`} className="flex flex-wrap gap-x-8">
+                        <div key={`loanDetail-${index}`} className="flex flex-wrap items-start gap-x-8 gap-y-1">
                             <Section header={t("plannedReturn")}>
-                                <Section.Text>{event.content.plannedReturnDate && formatDate(event.content.plannedReturnDate)}</Section.Text>
+                                <Section.Text>{formatDate(event.content.plannedReturnDate)}</Section.Text>
                             </Section>
                             <Section header={t("loanBy")}>
                                 <Section.Text>{event.content.loaner}</Section.Text>
@@ -125,23 +148,29 @@ const ItemHistory = () => {
                     ];
                 case "loanReturned":
                     return [
-                        <div key={`loanReturned-${index}`} className="flex gap-x-2">
-                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
-                            <span className="text-lg">{t("returnLoan")}</span>
-                        </div>
+                        <div key={`loanReturned-${index}`} className="flex flex-wrap items-baseline gap-x-1">
+                            <Pill className="self-center min-w-20 h-6 mr-1">{formatDate(event.date)}</Pill>
+                            <span className="text-lg">{t("loanReturned")} : {event.content.borrower}</span>
+                            <span className="text-sm break-all"><em>{event.content.borrowerEmail}</em></span>
+                        </div>,
+                        <Section key={`loanDate-${index}`} header={t("loanDate")}>
+                            <Section.Text>{formatDate(event.content.loanDate)}</Section.Text>
+                        </Section>
                     ];
                 case "control":
                     return [
-                        <div key={`control-${index}`} className="flex gap-x-2">
-                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
-                            <span className="text-lg">{t("controlBy")} {event.content.controller}</span>
+                        <div key={`control-${index}`} className="flex items-center gap-x-2">
+                            <Pill className="min-w-20 h-6">{formatDate(event.date)}</Pill>
+                            <span className="text-lg">{t("controlBy")} : {event.content.controller}</span>
                         </div>,
                         <Section key={`remarks-${index}`} header={t("remarks")}>
                             <Section.Text>{event.content.remarks}</Section.Text>
                         </Section>
                     ];
             }
-        });
+        })) : (
+            [[<div><em>{t("nothingToShow")}</em></div>]]
+        );
         setEntries(newEntries);
     }, [events]);
 
@@ -184,7 +213,8 @@ const ItemHistory = () => {
                                 </Button.Icon>
                             </Button.Outlined>
                         </div>
-                        <Table title="Prêts & contrôles" entries={entries}/>
+                        {/* History table */}
+                        <Table title={t("loansAndControls")} entries={entries}/>
                     </div>
                 ) : (
                     t("itemNotFound")

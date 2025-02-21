@@ -1,6 +1,8 @@
 {
-    "appTitle":    "Stock",
+    "appTitle":     "Stock",
     "loading":      "Chargement",
+    "noneM":        "Aucun",
+    "noneF":        "Aucune",
     "buttons": {
         "back":         "Retour",
         "scan":         "Scan",

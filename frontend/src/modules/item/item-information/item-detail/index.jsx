@@ -86,13 +86,13 @@ const ItemDetail = ({ data }) => {
                                 </div>
                             </div>
                         ) : (
-                            <Section.Text>{t("none")}</Section.Text>
+                            <Section.Text>{t("noneM", { ns:"common" })}</Section.Text>
                         )}
                     </Section>
                     <Section variant="primary" header={t("serialNumber")}>
                         <Section.Text>{data.serial_number
                             ? data.serial_number
-                            : t("none")}
+                            : t("noneM", { ns:"common" })}
                         </Section.Text>
                     </Section>
                     <Section variant="primary" header={t("supplier")}>
