@@ -57,15 +57,6 @@ const ItemInformation = () => {
         <div className="flex flex-col">
             {/* Toolbar */}
             <Toolbar>
-                {/* Back button */}
-                <Button.Toolbar onClick={() => navigate(-1)}>
-                    <Button.Icon className="rounded-l-full w-10">
-                        <Icon.Back className="text-white h-8" />
-                    </Button.Icon>
-                    <Button.Label className="text-primary">
-                        {t("buttons.back", { ns:"common" })}
-                    </Button.Label>
-                </Button.Toolbar>
                 {/* Scan button */}
                 <Button.Toolbar>
                     <Button.Label className="text-primary">
