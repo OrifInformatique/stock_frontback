@@ -26,6 +26,55 @@ const ItemHistory = () => {
     const [events, setEvents] = useState([]);
     const [entries, setEntries] = useState([]);
 
+    // Functions
+    const formatHistoryData = (historyData) => {
+        let formattedData = [];
+
+        historyData.loans && historyData.loans.forEach((loan) => {
+            formattedData.push({
+                eventType: "loan",
+                date: loan.date ?? "-",
+                content: {
+                    loaner: loan.loaner.username ?? "-",
+                    plannedReturnDate: loan.planned_return_date ?? "-",
+                    borrower: loan.borrower ? loan.borrower.username : "",
+                    borrowerEmail: loan.borrower_email ?? "",
+                    itemLocalisation: loan.item_localisation ?? "-"
+                }
+            });
+
+            if (loan.real_return_date) {
+                formattedData.push({
+                    eventType: "loanReturned",
+                    date: loan.real_return_date ?? "-",
+                    content: {}
+                });
+            }
+        });
+
+        historyData.controls && historyData.controls.forEach((control) => {
+            formattedData.push({
+                eventType: "control",
+                date: control.date ?? "-",
+                content: {
+                    controller: control.controller.username ?? "-",
+                    remarks: control.remarks ?? t("none", {ns: "common"})
+                }
+            })
+        });
+        return formattedData;
+    }
+
+    const sortByDate = (array) => {
+        array.sort((a, b) => new Date(b.date) - new Date(a.date));
+        return array;
+    }
+
+    const formatDate = (date) => {
+        const [year, month, day] = date.split("-");
+        return `${day}.${month}.${year}`;
+    } 
+
     // API calls
     useEffect(() => {
         async function fetchData() {
@@ -40,46 +89,7 @@ const ItemHistory = () => {
                 setHistoryData(history);
                 setItemData(item);
 
-                setEvents([
-                    
-                ]);
-
-                setEntries(
-                    [
-                        [
-                            <div className="flex gap-x-2">
-                                <Pill>11.01.2025</Pill>
-                                <span>Retour du prêt</span>
-                            </div>
-                        ],
-                        [
-                            <div className="flex gap-x-2">
-                                <Pill>20.12.2024</Pill>
-                                <span>Contrôle par ThJo</span>
-                            </div>,
-                            <Section header="Remarques">
-                                <Section.Text>Vu dans l'armoire 35</Section.Text>
-                            </Section>
-                        ],
-                        [
-                            <div className="flex gap-x-2">
-                                <Pill>24.11.2024</Pill>
-                                <span>Prêt à BuYa</span>
-                            </div>,
-                            <div className="flex flex-wrap gap-x-8">
-                                <Section header="Prêté par">
-                                    <Section.Text>PeDi</Section.Text>
-                                </Section>
-                                <Section header="Retour prévu">
-                                    <Section.Text>24.02.2025</Section.Text>
-                                </Section>
-                                <Section header="Emplacement">
-                                    <Section.Text>Section RT</Section.Text>
-                                </Section>
-                            </div>
-                        ]
-                    ]
-                );
+                setEvents(sortByDate(formatHistoryData(history)));
             } catch (err) {
                 console.log(err)
             } finally {
@@ -87,7 +97,53 @@ const ItemHistory = () => {
             }
         }
         fetchData();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        const newEntries = events.map((event, index) => {
+            switch (event.eventType) {
+                case "loan":
+                    return [
+                        <div key={`loan-${index}`} className="flex items-center gap-x-2">
+                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
+                            <div className="flex flex-wrap items-baseline gap-x-1">
+                                <span className="text-lg">{t("loanTo")} {event.content.borrower}</span>
+                                {event.content.borrowerEmail && (<em className="text-md">{event.content.borrowerEmail}</em>)}
+                            </div>
+                        </div>,
+                        <div key={`loanDetail-${index}`} className="flex flex-wrap gap-x-8">
+                            <Section header={t("plannedReturn")}>
+                                <Section.Text>{event.content.plannedReturnDate && formatDate(event.content.plannedReturnDate)}</Section.Text>
+                            </Section>
+                            <Section header={t("loanBy")}>
+                                <Section.Text>{event.content.loaner}</Section.Text>
+                            </Section>
+                            <Section header={t("location")}>
+                                <Section.Text>{event.content.itemLocalisation}</Section.Text>
+                            </Section>
+                        </div>
+                    ];
+                case "loanReturned":
+                    return [
+                        <div key={`loanReturned-${index}`} className="flex gap-x-2">
+                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
+                            <span className="text-lg">{t("returnLoan")}</span>
+                        </div>
+                    ];
+                case "control":
+                    return [
+                        <div key={`control-${index}`} className="flex gap-x-2">
+                            <Pill className="min-w-20 h-6">{event.date && formatDate(event.date)}</Pill>
+                            <span className="text-lg">{t("controlBy")} {event.content.controller}</span>
+                        </div>,
+                        <Section key={`remarks-${index}`} header={t("remarks")}>
+                            <Section.Text>{event.content.remarks}</Section.Text>
+                        </Section>
+                    ];
+            }
+        });
+        setEntries(newEntries);
+    }, [events]);
 
     return (
         <div className="flex flex-col">
@@ -128,9 +184,7 @@ const ItemHistory = () => {
                                 </Button.Icon>
                             </Button.Outlined>
                         </div>
-                        <Table title="Prêts & contrôles"
-                            entries={entries}
-                        />
+                        <Table title="Prêts & contrôles" entries={entries}/>
                     </div>
                 ) : (
                     t("itemNotFound")

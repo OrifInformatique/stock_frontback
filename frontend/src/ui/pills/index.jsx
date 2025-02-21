@@ -3,9 +3,8 @@ import clsx from "clsx";
 
 const Pill = ({ className, variant, children }) => {
     return (
-        <div
-            className={clsx(
-                "flex-wrap text-white text-xs whitespace-nowrap rounded-full px-2 py-0.5",
+        <div className={clsx(
+                "flex flex-wrap text-white text-xs items-center justify-center whitespace-nowrap rounded-full px-2 py-0.5",
                 {
                     "bg-night bg-opacity-80": !variant,
                     "bg-success": variant === "success",

@@ -1,3 +1,12 @@
 {
-    "history": "Historique"
+    "history":          "Historique",
+    "returnLoan":       "Retour du prêt",
+    "loanTo":           "Prêt à",
+    "plannedReturn":    "Retour prévu",
+    "loanBy":           "Prêté par",
+    "location":         "Emplacement",
+    "controlBy":        "Contrôle par",
+    "remarks":          "Remarques",
+
+    "itemNotFound":     "L'objet n'a pas été trouvé."
 }

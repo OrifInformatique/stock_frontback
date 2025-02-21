@@ -68,10 +68,10 @@ const ItemDetail = ({ data }) => {
             {/* Item detail */}
             <div className="flex flex-wrap gap-x-12">
                 <div>
-                    <Section header={t("stockingPlace")}>
+                    <Section variant="primary" header={t("stockingPlace")}>
                         <Section.Text>{data.stocking_place.name}</Section.Text>
                     </Section>
-                    <Section header={t("lastControl")}>
+                    <Section variant="primary" header={t("lastControl")}>
                         {data.last_control ? (
                             <div>
                                 <div className="flex items-center gap-1">
@@ -89,27 +89,27 @@ const ItemDetail = ({ data }) => {
                             <Section.Text>{t("none")}</Section.Text>
                         )}
                     </Section>
-                    <Section header={t("serialNumber")}>
+                    <Section variant="primary" header={t("serialNumber")}>
                         <Section.Text>{data.serial_number
                             ? data.serial_number
                             : t("none")}
                         </Section.Text>
                     </Section>
-                    <Section header={t("supplier")}>
+                    <Section variant="primary" header={t("supplier")}>
                         <Section.Text>{data.supplier.name}</Section.Text>
                     </Section>
                 </div>
                 <div>
-                    <Section header={t("buyingPrice")}>
+                    <Section variant="primary" header={t("buyingPrice")}>
                         <Section.Text>CHF {data.buying_price}</Section.Text>
                     </Section>
-                    <Section header={t("buyingDate")}>
+                    <Section variant="primary" header={t("buyingDate")}>
                         <div className="flex gap-1">
                             <Icon.Date className="text-secondary-dark min-w-4 w-4" />
                             <Section.Text>{formatDate(data.buying_date)}</Section.Text>
                         </div>
                     </Section>
-                    <Section header={t("warrantyDuration")}>
+                    <Section variant="primary" header={t("warrantyDuration")}>
                         <div className="flex gap-2">
                             <Section.Text>{data.warranty_duration} {t("month")}</Section.Text>
                             {data.warranty_duration != 0 &&

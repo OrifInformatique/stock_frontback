@@ -1,12 +1,19 @@
 import React from "react";
+import clsx from "clsx";
 
 // Declinations
 import SectionText from "./SectionText";
 
-const Section = ({ header, children }) => {
+const Section = ({ header, variant, children }) => {
     return (
         <div>
-            <div className="text-primary font-semibold text-sm">
+            <div className={clsx(
+                "font-semibold text-sm",
+                {
+                    "text-night": !variant,
+                    "text-primary": variant === "primary",
+                })}
+            >
                 {header}
             </div>
             {children}

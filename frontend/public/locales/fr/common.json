@@ -1,5 +1,5 @@
 {
-    "app-title":    "Stock",
+    "appTitle":    "Stock",
     "loading":      "Chargement",
     "buttons": {
         "back":         "Retour",

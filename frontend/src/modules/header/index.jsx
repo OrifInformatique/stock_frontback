@@ -12,7 +12,7 @@ const Header = () => {
     return (
         <div className="flex w-full items-baseline gap-1 bg-primary py-4 px-2">
             <Logo />
-            <Title.App>{t('app-title')}</Title.App>
+            <Title.App>{t('appTitle')}</Title.App>
             <Link.Auth className="text-white ml-auto" to="" />
         </div>
     );

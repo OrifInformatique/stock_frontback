@@ -2,9 +2,9 @@ import React from "react";
 
 const TableEntry = ({ children }) => {
     return (
-        <span className="bg-secondary-light border-t border-secondary-dark p-2">
+        <div className="flex flex-col bg-secondary-light border-t border-secondary-dark gap-y-3 p-3">
             {children}
-        </span>
+        </div>
     );
 }
 
