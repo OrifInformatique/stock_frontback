@@ -1,9 +1,23 @@
 import React from "react";
 
-const Heading = () =>
+/**
+ * UI component to display different headings.
+ *
+ * @param {number} headingLevel Level of the heading, from 1 to 6.
+ *
+ * @param {string} title Text of the heading.
+ *
+ * @returns {JSX.Element}
+ *
+ */
+const Heading = ({ headingLevel, title }) =>
 {
+    const Tag = `h${headingLevel}`;
+
     return (
-        <p>Heading works!</p>
+        <Tag>
+            {title}
+        </Tag>
     )
 }
 

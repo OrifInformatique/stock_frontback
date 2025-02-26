@@ -1,5 +1,11 @@
 import React from "react";
 
+/**
+ * Pagination for the list of exemplars.
+ *
+ * @returns {JSX.Element}
+ *
+ */
 const Pagination = () =>
 {
     return (

@@ -1,9 +1,19 @@
 import React from "react";
 
-const Loading = () =>
+/**
+ * UI component to show a loading animation, when waiting for promises to resolve.
+ *
+ * @param {string} [text = "Chargement..."] Text to display. "Chargement..." by default.
+ *
+ * @returns {JSX.Element}
+ *
+ */
+const Loading = ({ text = "Chargement..." }) =>
 {
     return (
-        <p>Loading works!</p>
+        <div>
+            {text}
+        </div>
     )
 }
 

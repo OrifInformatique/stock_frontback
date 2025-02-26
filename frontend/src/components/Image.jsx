@@ -1,9 +1,22 @@
 import React from "react";
 
-const Image = () =>
+/**
+ * UI component to display images.
+ *
+ * @param {string} src Source of the image.
+ *
+ * @param {string} alt Alternative text of the image.
+ *
+ * @returns {JSX.Elements}
+ *
+ */
+const Image = ({ src, alt }) =>
 {
     return (
-        <p>Image works!</p>
+        <img
+            src={src}
+            alt={alt}
+        />
     )
 }
 

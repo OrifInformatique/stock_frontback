@@ -10,6 +10,8 @@ import Loading from './components/Loading';
 
 import Redirect from './utils/Redirect';
 
+import './i18n';
+
 import './index.pcss';
 
 const container = document.getElementById('root');
@@ -17,7 +19,10 @@ const root = createRoot(container);
 
 root.render(
     <Suspense fallback={<Loading />}>
-        <BrowserRouter basename={process.env.APP_ROOT}>
+        <BrowserRouter
+            basename={process.env.APP_ROOT}
+            future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+        >
             <Routes>
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Home />} />

@@ -1,16 +1,26 @@
 import React from 'react'
 import { Outlet } from "react-router-dom";
 
+/**
+ * Layout for all pages.
+ *
+ * @returns {JSX.Element}
+ *
+ */
 const MainLayout = () => {
     return (
         <>
-            {/* Add a header here */}
+            <header>
+                Header works!
+            </header>
 
             <main>
                 <Outlet />
             </main>
 
-            {/* Add a footer here */}
+            <footer>
+                Footer works!
+            </footer>
         </>
     )
 }

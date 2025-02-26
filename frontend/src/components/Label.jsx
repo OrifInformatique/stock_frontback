@@ -1,9 +1,21 @@
 import React from "react";
 
-const Label = () =>
+/**
+ * UI component to show label of a form field.
+ *
+ * @param {string} forInput Input name to link with this label.
+ *
+ * @param {string} label Text of the label.
+ *
+ * @returns {JSX.Element}
+ *
+ */
+const Label = ({ forInput, label }) =>
 {
     return (
-        <p>Label works!</p>
+        <label for={forInput}>
+            {label}
+        </label>
     )
 }
 
