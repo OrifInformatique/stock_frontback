@@ -4,7 +4,7 @@ import clsx from "clsx";
 const ButtonToolbar = ({ className, onClick, variant, children }) => {
     return (
         <button className={clsx(
-            "group border border-primary rounded-full w-40",
+            "group border border-primary rounded-full",
             {
                 "hover:border-primary-light": !variant,
                 "hover:border-success": variant === "success",

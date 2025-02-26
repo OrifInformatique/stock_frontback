@@ -186,7 +186,7 @@ const ItemHistory = () => {
             {/* Toolbar */}
             <Toolbar>
                 {/* Back button */}
-                <Button.Toolbar onClick={() => navigate(`/items/${id}`)}>
+                <Button.Toolbar className="w-40" onClick={() => navigate(`/items/${id}`)}>
                     <Button.Icon className="rounded-l-full w-10">
                         <Icon.Back className="text-white h-8" />
                     </Button.Icon>

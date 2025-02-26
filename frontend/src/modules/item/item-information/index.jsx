@@ -56,9 +56,18 @@ const ItemInformation = () => {
     return (ready &&
         <div className="flex flex-col">
             {/* Toolbar */}
-            <Toolbar>
+            <Toolbar className="justify-between">
+                {/* Back button */}
+                <Button.Toolbar className="flex-1" onClick={() => {}}>
+                    <Button.Icon className="rounded-l-full w-12">
+                        <Icon.Back className="text-white h-8" />
+                    </Button.Icon>
+                    <Button.Label className="text-primary">
+                        {t("buttons.back", { ns:"common" })}
+                    </Button.Label>
+                </Button.Toolbar>
                 {/* Scan button */}
-                <Button.Toolbar>
+                <Button.Toolbar className="flex-1" onClick={() => {}}>
                     <Button.Label className="text-primary">
                         {t("buttons.scan", { ns:"common" })}
                     </Button.Label>
