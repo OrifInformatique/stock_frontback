@@ -9,26 +9,24 @@ import React from "react";
  *
  * @param {any} [defaultValue = null] Default value of the input. Null by default.
  *
- * @param {string} [type = "text"] Type of the input. "text" by default.
- *
  * @param {boolean} [checked = false] Defines whether the input is selected. False by default. \
  * Works for checkbox and radio inputs.
  *
  * @returns {JSX.Element}
  *
  */
-const Input = ({ name, placeholder = null, defaultValue = null, type = "text", checked = false }) =>
+const InputText = ({ name, placeholder = null, defaultValue = null, checked = false }) =>
 {
     return (
         <input
             id={name}
             name={name}
             placeholder={placeholder}
-            defaultValue={defaultValue}
-            type={type}
+            value={defaultValue}
             checked={checked}
+            type="text"
         />
     )
 }
 
-export default Input;
+export default InputText;

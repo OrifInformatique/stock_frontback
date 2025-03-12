@@ -1,7 +1,6 @@
 import React from "react";
 
 import Label from "./Label";
-import Input from "./Input";
 
 /**
  * UI component to display checkbox input, designed as a toggle.
@@ -28,9 +27,9 @@ const Toggle = ({ name, beforeLabelName = null, afterLabelName = null, checked =
                 />
             }
 
-            <Input
+            <input
                 name={name}
-                type={"checkbox"}
+                type="checkbox"
                 checked={checked}
                 className="toggle"
             />

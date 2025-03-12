@@ -1,0 +1,35 @@
+import itemsData from "../mocks/items.json";
+
+/**
+ * Gets all the items.
+ *
+ * @returns {Array}
+ *
+ */
+export const getItems = async () =>
+{
+    try
+    {
+        // Uncomment below to use the real backend.
+        /*
+        const response = await fetch(`${process.env.BACKEND_URL}/`);
+
+        if (!response.ok)
+        {
+            const error = await response.text();
+            console.error(`${response.status} ${response.statusText} : ${error}`);
+            return [];
+        }
+
+        return await response.json();
+        */
+
+        return itemsData;
+    }
+
+    catch(error)
+    {
+        console.error(`Erreur lors de la récupération des données : ${error.message}`);
+        return [];
+    }
+};
