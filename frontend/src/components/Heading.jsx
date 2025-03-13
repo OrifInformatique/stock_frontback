@@ -13,9 +13,12 @@ import React from "react";
 const Heading = ({ headingLevel, title }) =>
 {
     const Tag = `h${headingLevel}`;
+    const size = headingLevel * -3.5 + 35;
 
     return (
-        <Tag>
+        <Tag
+            className="text-center"
+            style={{ fontSize: `${size}px`}}>
             {title}
         </Tag>
     )

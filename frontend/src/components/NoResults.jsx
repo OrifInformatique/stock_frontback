@@ -11,7 +11,7 @@ import React from "react";
 const NoResults = ({ text = "Aucun résultat !" }) =>
 {
     return (
-        <div>
+        <div className="m-auto p-12 text-center">
             {text}
         </div>
     )

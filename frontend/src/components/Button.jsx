@@ -1,4 +1,8 @@
 import React from "react";
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../../tailwind.config.cjs';
+
+
 
 /**
  * UI component to interact with or between pages.
@@ -14,10 +18,13 @@ import React from "react";
  */
 const Button = ({ label, type = "button", variant = "primary" }) =>
 {
+    const fullConfig = resolveConfig(tailwindConfig);
+
     return (
         <button
             type={type}
-            className={variant}
+            className={`px-4 py-2 text-white rounded-md`}
+            style={{ backgroundColor: fullConfig.theme.colors[variant]}}
         >
             {label}
         </button>

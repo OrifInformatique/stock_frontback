@@ -11,7 +11,7 @@ import React from "react";
 const Loading = ({ text = "Chargement..." }) =>
 {
     return (
-        <div>
+        <div className="m-auto p-12 text-center">
             {text}
         </div>
     )

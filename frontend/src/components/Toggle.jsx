@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Label from "./Label";
 
@@ -18,30 +18,36 @@ import Label from "./Label";
  */
 const Toggle = ({ name, beforeLabelName = null, afterLabelName = null, checked = false }) =>
 {
+    const [isChecked, setIsChecked] = useState(checked);
+
+    const handleToggle = () => {
+        setIsChecked(!isChecked);
+    };
+
     return (
-        <>
-            {beforeLabelName !== null &&
+        <div className="flex items-center gap-2">
+            {beforeLabelName &&
                 <Label
                     forInput={name}
                     label={beforeLabelName}
-                />
-            }
+                />}
 
-            <input
-                name={name}
-                type="checkbox"
-                checked={checked}
-                className="toggle"
-            />
+            <button
+                type="button"
+                role="switch"
+                aria-checked={isChecked}
+                onClick={handleToggle}
+                className={`relative w-12 h-6 rounded-full duration-300 bg-gray-300`}
+            >
+                <span className={`absolute top-1 left-1 w-4 h-4 bg-black rounded-full shadow-md transition-transform duration-300
+                    ${isChecked ? "translate-x-6" : "translate-x-0"}`} />
+            </button>
 
-            {afterLabelName !== null &&
-                <Label
-                    forInput={name}
-                    label={afterLabelName}
-                />
-            }
-        </>
-    )
-}
+            <input type="hidden" name={name} value={isChecked} />
+
+            {afterLabelName && <Label forInput={name} label={afterLabelName} />}
+        </div>
+    );
+};
 
 export default Toggle;

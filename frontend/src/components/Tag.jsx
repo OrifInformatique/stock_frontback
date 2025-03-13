@@ -13,7 +13,10 @@ import React from "react";
 const Tag = ({ text, color }) =>
 {
     return (
-        <div className={color}>
+        <div
+            className="text-white w-fit px-1 rounded-md mx-auto"
+            style={{backgroundColor: color}}
+        >
             {text}
         </div>
     )

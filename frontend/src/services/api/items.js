@@ -29,7 +29,7 @@ export const getItems = async () =>
 
     catch(error)
     {
-        console.error(`Erreur lors de la récupération des données : ${error.message}`);
+        console.error(`Error while fetching data: ${error.message}`);
         return [];
     }
 };

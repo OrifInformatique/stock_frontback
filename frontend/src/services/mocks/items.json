@@ -1,3 +1,44 @@
 {
-    "message": "items mock works"
+    "items": [
+        {
+			"id": "1",
+			"image_url": "0138_picture.png",
+			"object_name": "TP-LINK carte réseau PCI sans fil",
+			"object_description": "Carte wifi/wi-fi",
+			"state": "Fonctionnel",
+			"loan_state": "Aucun prêt en cours"
+		},
+        {
+			"id": "2",
+			"image_url": "0037_picture.png",
+			"object_name": "APC SMT750IC UPS",
+			"object_description": "APC SMT750IC (750va, 500w, Line-Interakiv)",
+			"state": "Fonctionnel",
+			"loan_state": "En prêt"
+		},
+        {
+			"id": "3",
+			"image_url": "0007_picture.png",
+			"object_name": "Acronis true image 2016",
+			"object_description": "Logiciel",
+			"state": "Fonctionnel",
+			"loan_state": "Aucun prêt en cours"
+		},
+        {
+			"id": "4",
+			"image_url": "0025_picture.png",
+			"object_name": "Adaptateur VGA - HDMI",
+			"object_description": "HAMA VGA HDMI",
+			"state": "Fonctionnel",
+			"loan_state": "Prêt en retard"
+		},
+        {
+			"id": "5",
+			"image_url": "0046_picture.png",
+			"object_name": "Arduino ALLBOT Expandable Robot System",
+			"object_description": "",
+			"state": "Fonctionnel",
+			"loan_state": "En prêt"
+		}
+    ]
 }

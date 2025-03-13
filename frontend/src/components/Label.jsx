@@ -7,13 +7,18 @@ import React from "react";
  *
  * @param {string} label Text of the label.
  *
+ * @param {boolean} inline Defines whether the label is displayed as inline or block. false by default.
+ *
  * @returns {JSX.Element}
  *
  */
-const Label = ({ forInput, label }) =>
+const Label = ({ forInput, label, inline = false }) =>
 {
     return (
-        <label for={forInput}>
+        <label
+            htmlFor={forInput}
+            className={`${!inline && "block"} p-2 hover:cursor-pointer`}
+        >
             {label}
         </label>
     )
