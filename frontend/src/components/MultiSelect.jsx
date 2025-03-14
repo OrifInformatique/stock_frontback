@@ -18,25 +18,23 @@ import Label from "./Label";
 const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] }) =>
 {
     const [selectedCount, setSelectedCount] = useState(0);
+    const [selectedValues, setSelectedValues] = useState(defaultValues);
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMultiSelect = () =>
+    const handleSelectedOptions = (value) =>
     {
-        setIsOpen((prev) => !prev);
-    }
+        setSelectedValues((prev) =>
+            prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+        );
+    };
 
-    const handleSelectedCount = () =>
-    {
-        setSelectedCount(document.querySelectorAll(`#${name}-multiselect input[type=checkbox]:checked`).length);
-    }
-
-    useEffect(() => handleSelectedCount)
+    useEffect(() => setSelectedCount(selectedValues.length), [selectedValues]);
 
     return (
-        <div className="relative">
+        <>
             <div
                 className={`${disabled ? "bg-stone-300 cursor-not-allowed pointer-events-none" : "bg-background"} rounded-md w-fit min-w-40 px-4 py-2 text-center select-none`}
-                onClick={toggleMultiSelect}
+                onClick={() => setIsOpen((prev) => !prev)}
             >
                 {selectedCount > 0 ? (
                     <p className="hover:cursor-pointer">
@@ -53,7 +51,6 @@ const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] 
                 id={`${name}-multiselect`}
                 className={`${!isOpen && "!hidden"} block absolute border border-primary w-fit min-w-40 py-2 space-y-2 rounded-md z-1 bg-white`}
                 onClick={(e) => e.stopPropagation()}
-                onChange={handleSelectedCount}
             >
                 {options.map((option, index) => (
                     <div
@@ -65,8 +62,9 @@ const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] 
                             name={`${name}-${index}`}
                             type="checkbox"
                             value={option}
-                            defaultChecked={defaultValues.includes(option)}
+                            checked={selectedValues.includes(option)}
                             className="rounded-sm hover:cursor-pointer"
+                            onChange={() => handleSelectedOptions(option)}
                         />
 
                         <Label
@@ -77,7 +75,7 @@ const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] 
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     )
 }
 
