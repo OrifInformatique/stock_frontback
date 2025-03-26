@@ -4,36 +4,29 @@ import Label from "./Label";
 /**
  * UI component to select one or more options, in a dropdown.
  *
- * @param {string} name Name of the input.
- *
- * @param {any} [defaultValue = []] Default value of the input. Null by default.
- *
- * @param {boolean} [disabled = false] Defines whether the input is disabled. False by default.
- *
- * @param {array} [options = []] Dropdown options.
- *
  * @returns {JSX.Element}
  *
  */
-const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] }) =>
+const MultiSelect = ({ name, options = [], selectedValues = [], onChangeFunction, disabled = false }) =>
 {
     const [selectedCount, setSelectedCount] = useState(0);
-    const [selectedValues, setSelectedValues] = useState(defaultValues);
     const [isOpen, setIsOpen] = useState(false);
 
     const handleSelectedOptions = (value) =>
     {
-        setSelectedValues((prev) =>
+        onChangeFunction((prev) =>
             prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
         );
     };
 
     useEffect(() => setSelectedCount(selectedValues.length), [selectedValues]);
 
+    if(options.length < 1) disabled = true;
+
     return (
-        <>
+        <div className="relative">
             <div
-                className={`${disabled ? "bg-stone-300 cursor-not-allowed pointer-events-none" : "bg-background"} rounded-md w-fit min-w-40 px-4 py-2 text-center select-none`}
+                className={`${disabled ? "bg-stone-300 hover:cursor-not-allowed pointer-events-none" : "bg-background"} rounded-md w-full h-fit px-4 py-2 text-center select-none`}
                 onClick={() => setIsOpen((prev) => !prev)}
             >
                 {selectedCount > 0 ? (
@@ -49,7 +42,7 @@ const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] 
 
             <div
                 id={`${name}-multiselect`}
-                className={`${!isOpen && "!hidden"} block absolute border border-primary w-fit min-w-40 py-2 space-y-2 rounded-md z-1 bg-white`}
+                className={`${!isOpen && "!hidden"} block absolute border border-blue min-w-max w-full py-2 space-y-2 rounded-md z-50 bg-white`}
                 onClick={(e) => e.stopPropagation()}
             >
                 {options.map((option, index) => (
@@ -75,7 +68,7 @@ const MultiSelect = ({ name, defaultValues = [], disabled = false, options = [] 
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 

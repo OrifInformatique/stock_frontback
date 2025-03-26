@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import Item from "../modules/Item"
+import NoResults from "../ui/NoResults";
 
-import { getItems } from "../services/api/items"
+import Item from "../modules/Item";
+import ItemCommon from "../modules/ItemCommon";
 
 /**
  * List of all exemplars corresponding to the selected filters.
@@ -12,35 +13,26 @@ import { getItems } from "../services/api/items"
  * @returns {JSX.Element}
  *
  */
-const ItemsList = () =>
+const ItemsList = ({ items = [], displayExemplars }) =>
 {
-    const [items, setItems] = useState([]);
-
-    useEffect(() => {
-        const fetchItems = async () =>
-        {
-            const data = await getItems();
-            setItems(data.items);
-        };
-        fetchItems();
-    }, []);
-
     return (
-        <>
-            {/*<pre>{JSON.stringify(items, null, 2)}</pre>*/}
-
-            <section className="p-2 flex flex-wrap justify-center">
-                {items.length > 0 &&
-                    items.map(item => (
-                        <Item
-                            key={item.id}
-                            itemData={item}
-                        />
-                    ))
-                }
-            </section>
-
-        </>
+        <section className="flex flex-wrap justify-center gap-4 mt-36 lg:mt-24 p-4">
+            {items.length > 0 ? (
+                displayExemplars ? items.map(itemCommon =>
+                    <ItemCommon
+                        key={itemCommon.id}
+                        itemCommon={itemCommon}
+                    />
+                ) : items.map(exemplar =>
+                    <Item
+                        key={exemplar.id}
+                        item={exemplar}
+                    />
+                )
+            ) :
+                <NoResults />
+            }
+        </section>
     )
 }
 

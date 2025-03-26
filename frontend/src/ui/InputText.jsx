@@ -7,32 +7,27 @@ import React, { useState } from "react";
  *
  * @param {string} [placeholder = null] Text to show as the input placeholder. Null by default.
  *
- * @param {any} [defaultValue = null] Default value of the input. Null by default.
+ * @param {any} value Value of the input.
  *
  * @param {boolean} [disabled = false] Defines whether the input is disabled. False by default.
+ *
+ * @param {Function} onChangeFunction Function to call when typing in the text field.
  *
  * @returns {JSX.Element}
  *
  */
-const InputText = ({ name, placeholder = null, defaultValue = null, disabled = false }) =>
+const InputText = ({ name, placeholder = null, value, disabled = false, onChangeFunction, className }) =>
 {
-    const [value, setValue] = useState(defaultValue);
-
-    const handleInput = (event) =>
-    {
-        setValue(event.target.value);
-    }
-
     return (
         <input
-            className={`${disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background"} rounded-md`}
+            className={`${disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background"} rounded-md w-full ${className}`}
             id={name}
             name={name}
             placeholder={placeholder}
             value={value}
             disabled={disabled}
             type="text"
-            onChange={handleInput}
+            onChange={onChangeFunction}
         />
     )
 }

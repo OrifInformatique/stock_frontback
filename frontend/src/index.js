@@ -6,7 +6,7 @@ import MainLayout from './layouts/MainLayout';
 
 import Home from './pages/Home';
 
-import Loading from './components/Loading';
+import Loading from './ui/Loading';
 
 import Redirect from './utils/Redirect';
 

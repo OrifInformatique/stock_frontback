@@ -1,44 +1,114 @@
 {
-    "items": [
-        {
-			"id": "1",
-			"image_url": "0138_picture.png",
-			"object_name": "TP-LINK carte réseau PCI sans fil",
-			"object_description": "Carte wifi/wi-fi",
-			"state": "Fonctionnel",
-			"loan_state": "Aucun prêt en cours"
-		},
-        {
-			"id": "2",
-			"image_url": "0037_picture.png",
-			"object_name": "APC SMT750IC UPS",
-			"object_description": "APC SMT750IC (750va, 500w, Line-Interakiv)",
-			"state": "Fonctionnel",
-			"loan_state": "En prêt"
-		},
-        {
-			"id": "3",
-			"image_url": "0007_picture.png",
-			"object_name": "Acronis true image 2016",
-			"object_description": "Logiciel",
-			"state": "Fonctionnel",
-			"loan_state": "Aucun prêt en cours"
-		},
-        {
-			"id": "4",
-			"image_url": "0025_picture.png",
-			"object_name": "Adaptateur VGA - HDMI",
-			"object_description": "HAMA VGA HDMI",
-			"state": "Fonctionnel",
-			"loan_state": "Prêt en retard"
-		},
-        {
-			"id": "5",
-			"image_url": "0046_picture.png",
-			"object_name": "Arduino ALLBOT Expandable Robot System",
-			"object_description": "",
-			"state": "Fonctionnel",
-			"loan_state": "En prêt"
-		}
+    "filters": {
+      "item_tags": [
+        { "id": 1, "name": "Électronique" },
+        { "id": 2, "name": "Mobilier" },
+        { "id": 3, "name": "Papeterie" }
+      ],
+      "loan_states": [
+        { "id": 1, "name": "Aucun prêt" },
+        { "id": 2, "name": "En prêt" },
+        { "id": 3, "name": "En retard" }
+      ],
+      "item_conditions": [
+        { "id": 1, "name": "Fonctionnel" },
+        { "id": 2, "name": "À réparer" },
+        { "id": 3, "name": "Indisponible" }
+      ],
+      "item_groups": [
+        { "id": 1, "name": "Bureautique" },
+        { "id": 2, "name": "Informatique" },
+        { "id": 3, "name": "Entrepôt" }
+      ],
+      "stocking_places": [
+        { "id": 1, "name": "Salle 101" },
+        { "id": 2, "name": "Réserve B" },
+        { "id": 3, "name": "Entrepôt central" }
+      ]
+    },
+    "items_common": [
+      {
+        "id": 1,
+        "image_url": "0046_picture.png",
+        "name": "Ordinateur Portable Dell XPS",
+        "group": "Informatique",
+        "item_tag": "Électronique",
+        "items": [
+          {
+            "id": 101,
+            "inventory_prefix": "INF-001",
+            "item_condition": "À réparer",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Salle 101"
+          },
+          {
+            "id": 102,
+            "inventory_prefix": "INF-002",
+            "item_condition": "Fonctionnel",
+            "loan_state": "En prêt",
+            "stocking_place": "Réserve B"
+          },
+          {
+            "id": 103,
+            "inventory_prefix": "INF-003",
+            "item_condition": "Fonctionnel",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Salle 101"
+          },
+          {
+            "id": 104,
+            "inventory_prefix": "INF-004",
+            "item_condition": "Fonctionnel",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Entrepôt central"
+          },
+          {
+            "id": 105,
+            "inventory_prefix": "INF-005",
+            "item_condition": "Fonctionnel",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Réserve B"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "image_url": "0138_picture.png",
+        "name": "Chaise de bureau ergonomique",
+        "group": "Entrepôt",
+        "item_tag": "Mobilier",
+        "items": [
+          {
+            "id": 201,
+            "inventory_prefix": "MOB-001",
+            "item_condition": "Indisponible",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Salle 101"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "image_url": "0037_picture.png",
+        "name": "Imprimante HP LaserJet",
+        "group": "Bureautique",
+        "item_tag": "Électronique",
+        "items": [
+          {
+            "id": 301,
+            "inventory_prefix": "BUR-001",
+            "item_condition": "À réparer",
+            "loan_state": "En retard",
+            "stocking_place": "Entrepôt central"
+          },
+          {
+            "id": 302,
+            "inventory_prefix": "BUR-002",
+            "item_condition": "À réparer",
+            "loan_state": "Aucun prêt",
+            "stocking_place": "Réserve B"
+          }
+        ]
+      }
     ]
-}
+  }

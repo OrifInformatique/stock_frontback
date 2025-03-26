@@ -1,0 +1,9 @@
+{
+    "home_searchbar_placeholder_objects": "Rechercher un nom d'objet...",
+    "home_searchbar_placeholder_exemplars": "Rechercher un numéro d'inventaire...",
+    "show_filters": "Afficher les filtres",
+    "hide_filters": "Masquer les filtres",
+    "reset_filters": "Réinitialiser les filtres",
+    "filter_by": "Trier par",
+    "filter_order": "Ordre de tri"
+}

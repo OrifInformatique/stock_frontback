@@ -12,12 +12,12 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const Label = ({ forInput, label, inline = false }) =>
+const Label = ({ forInput, label, inline = false}) =>
 {
     return (
         <label
             htmlFor={forInput}
-            className={`${!inline && "block"} p-2 hover:cursor-pointer`}
+            className={`${!inline && "block"} py-1 hover:cursor-pointer`}
         >
             {label}
         </label>

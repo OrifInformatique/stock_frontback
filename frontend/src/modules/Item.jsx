@@ -1,55 +1,72 @@
-import React, { cloneElement } from "react";
+import React from "react";
 
-import Image from "../components/Image";
-import Heading from "../components/Heading";
-import Tag from "../components/Tag";
+import { useTranslation } from "react-i18next";
+
+import Heading from "../ui/Heading";
+import Image from "../ui/Image";
+import MeatballsMenu from "../ui/MeatballsMenu";
+import Tag from "../ui/Tag";
 
 /**
  * Exemplary card.
  *
- * @param {array} itemData The data of the item.
+ * @param {array} item The data of the item.
  *
  * @returns {JSX.Element}
  *
  */
-const Item = ({ itemData }) =>
+const Item = ({ item }) =>
 {
-    let stateTagColor = "green", loanTagColor = "green";
-
-    switch(itemData.loan_state)
-    {
-        case "En prêt":
-            loanTagColor = "orange";
-            break;
-
-        case "Prêt en retard":
-            loanTagColor = "red";
-            break;
-    }
+    const { t } = useTranslation("item");
 
     return (
-        <div className="flex flex-col justify-items-stretch w-fit max-w-[310px] p-2 m-2 bg-background rounded-md break-words space-y-2 text-center">
-            <Image
-                src={itemData.image_url}
-                alt={itemData.object_name}
-                size={300}
-            />
+        <div className="flex flex-col gap-2 w-80 p-2 bg-background rounded-md break-words text-center">
+            <div className="flex justify-end">
+                <MeatballsMenu actions={[
+                    {
+                        label: t("add_loan", { ns: "item" }),
+                        action: () => alert("button clikced")
+                    },
+                    {
+                        label: t("edit_loan", { ns: "item" }),
+                        action: () => alert("button clikced")
+                    },
+                    {
+                        label: t("return_loan", { ns: "item" }),
+                        action: () => alert("button clikced")
+                    },
+                    {
+                        label: t("edit_exemplar", { ns: "item" }),
+                        action: () => alert("button clikced")
+                    },
+                    {
+                        label: t("delete_exemplar", { ns: "item" }),
+                        action: () => alert("button clikced")
+                    }
+                ]}/>
+            </div>
+
+            <div className="mx-auto">
+                <Image
+                    src={item.image_url}
+                    alt={item.name}
+                    size={285}
+                />
+            </div>
 
             <Heading
                 headingLevel={3}
-                title={itemData.object_name}
-            />
-
-            <p>{itemData.object_description}</p>
-
-            <Tag
-                text={itemData.state}
-                color={stateTagColor}
+                title={`${item.inventory_prefix}.${item.id}`}
             />
 
             <Tag
-                text={itemData.loan_state}
-                color={loanTagColor}
+                text={item.item_condition}
+                color={"blue-light"}
+            />
+
+            <Tag
+                text={item.loan_state}
+                color={"blue-light"}
             />
         </div>
     )
