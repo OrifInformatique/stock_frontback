@@ -10,7 +10,14 @@ import Label from "./Label";
  * @returns {JSX.Element}
  *
  */
-const Toggle = ({ name, label = null, checked, offIcon, onIcon, onClickFunction }) =>
+const Toggle = ({
+    name,
+    label = null,
+    checked,
+    offIcon,
+    onIcon,
+    onClickFunction
+}) =>
 {
     return (
         <div className="flex content-center gap-2">

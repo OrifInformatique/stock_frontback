@@ -12,7 +12,9 @@ import { useTranslation } from "react-i18next";
  * @returns {JSX.Element}
  *
  */
-const MeatballsMenu = ({ actions, className }) =>
+const MeatballsMenu = ({
+    actions,
+}) =>
 {
     const [openMeatballsMenu, setOpenMeatballsMenu] = useState(false);
 

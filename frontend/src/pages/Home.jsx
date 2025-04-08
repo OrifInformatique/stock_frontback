@@ -56,7 +56,7 @@ const Home = () =>
         if(displayMode === t("objects", { ns: "item" }))
         {
             setFilteredItems(itemsCommon
-                .filter(itemCommon => !searchbar
+                .filter(itemCommon => !searchBar
                     || itemCommon.name.toLowerCase().includes(searchBar.toLowerCase()))
 
                 .filter(itemCommon => selectedObjectTypes.length === 0
@@ -107,6 +107,7 @@ const Home = () =>
             const exemplars = itemsCommon.flatMap(itemCommon =>
                 itemCommon.items.map(exemplar => ({
                     ...exemplar,
+                    item_common_id: itemCommon.id,
                     name: itemCommon.name,
                     item_tag: itemCommon.item_tag,
                     group: itemCommon.group,
@@ -200,7 +201,7 @@ const Home = () =>
      * Filters the list of items common when a filter is updated.
      */
     useEffect(() => {
-        debugFilters();
+        //debugFilters();
         filterItems();
 
     }, [displayMode, searchBar, selectedObjectTypes, selectedLoanStates, selectedExemplarConditions, selectedGroups, selectedStockingPlaces, selectedFilterOption, filterByAscOrder]);

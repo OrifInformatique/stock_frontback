@@ -15,7 +15,12 @@ import Label from "./Label";
  * @returns {JSX.Element}
  *
  */
-const SegmentedControl = ({ name, options, selectedValue, onChangeFunction }) =>
+const SegmentedControl = ({
+    name,
+    options,
+    selectedValue,
+    onChangeFunction
+}) =>
 {
     return (
         <div className="flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black">

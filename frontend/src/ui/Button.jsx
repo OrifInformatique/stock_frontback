@@ -1,32 +1,58 @@
 import React from "react";
 
+import clsx from "clsx";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
- * UI component to interact with or between pages.
- *
- * @param {string} label Label of the button.
- *
- * @param {string} [type = "button"] Button type. "button" by default.
- *
- * @param {string} [variant = "blue"] Color variant of the button. "blue" by default.
+ * UI component to interact in the page.
  *
  * @returns {JSX.Element}
  *
  */
-const Button = ({ icon = null, label, keepLabel = false, type = "button", variant = "blue", onClickFunction, className }) =>
+const Button = ({
+    icon = null,
+    label = null,
+    title,
+    keepLabel = false,
+    type = "button",
+    variant = "blue",
+    onClickFunction,
+    className
+}) =>
 {
-    if(!label) keepLabel = false;
+    // Keep the label even on small screens
+    const doKeepLabel = (keepLabel === true && label !== null) || icon === null;
 
     return (
         <button
             type={type}
+            title={title}
             onClick={onClickFunction}
-            className={`${keepLabel ? "size-full" : "size-10 sm:size-full"} px-4 py-2 rounded-full sm:rounded-md text-white bg-${variant} ${className}`}
+            className={clsx(
+                "rounded-full sm:rounded-md hover:bg-white border-2 text-white transition-colors duration-300",
+                doKeepLabel
+                    ? "size-full px-4 py-2 "
+                    : label
+                        ? "size-10 sm:size-full sm:px-4 sm:py-2"
+                        : "size-10 p-0",
+                `bg-${variant} border-${variant}`,
+                `hover:text-${variant}`,
+                className
+            )}
         >
-            {icon && <FontAwesomeIcon icon={icon} className={label ? keepLabel ? "ml-0 mr-2" : "-ml-[50%] sm:ml-0 sm:mr-2" : ""}/>}
+            {icon &&
+                <FontAwesomeIcon
+                    icon={icon}
+                    className={clsx(doKeepLabel ? "mr-2" : label && "sm:mr-2")}
+                />
+            }
 
-            {label && <span className={keepLabel ? "inline" : "hidden sm:inline"}>{label}</span>}
+            {label &&
+                <span className={clsx(doKeepLabel ? "inline" : "hidden sm:inline")}>
+                    {label}
+                </span>
+            }
         </button>
     )
 }

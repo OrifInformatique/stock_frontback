@@ -6,24 +6,32 @@
     "edit_object": "Modifier l'objet",
     "delete_object": "Supprimer l'objet",
 
-    "object_type": "Type d'objet",
-
     "exemplar": "Exemplaire",
     "exemplars": "Exemplaires",
     "add_exemplar": "Ajouter un exemplaire",
     "edit_exemplar": "Modifier l'exemplaire",
     "delete_exemplar": "Supprimer l'exemplaire",
 
-    "inventory_number": "N° d'inventaire",
-
     "loan_state": "État du prêt",
     "add_loan": "Ajouter un prêt",
     "edit_loan": "Modifier un prêt",
     "return_loan": "Retourner le prêt",
 
+    "add_control": "Ajouter un contrôle",
+
+    "event_history": "Historique des évènements",
     "exemplar_condition": "État de l'exemplaire",
-
     "group": "Groupe",
-
-    "stocking_place": "Lieu de stockage"
+    "identifier": "Identifiant",
+    "inventory_number": "N° d'inventaire",
+    "prefix": "Préfixe",
+    "buying_date": "Date d'achat",
+    "buying_price": "Prix d'achat",
+    "object_type": "Type d'objet",
+    "remarks": "Remarques",
+    "stocking_place": "Lieu de stockage",
+    "serial_number": "Numéro de série",
+    "supplier": "Fournisseur",
+    "supplier_ref": "Référence du fournisseur",
+    "warranty_duration": "Durée de garantie"
 }

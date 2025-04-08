@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Label from "./Label";
 
+import clsx from "clsx";
+
 /**
  * UI component to select one or more options, in a dropdown.
  *
  * @returns {JSX.Element}
  *
  */
-const MultiSelect = ({ name, options = [], selectedValues = [], onChangeFunction, disabled = false }) =>
+const MultiSelect = ({
+    name,
+    options = [],
+    selectedValues = [],
+    onChangeFunction,
+    disabled = false,
+    className
+}) =>
 {
     const [selectedCount, setSelectedCount] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
@@ -26,8 +35,12 @@ const MultiSelect = ({ name, options = [], selectedValues = [], onChangeFunction
     return (
         <div className="relative">
             <div
-                className={`${disabled ? "bg-stone-300 hover:cursor-not-allowed pointer-events-none" : "bg-background"} rounded-md w-full h-fit px-4 py-2 text-center select-none`}
                 onClick={() => setIsOpen((prev) => !prev)}
+                className={clsx(
+                    "rounded-md w-full h-fit px-4 py-2 text-center select-none",
+                    disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                    className
+                )}
             >
                 {selectedCount > 0 ? (
                     <p className="hover:cursor-pointer">

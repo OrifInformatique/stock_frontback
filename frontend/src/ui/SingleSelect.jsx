@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Label from "./Label";
+
+import clsx from "clsx";
 
 /**
  * UI component to select one or more options, in a dropdown.
@@ -7,7 +8,14 @@ import Label from "./Label";
  * @returns {JSX.Element}
  *
  */
-const SingleSelect = ({ name, options = [], selectedValue, disabled = false, onChangeFunction }) =>
+const SingleSelect = ({
+    name,
+    options = [],
+    selectedValue,
+    disabled = false,
+    onChangeFunction,
+    className
+}) =>
 {
     const handleSingleSelect = (event) =>
     {
@@ -21,7 +29,11 @@ const SingleSelect = ({ name, options = [], selectedValue, disabled = false, onC
             value={selectedValue}
             disabled={disabled || options.length === 0}
             onChange={handleSingleSelect}
-            className={`${disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background"} rounded-md w-full`}
+            className={clsx(
+                "rounded-md w-full",
+                disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                className
+            )}
         >
             {options.map(option => (
                 <option

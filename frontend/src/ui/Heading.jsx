@@ -10,14 +10,17 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const Heading = ({ headingLevel, title }) =>
+const Heading = ({
+    headingLevel,
+    title
+}) =>
 {
     const Tag = `h${headingLevel}`;
     const size = headingLevel * -3.5 + 35;
 
     return (
         <Tag
-            className="text-center"
+            className="text-center my-4"
             style={{ fontSize: `${size}px`}}>
             {title}
         </Tag>

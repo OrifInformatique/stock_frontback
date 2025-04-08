@@ -12,7 +12,11 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const Label = ({ forInput, label, inline = false}) =>
+const Label = ({
+    forInput,
+    label,
+    inline = false
+}) =>
 {
     return (
         <label

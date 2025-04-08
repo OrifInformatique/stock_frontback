@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from './layouts/MainLayout';
 
 import Home from './pages/Home';
+import ItemCommonDetails from './pages/ItemCommonDetails';
 
 import Loading from './ui/Loading';
 
@@ -24,10 +25,34 @@ root.render(
             future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
         >
             <Routes>
-                <Route path="/" element={<MainLayout />}>
-                    <Route index element={<Home />} />
+                <Route
+                    path="/"
+                    element={<MainLayout />}
+                >
+                    <Route
+                        index
+                        element={<Home />}
+                    />
 
-                    <Route path="*" element={<Redirect to="/" />} />
+                    <Route path="objects/:itemCommonId/">
+                        <Route path="exemplars/">
+                            <Route
+                                index
+                                element={<ItemCommonDetails />}
+                            />
+
+                            <Route
+                                path=":itemId"
+                                element={<ItemCommonDetails />}
+                            />
+                        </Route>
+
+                    </Route>
+
+                    <Route
+                        path="*"
+                        element={<Redirect to="/" />}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -15,7 +15,11 @@ import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
  * @returns {JSX.Elements}
  *
  */
-const Image = ({ src, alt, size }) =>
+const Image = ({
+    src,
+    alt,
+    size
+}) =>
 {
     const [insertImagePlaceholder, setInsertImagePlaceholder] = useState(false)
 
@@ -23,17 +27,18 @@ const Image = ({ src, alt, size }) =>
         <>
             {insertImagePlaceholder ? (
                 <div
-                    className={`flex flex-wrap place-content-center bg-gray-400 rounded-md`}
-                    style={{ width: `${size}px`, height: `${size}px`}}>
+                    className={"flex flex-wrap place-content-center bg-gray-400 rounded-md"}
+                    style={{ width: `${size}px`, height: `${size}px` }}
+                >
                     <FontAwesomeIcon icon={faEyeSlash} size={"5x"}/>
                 </div>
             ) : (
                 <img
                     src={`/images/${src}`}
                     alt={alt}
-                    className={`h-auto rounded-md`}
-                    style={{ width: `${size}px`}}
-                    onError={setInsertImagePlaceholder(true)}
+                    className={"h-auto rounded-md"}
+                    style={{ width: `${size}px` }}
+                    onError={() => setInsertImagePlaceholder(true)}
                 />
             )}
         </>

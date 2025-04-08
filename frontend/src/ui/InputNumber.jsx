@@ -3,16 +3,19 @@ import React from "react";
 import clsx from "clsx";
 
 /**
- * UI component to display text input fields.
+ * UI component to display a number field.
  *
  * @returns {JSX.Element}
  *
  */
-const InputText = ({
+const InputNumber = ({
     name,
     placeholder = null,
     value,
     defaultValue = "",
+    min = -Infinity,
+    max = Infinity,
+    step = "any",
     readonly = false,
     disabled = false,
     onChangeFunction,
@@ -21,14 +24,17 @@ const InputText = ({
 {
     return (
         <input
-            type="text"
+            type="number"
             id={name}
             name={name}
             placeholder={placeholder}
             value={value}
             defaultValue={defaultValue}
-            readOnly = {readonly}
-            disabled = {disabled}
+            min={min}
+            max={max}
+            step={step}
+            readOnly={readonly}
+            disabled={disabled}
             onChange={onChangeFunction}
             className={clsx(
                 "rounded-md w-full",
@@ -39,4 +45,4 @@ const InputText = ({
     )
 }
 
-export default InputText;
+export default InputNumber;

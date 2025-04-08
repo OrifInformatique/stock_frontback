@@ -1,6 +1,9 @@
 {
-    "menu": "Menu",
-    "close": "Fermer",
-    "new": "Nouveau",
-    "export": "Exporter"
+    "additional_infos": "Infos complémentaires",
+    "bought_the": "Acheté le",
+    "for_price": "à",
+    "in": "Dans",
+    "in_months": "en mois",
+    "months": "mois",
+    "no_description": "Pas de description"
 }

@@ -2,13 +2,16 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
+import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
+
 import Heading from "../ui/Heading";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
+import TextLink from "../ui/TextLink";
 
 /**
- * Exemplary card.
+ * Exemplary card, with minimal info.
  *
  * @param {array} item The data of the item.
  *
@@ -54,19 +57,23 @@ const Item = ({ item }) =>
                 />
             </div>
 
-            <Heading
-                headingLevel={3}
-                title={`${item.inventory_prefix}.${item.id}`}
-            />
+            <TextLink to={`/objects/${item.item_common_id}/exemplars/${item.id}`}>
+                <Heading
+                    headingLevel={3}
+                    title={`${item.inventory_prefix}.${item.id}`}
+                />
+            </TextLink>
 
             <Tag
                 text={item.item_condition}
-                color={"blue-light"}
+                color={setConditionTagColor(item.item_condition)}
+                className={"mx-auto"}
             />
 
             <Tag
                 text={item.loan_state}
-                color={"blue-light"}
+                color={setLoanTagColor(item.loan_state)}
+                className={"mx-auto"}
             />
         </div>
     )

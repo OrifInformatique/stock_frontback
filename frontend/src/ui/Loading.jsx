@@ -8,7 +8,9 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const Loading = ({ text = "Chargement..." }) =>
+const Loading = ({
+    text = "Chargement..."
+}) =>
 {
     return (
         <div className="m-auto p-12 text-center">

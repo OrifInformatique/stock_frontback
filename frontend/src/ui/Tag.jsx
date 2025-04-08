@@ -1,5 +1,7 @@
 import React from "react";
 
+import clsx from "clsx";
+
 /**
  * UI component to display a tag for an element.
  *
@@ -10,14 +12,22 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const Tag = ({ text, color }) =>
+const Tag = ({
+    text,
+    color,
+    className
+}) =>
 {
     return (
-        <div
-            className={`text-white w-fit px-1 rounded-md mx-auto bg-${color}`}
+        <span
+            className={clsx(
+                "text-white w-fit px-1 rounded-md",
+                color,
+                className
+            )}
         >
             {text}
-        </div>
+        </span>
     )
 }
 

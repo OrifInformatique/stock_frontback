@@ -11,9 +11,12 @@ import { useTranslation } from "react-i18next";
  * @returns {JSX.Element}
  *
  */
-const Menu = ({ actions, className }) =>
+const Menu = ({
+    actions,
+    className
+}) =>
 {
-    const { t } = useTranslation("misc")
+    const { t } = useTranslation("buttons")
 
     const [openMenu, setOpenMenu] = useState(false);
     const [menuButtonIcon, setMenuButtonIcon] = useState(faBars);
@@ -41,7 +44,7 @@ const Menu = ({ actions, className }) =>
                         label={action.label}
                         keepLabel={true}
                         onClickFunction={action.action}
-                        className={"!rounded-full"}
+                        className={"!rounded-full !min-w-max"}
                     />
                 )
             )}
@@ -51,7 +54,7 @@ const Menu = ({ actions, className }) =>
                 label={menuButtonLabel}
                 keepLabel={openMenu}
                 onClickFunction={toggleMenu}
-                className={"!rounded-full"}
+                className={"!rounded-full !min-w-max"}
             />
         </div>
     )

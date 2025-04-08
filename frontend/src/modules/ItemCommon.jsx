@@ -2,13 +2,16 @@ import React from "react";
 
 import { useTranslation } from "react-i18next";
 
+import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
+
 import Heading from "../ui/Heading";
 import Image from "../ui/Image";
+import TextLink from "../ui/TextLink";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
 
 /**
- * Item common card.
+ * Item common card, with minimal info.
  *
  * @returns {JSX.Element}
  *
@@ -45,10 +48,12 @@ const ItemCommon = ({ itemCommon }) =>
             </div>
 
             <div className="flex flex-wrap place-content-center min-h-24">
-                <Heading
-                    headingLevel={2}
-                    title={itemCommon.name}
-                />
+                <TextLink to={`/objects/${itemCommon.id}/exemplars`}>
+                    <Heading
+                        headingLevel={2}
+                        title={itemCommon.name}
+                    />
+                </TextLink>
             </div>
 
             <div className="flex flex-col gap-2 max-h-64 sm:max-h-60 overflow-y-auto">
@@ -64,12 +69,14 @@ const ItemCommon = ({ itemCommon }) =>
                         <div className="flex flex-col justify-center gap-2">
                             <Tag
                                 text={exemplar.item_condition}
-                                color={"blue-light"}
+                                color={setConditionTagColor(exemplar.item_condition)}
+                                className={"mx-auto"}
                             />
 
                             <Tag
                                 text={exemplar.loan_state}
-                                color={"blue-light"}
+                                color={setLoanTagColor(exemplar.loan_state)}
+                                className={"mx-auto"}
                             />
                         </div>
                     </div>
