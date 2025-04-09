@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +23,12 @@ const Image = ({
 {
     const [insertImagePlaceholder, setInsertImagePlaceholder] = useState(false)
 
+    useEffect(() =>
+    {
+        if(src)
+            setInsertImagePlaceholder(false)
+    }, [src])
+
     return (
         <>
             {insertImagePlaceholder ? (
@@ -34,7 +40,7 @@ const Image = ({
                 </div>
             ) : (
                 <img
-                    src={`/images/${src}`}
+                    src={src}
                     alt={alt}
                     className={"h-auto rounded-md"}
                     style={{ width: `${size}px` }}

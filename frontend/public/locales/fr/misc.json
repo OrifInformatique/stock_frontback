@@ -1,9 +1,11 @@
 {
+    "add_or_edit_an_image": "Ajouter ou modifier une image",
     "additional_infos": "Infos complémentaires",
     "bought_the": "Acheté le",
     "for_price": "à",
     "in": "Dans",
     "in_months": "en mois",
     "months": "mois",
-    "no_description": "Pas de description"
+    "no_description": "Pas de description",
+    "no_image": "Aucune image"
 }

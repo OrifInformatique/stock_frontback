@@ -1,5 +1,7 @@
 import React from "react";
 
+import clsx from "clsx";
+
 /**
  * UI component to show label of a form field.
  *
@@ -15,13 +17,18 @@ import React from "react";
 const Label = ({
     forInput,
     label,
-    inline = false
+    inline = false,
+    className
 }) =>
 {
     return (
         <label
             htmlFor={forInput}
-            className={`${!inline && "block"} py-1 hover:cursor-pointer`}
+            className={clsx(
+                "py-1 hover:cursor-pointer",
+                !inline && "block",
+                className
+            )}
         >
             {label}
         </label>

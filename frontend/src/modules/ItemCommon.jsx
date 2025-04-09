@@ -61,10 +61,15 @@ const ItemCommon = ({ itemCommon }) =>
                     <div
                         key={exemplar.id}
                         className="flex justify-between items-center h-20 p-2 rounded-md bg-blue text-white">
-                        <Heading
-                            headingLevel={3}
-                            title={`${exemplar.inventory_prefix}.${exemplar.id}`}
-                        />
+                        <TextLink
+                            to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
+                            className={"hover:text-white hover:underline"}
+                        >
+                            <Heading
+                                headingLevel={3}
+                                title={`${exemplar.inventory_prefix}.${exemplar.id}`}
+                            />
+                        </TextLink>
 
                         <div className="flex flex-col justify-center gap-2">
                             <Tag

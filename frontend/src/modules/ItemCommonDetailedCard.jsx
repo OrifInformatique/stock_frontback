@@ -83,7 +83,13 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
 
                 </div>
             ) : (
-                <ItemCommonForm />
+                <ItemCommonForm
+                    itemCommon={itemCommon}
+                    startCancelButton={true}
+                    endCancelButton={true}
+                    submitButton={true}
+                    cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
+                />
             )}
         </section>
     )

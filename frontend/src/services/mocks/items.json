@@ -29,7 +29,7 @@
     "items_common": [
       {
         "id": 1,
-        "image_url": "0046_picture.png",
+        "image_url": "/images/0046_picture.png",
         "name": "Ordinateur Portable Dell XPS",
         "description": "Laptop 17 pouces",
         "group": "Informatique",
@@ -74,7 +74,7 @@
       },
       {
         "id": 2,
-        "image_url": "0138_picture.png",
+        "image_url": "/images/0138_picture.png",
         "name": "Chaise de bureau ergonomique",
         "description": "Dossier et assise réglable",
         "group": "Entrepôt",
@@ -91,7 +91,7 @@
       },
       {
         "id": 3,
-        "image_url": "0037_picture.png",
+        "image_url": "/images/0037_picture.png",
         "name": "Imprimante HP LaserJet",
         "description": "Imprimante couleurs pour feuilles A4",
         "group": "Bureautique",
