@@ -17,7 +17,7 @@ import Textarea from "../ui/Textarea";
  *
  */
 const ItemForm = ({
-    item = "",
+    item = null,
     startCancelButton = false,
     endCancelButton = false,
     submitButton = false,

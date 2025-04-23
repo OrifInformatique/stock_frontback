@@ -5,7 +5,11 @@
     "for_price": "à",
     "in": "Dans",
     "in_months": "en mois",
+    "linked_file": "Fichier joint",
     "months": "mois",
     "no_description": "Pas de description",
-    "no_image": "Aucune image"
+    "no_image": "Aucune image",
+    "none_selected": "Aucun sélectioné",
+    "selected": "sélectionné",
+    "selected_plural": "sélectionnés"
 }

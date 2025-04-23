@@ -20,6 +20,35 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
     const { t } = useTranslation(["item", "misc"]);
 
     const [isUpdated, setIsUpdated] = useState(false);
+    const [objectFormData, setObjectFormData] = useState({})
+
+    const handleObjectEditFormSubmit = (event) =>
+        {
+            event.preventDefault();
+
+            setObjectFormData(() =>
+            {
+                const formData = Object.fromEntries(new FormData(event.target).entries());
+                console.log(formData);
+
+                /*try
+                {
+                    new XMLHttpRequest()
+                        .open("POST", `${process.env.BACKEND_URL}/objects/add`)
+                        .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                        .send(formData);
+                }
+
+                catch(error)
+                {
+                    console.error("Error while editing a object: ", error)
+                }*/
+
+                return formData;
+            })
+
+            setIsUpdated(false);
+        }
 
     return (
         <section>
@@ -83,13 +112,14 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
 
                 </div>
             ) : (
-                <ItemCommonForm
-                    itemCommon={itemCommon}
-                    startCancelButton={true}
-                    endCancelButton={true}
-                    submitButton={true}
-                    cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
-                />
+                <form onSubmit={handleObjectEditFormSubmit}>
+                    <ItemCommonForm
+                        itemCommon={itemCommon}
+                        endCancelButton={true}
+                        submitButton={true}
+                        cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
+                    />
+                </form>
             )}
         </section>
     )

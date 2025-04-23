@@ -1,5 +1,6 @@
 {
     "name": "Nom",
+    "description": "Description",
 
     "object": "Objet",
     "objects": "Objets",

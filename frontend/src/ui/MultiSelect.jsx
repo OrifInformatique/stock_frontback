@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Label from "./Label";
+import { useTranslation } from "react-i18next";
 
 import clsx from "clsx";
+
+import Label from "./Label";
 
 /**
  * UI component to select one or more options, in a dropdown.
@@ -18,6 +20,8 @@ const MultiSelect = ({
     className
 }) =>
 {
+    const { t } = useTranslation("misc");
+
     const [selectedCount, setSelectedCount] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,7 +39,7 @@ const MultiSelect = ({
     return (
         <div className="relative">
             <div
-                onClick={() => setIsOpen((prev) => !prev)}
+                onClick={() => { if(!disabled) setIsOpen((prev) => !prev) }}
                 className={clsx(
                     "rounded-md w-full h-fit px-4 py-2 text-center select-none",
                     disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
@@ -43,12 +47,23 @@ const MultiSelect = ({
                 )}
             >
                 {selectedCount > 0 ? (
-                    <p className="hover:cursor-pointer">
-                        {selectedCount} sélectionné{selectedCount > 1 && "s"}
+                    <p className={clsx(
+                        disabled
+                            ? "hover:cursor-not-allowed"
+                            : "hover:cursor-pointer")
+                    }>
+                        {`${selectedCount} ${selectedCount > 1
+                            ? t("selected_plural")
+                            : t("selected")
+                        }`}
                     </p>
                 ) : (
-                    <p className="hover:cursor-pointer">
-                        Aucun sélectionné
+                    <p className={clsx(
+                        disabled
+                            ? "hover:cursor-not-allowed"
+                            : "hover:cursor-pointer")
+                    }>
+                        {t("none_selected")}
                     </p>
                 )}
             </div>
@@ -69,8 +84,8 @@ const MultiSelect = ({
                             type="checkbox"
                             value={option}
                             checked={selectedValues.includes(option)}
-                            className="rounded-sm hover:cursor-pointer"
                             onChange={() => handleSelectedOptions(option)}
+                            className="rounded-sm hover:cursor-pointer"
                         />
 
                         <Label

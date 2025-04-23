@@ -16,7 +16,8 @@ import Label from "./Label";
  *
  */
 const InputFileImage = ({
-    name
+    name,
+    imagePreviewSize = 300
 }) =>
 {
     const { t } = useTranslation(["buttons", "misc"]);
@@ -52,6 +53,7 @@ const InputFileImage = ({
         if(!allowedFileTypes.includes(image.type))
         {
             console.error("Invalid file type: ", image.type);
+            deleteUploadedFile();
             return;
         }
 
@@ -96,17 +98,20 @@ const InputFileImage = ({
         <div>
             <div
                 onClick={() => document.getElementById(name).click()}
-                className="relative hover:cursor-pointer"
+                className="relative flex justify-center hover:cursor-pointer"
             >
                 <Image
                     src={imagePreviewSrc}
-                    size={300}
+                    size={imagePreviewSize}
                 />
 
                 <Label
                     forInput={name}
                     label={t("add_or_edit_an_image", { ns: "misc" })}
-                    className={"absolute bottom-0 w-full py-2 rounded-b-md bg-black/50 text-white text-center"}
+                    className={clsx(
+                        "absolute bottom-0 py-2 rounded-b-md bg-black/50 text-white text-center",
+                        `w-[${imagePreviewSize}px]`
+                    )}
                 />
             </div>
 
@@ -121,7 +126,7 @@ const InputFileImage = ({
                     <Button
                         label={t("delete_image", { ns: "buttons" })}
                         onClickFunction={deleteUploadedFile}
-                        className={"mt-2"}
+                        className={"mt-2 h-fit"}
                     />
                 </>
             }
