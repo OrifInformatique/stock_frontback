@@ -27,13 +27,21 @@ import Tag from "../ui/Tag";
  * @returns {JSX.Element}
  *
  */
-const ItemDetailedCard = ({ item, isHighlighted = false }) =>
+const ItemDetailedCard = ({
+    item = null,
+    isHighlighted = false,
+    editExemplarFunction = null
+}) =>
 {
     const { t } = useTranslation(["item", "misc"]);
 
     const [showExtraInfos, setShowExtraInfos] = useState(false);
 
-    const toggleExtraInfo = () => setShowExtraInfos((prev) => !prev);
+    if(!editExemplarFunction)
+    {
+        console.error("No function to edit an exemplar provided.");
+        return;
+    }
 
     return (
         <div className={clsx(
@@ -62,7 +70,7 @@ const ItemDetailedCard = ({ item, isHighlighted = false }) =>
                 </p>
 
                 <p
-                    onClick={toggleExtraInfo}
+                    onClick={() => setShowExtraInfos((prev) => !prev)}
                     className="space-x-1 hover:cursor-pointer select-none"
                 >
                     <FontAwesomeIcon
@@ -108,6 +116,7 @@ const ItemDetailedCard = ({ item, isHighlighted = false }) =>
                     <Button
                         icon={faPen}
                         title={t("edit_exemplar", { ns: "item" })}
+                        onClickFunction={() => editExemplarFunction(item)}
                         className={"basis-1/3"}
                     />
 

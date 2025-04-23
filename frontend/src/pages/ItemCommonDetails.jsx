@@ -29,7 +29,7 @@ const ItemCommonDetails = () =>
     const [isLoading, setIsLoading] = useState(true);
 
     const [displayExemplarForm, setDisplayExemplarForm] = useState(false);
-    const [exemplarFormData, setExemplarFormData] = useState({})
+    const [exemplarFormData, setExemplarFormData] = useState(null)
 
     const [itemCommon, setItemCommon] = useState({});
 
@@ -44,32 +44,63 @@ const ItemCommonDetails = () =>
         setIsLoading(false);
     }, [])
 
+    /**
+     * Hides the exemplar form and empty all form values.
+     *
+     * @returns {void}
+     *
+     */
+    const cancelForm = () =>
+    {
+        setDisplayExemplarForm(false);
+        setExemplarFormData(null)
+    }
+
+    /**
+     * Shows the exemplar form and prefill the fields
+     * with corresponding exemplar values.
+     *
+     * @param {Object} exemplarData Data of the exemplar
+     *
+     * @returns {void}
+     *
+     */
+    const editExemplar = (exemplarData) =>
+    {
+        setDisplayExemplarForm(true);
+        setExemplarFormData(exemplarData);
+    }
+
+    /**
+     * Handles the submit of the exemplar form.
+     *
+     * @param {Event}
+     *
+     * @returns {void}
+     *
+     */
     const handleNewExemplarFormSubmit = (event) =>
     {
         event.preventDefault();
 
-        setExemplarFormData(() =>
+        const formData = Object.fromEntries(new FormData(event.target).entries());
+        console.log(formData);
+
+        /*try
         {
-            const formData = Object.fromEntries(new FormData(event.target).entries());
-            console.log(formData);
+            new XMLHttpRequest()
+                .open("POST", `${process.env.BACKEND_URL}/exemplars/add`)
+                .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                .send(formData);
+        }
 
-            /*try
-            {
-                new XMLHttpRequest()
-                    .open("POST", `${process.env.BACKEND_URL}/exemplars/add`)
-                    .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .send(formData);
-            }
-
-            catch(error)
-            {
-                console.error("Error while creating a exemplar: ", error)
-            }*/
-
-            return formData;
-        })
+        catch(error)
+        {
+            console.error("Error while creating a exemplar: ", error)
+        }*/
 
         setDisplayExemplarForm(false);
+        setExemplarFormData(null)
     }
 
     return (
@@ -102,10 +133,11 @@ const ItemCommonDetails = () =>
 
                             <form onSubmit={handleNewExemplarFormSubmit}>
                                 <ItemForm
+                                    item={exemplarFormData}
                                     startCancelButton={true}
                                     endCancelButton={true}
                                     submitButton={true}
-                                    cancelButtonOnClickFunction={() => setDisplayExemplarForm(false)}
+                                    cancelButtonOnClickFunction={cancelForm}
                                 />
                             </form>
                         </>
@@ -130,6 +162,7 @@ const ItemCommonDetails = () =>
                                 key={item.id}
                                 item={item}
                                 isHighlighted={item.id === parseInt(itemId)}
+                                editExemplarFunction={editExemplar}
                             />
                         )}
                     </div>
