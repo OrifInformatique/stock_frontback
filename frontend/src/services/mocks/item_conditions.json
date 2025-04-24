@@ -1,0 +1,5 @@
+[
+    { "id": 1, "name": "Fonctionnel" },
+    { "id": 2, "name": "À réparer" },
+    { "id": 3, "name": "Indisponible" }
+]

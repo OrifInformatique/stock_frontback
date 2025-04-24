@@ -1,4 +1,4 @@
-import itemsData from "../mocks/items.json";
+import items from "../mocks/items.json";
 
 /**
  * Gets all the items.
@@ -24,7 +24,7 @@ export const getItems = async () =>
         return await response.json();
         */
 
-        return itemsData;
+        return items;
     }
 
     catch(error)
@@ -58,7 +58,7 @@ export const getItemCommon = async (itemCommonId) =>
             return await response.json();
             */
 
-            return itemsData.items_common.filter(itemCommon => itemCommon.id === itemCommonId)[0];
+            return items.filter(itemCommon => itemCommon.id === itemCommonId)[0];
         }
 
         catch(error)
