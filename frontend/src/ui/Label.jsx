@@ -18,7 +18,7 @@ const Label = ({
     forInput,
     label,
     inline = false,
-    className
+    className = null
 }) =>
 {
     return (

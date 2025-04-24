@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
+import clsx from "clsx";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Label from "./Label";
 
@@ -13,32 +16,51 @@ import Label from "./Label";
 const Toggle = ({
     name,
     label = null,
-    checked,
-    offIcon,
-    onIcon,
-    onClickFunction
+    defaultChecked = null,
+    checked = null,
+    offIcon = faXmark,
+    onIcon = faCheck,
+    onClickFunction = null,
+    errors = [],
+    className = null
 }) =>
 {
-    return (
-        <div className="flex content-center gap-2">
-            <button
-                id={name}
-                name={name}
-                type="button"
-                role="switch"
-                aria-checked={checked}
-                onClick={() => onClickFunction(prev => !prev)}
-                className={`size-8 bg-gray-500 rounded-md`}
-            >
-                <FontAwesomeIcon icon={checked ? onIcon : offIcon} size="lg"/>
-            </button>
+    const [isChecked, setIsChecked] = useState(checked ?? defaultChecked ?? false);
 
-            <Label
-                forInput={name}
-                label={label}
-                inline={true}
-            />
-        </div>
+    const handleToggle = () =>
+    {
+        setIsChecked(prev => !prev);
+        return onClickFunction(prev => !prev)
+    }
+
+    return (
+        <>
+            <div className="flex content-center gap-2">
+                <button
+                    id={name}
+                    name={name}
+                    type="button"
+                    role="switch"
+                    aria-checked={isChecked}
+                    onClick={handleToggle}
+                    className={clsx(
+                        "size-8 bg-gray-500 rounded-md",
+                        errors.length > 0 && "border-2 border-solid border-red-500",
+                        className
+                    )}
+                >
+                    <FontAwesomeIcon icon={checked ? onIcon : offIcon} size="lg"/>
+                </button>
+
+                <Label
+                    forInput={name}
+                    label={label}
+                    inline={true}
+                />
+            </div>
+
+            <ShowFormErrors errors={errors} />
+        </>
     );
 };
 

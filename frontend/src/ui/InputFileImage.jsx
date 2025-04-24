@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
 import { formatBytes } from "../utils/fileUtils";
+import ShowFormErrors from "../utils/ShowFormErrors";
 
 import Button from "./Button";
 import Image from "./Image";
@@ -17,7 +18,8 @@ import Label from "./Label";
  */
 const InputFileImage = ({
     name,
-    imagePreviewSize = 300
+    imagePreviewSize = 300,
+    errors = []
 }) =>
 {
     const { t } = useTranslation(["buttons", "misc"]);
@@ -95,51 +97,55 @@ const InputFileImage = ({
     }, [imagePreviewSrc])
 
     return (
-        <div>
-            <div
-                onClick={() => document.getElementById(name).click()}
-                className="relative flex justify-center hover:cursor-pointer"
-            >
-                <Image
-                    src={imagePreviewSrc}
-                    size={imagePreviewSize}
-                />
+        <>
+            <div className={clsx(errors.length > 0 && "border-2 border-solid border-red-500")}>
+                <div
+                    onClick={() => document.getElementById(name).click()}
+                    className="relative flex justify-center hover:cursor-pointer"
+                >
+                    <Image
+                        src={imagePreviewSrc}
+                        size={imagePreviewSize}
+                    />
 
-                <Label
-                    forInput={name}
-                    label={t("add_or_edit_an_image", { ns: "misc" })}
-                    className={clsx(
-                        "absolute bottom-0 py-2 rounded-b-md bg-black/50 text-white text-center",
-                        `w-[${imagePreviewSize}px]`
-                    )}
+                    <Label
+                        forInput={name}
+                        label={t("add_or_edit_an_image", { ns: "misc" })}
+                        className={clsx(
+                            "absolute bottom-0 py-2 rounded-b-md bg-black/50 text-white text-center",
+                            `w-[${imagePreviewSize}px]`
+                        )}
+                    />
+                </div>
+
+                {isImageUploaded &&
+                    <>
+                        <p className="flex justify-between">
+                            <span>{imageName}</span>
+
+                            <span>{imageSize}</span>
+                        </p>
+
+                        <Button
+                            label={t("delete_image", { ns: "buttons" })}
+                            onClickFunction={deleteUploadedFile}
+                            className={"mt-2 h-fit"}
+                        />
+                    </>
+                }
+
+                <input
+                    type="file"
+                    id={name}
+                    name={name}
+                    accept={allowedFileTypes.join(",")}
+                    onChange={handleFileUpload}
+                    className={"hidden"}
                 />
             </div>
 
-            {isImageUploaded &&
-                <>
-                    <p className="flex justify-between">
-                        <span>{imageName}</span>
-
-                        <span>{imageSize}</span>
-                    </p>
-
-                    <Button
-                        label={t("delete_image", { ns: "buttons" })}
-                        onClickFunction={deleteUploadedFile}
-                        className={"mt-2 h-fit"}
-                    />
-                </>
-            }
-
-            <input
-                type="file"
-                id={name}
-                name={name}
-                accept={allowedFileTypes.join(",")}
-                onChange={handleFileUpload}
-                className={"hidden"}
-            />
-        </div>
+            <ShowFormErrors errors={errors} />
+        </>
     )
 }
 

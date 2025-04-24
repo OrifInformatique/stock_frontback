@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
  */
 const Menu = ({
     actions,
-    className
+    className = null
 }) =>
 {
     const { t } = useTranslation("buttons")

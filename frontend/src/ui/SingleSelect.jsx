@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import clsx from "clsx";
+
+import ShowFormErrors from "../utils/ShowFormErrors";
 
 /**
  * UI component to select one or more options, in a dropdown.
@@ -11,10 +13,12 @@ import clsx from "clsx";
 const SingleSelect = ({
     name,
     options = [],
-    selectedValue,
+    defaultValue = null,
+    selectedValue = null,
     disabled = false,
-    onChangeFunction,
-    className
+    onChangeFunction = null,
+    errors = [],
+    className = null
 }) =>
 {
     const handleSingleSelect = (event) =>
@@ -23,27 +27,35 @@ const SingleSelect = ({
     }
 
     return (
-        <select
-            id={name}
-            name={name}
-            value={selectedValue}
-            disabled={disabled || options.length === 0}
-            onChange={handleSingleSelect}
-            className={clsx(
-                "rounded-md w-full",
-                disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
-                className
-            )}
-        >
-            {options.map(option => (
-                <option
-                    key={option.value}
-                    value={option.value}
-                >
-                    {option.label}
-                </option>
-            ))}
-        </select>
+        <>
+            <select
+                id={name}
+                name={name}
+                {...selectedValue !== null
+                    ? { value: selectedValue }
+                    : { defaultValue: defaultValue }
+                }
+                disabled={disabled || options.length === 0}
+                onChange={onChangeFunction && handleSingleSelect}
+                className={clsx(
+                    "rounded-md w-full",
+                    disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                    errors.length > 0 && "border-2 border-solid border-red-500",
+                    className
+                )}
+            >
+                {options.map(option => (
+                    <option
+                        key={option.value}
+                        value={option.value}
+                    >
+                        {option.label}
+                    </option>
+                ))}
+            </select>
+
+            <ShowFormErrors errors={errors} />
+        </>
     )
 }
 

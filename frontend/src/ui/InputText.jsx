@@ -2,6 +2,8 @@ import React from "react";
 
 import clsx from "clsx";
 
+import ShowFormErrors from "../utils/ShowFormErrors";
+
 /**
  * UI component to display text input fields.
  *
@@ -11,31 +13,39 @@ import clsx from "clsx";
 const InputText = ({
     name,
     placeholder = null,
-    value,
-    defaultValue = "",
+    value = null,
+    defaultValue = null,
     readonly = false,
     disabled = false,
-    onChangeFunction,
-    className
+    onChangeFunction = null,
+    errors = [],
+    className = null
 }) =>
 {
     return (
-        <input
-            type="text"
-            id={name}
-            name={name}
-            placeholder={placeholder}
-            value={value}
-            defaultValue={defaultValue}
-            readOnly = {readonly}
-            disabled = {disabled}
-            onChange={onChangeFunction}
-            className={clsx(
-                "rounded-md w-full",
-                disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
-                className
-            )}
-        />
+        <>
+            <input
+                type="text"
+                id={name}
+                name={name}
+                placeholder={placeholder}
+                {...value !== null
+                    ? { value: value }
+                    : { defaultValue: defaultValue }
+                }
+                readOnly = {readonly}
+                disabled = {disabled}
+                onChange={onChangeFunction}
+                className={clsx(
+                    "rounded-md w-full",
+                    disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                    errors.length > 0 && "border-2 border-solid border-red-500",
+                    className
+                )}
+            />
+
+            <ShowFormErrors errors={errors} />
+        </>
     )
 }
 

@@ -20,14 +20,14 @@
 
     "add_control": "Ajouter un contrôle",
 
+    "buying_date": "Date d'achat",
+    "buying_price": "Prix d'achat",
     "event_history": "Historique des évènements",
     "exemplar_condition": "État de l'exemplaire",
     "group": "Groupe",
     "identifier": "Identifiant",
     "inventory_number": "N° d'inventaire",
     "prefix": "Préfixe",
-    "buying_date": "Date d'achat",
-    "buying_price": "Prix d'achat",
     "object_type": "Type d'objet",
     "remarks": "Remarques",
     "stocking_place": "Lieu de stockage",

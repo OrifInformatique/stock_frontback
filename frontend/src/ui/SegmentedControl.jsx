@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+
+import clsx from "clsx";
+
+import ShowFormErrors from "../utils/ShowFormErrors";
 
 import Label from "./Label";
+
 /**
  * UI component to show a segmented control to choose between options.
  *
@@ -17,42 +22,71 @@ import Label from "./Label";
  */
 const SegmentedControl = ({
     name,
-    options,
-    selectedValue,
-    onChangeFunction
+    options = [],
+    defaultValue = null,
+    selectedValue = null,
+    onChangeFunction = null,
+    errors = [],
+    className = null
 }) =>
 {
+    // TODO : Add the possibility to disable this component.
+
+    const [selectedElement, setSelectedElement] = useState(selectedValue ?? defaultValue ?? options[0])
+
+    const handleSelection = (option) =>
+    {
+        setSelectedElement(option);
+
+        return onChangeFunction(option)
+    }
+
     return (
-        <div className="flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black">
-            {options.map(option => {
-
-                const isSelected = selectedValue === option;
-
-                return (
-                    <div
-                        key={option}
-                        className={`flex flex-1 justify-center align-center bg-background ${isSelected && "bg-blue text-white"} first:rounded-l-full last:rounded-r-full px-2 py-1 transition-colors hover:cursor-pointer text-center`}
-                        onClick={() => onChangeFunction(option)}
-                    >
-                        <input
-                            id={option}
-                            name={name}
-                            type="radio"
-                            value={option}
-                            checked={isSelected}
-                            onChange={() => onChangeFunction(option)}
-                            className="hidden"
-                        />
-
-                        <Label
-                            forInput={option}
-                            label={option}
-                            inline={true}
-                        />
-                    </div>
+        <>
+            <div className={clsx(
+                "flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black",
+                errors.length > 0 && "border-2 border-solid border-red-500"
                 )}
-            )}
-        </div>
+            >
+                {options.map(option => {
+
+                    const isSelected = selectedElement === option;
+
+                    return (
+                        <div
+                            key={option}
+                            onClick={() => handleSelection(option)}
+                            className={clsx(
+                                "flex flex-1 justify-center align-center bg-background first:rounded-l-full last:rounded-r-full px-2 py-1 transition-colors hover:cursor-pointer text-center",
+                                isSelected && "bg-blue text-white",
+                                className
+                            )}
+                        >
+                            <input
+                                id={option}
+                                name={name}
+                                type="radio"
+                                {...selectedValue !== null
+                                    ? { value: selectedValue }
+                                    : { defaultValue: defaultValue }
+                                }
+                                checked={isSelected}
+                                onChange={() => handleSelection(option)}
+                                className="hidden"
+                            />
+
+                            <Label
+                                forInput={option}
+                                label={option}
+                                inline={true}
+                            />
+                        </div>
+                    )}
+                )}
+            </div>
+
+            <ShowFormErrors errors={errors} />
+        </>
     )
 }
 

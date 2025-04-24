@@ -2,6 +2,8 @@ import React from "react";
 
 import clsx from "clsx";
 
+import ShowFormErrors from "../utils/ShowFormErrors";
+
 /**
  * UI component to display a textarea field.
  *
@@ -11,7 +13,8 @@ import clsx from "clsx";
 const Textarea = ({
     name,
     placeholder = null,
-    value,
+    defaultValue = null,
+    value = null,
     maxLength = Infinity,
     rows = null,
     cols = null,
@@ -20,7 +23,8 @@ const Textarea = ({
     required = false,
     readonly = false,
     disabled = false,
-    onChangeFunction,
+    onChangeFunction = null,
+    errors = [],
     className
 }) =>
 {
@@ -42,26 +46,33 @@ const Textarea = ({
     }
 
     return (
-        <textarea
-            id={name}
-            name={name}
-            placeholder={placeholder}
-            maxLength={maxLength}
-            rows={rows}
-            cols={cols}
-            required={required}
-            readOnly={readonly}
-            disabled={disabled}
-            onChange={onChangeFunction}
-            className={clsx(
-                "rounded-md w-full",
-                disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
-                resizeClass,
-                className
-            )}
-        >
-            {value}
-        </textarea>
+        <>
+            <textarea
+                id={name}
+                name={name}
+                placeholder={placeholder}
+                {...value !== null
+                    ? { value: value }
+                    : { defaultValue: defaultValue }
+                }
+                maxLength={maxLength}
+                rows={rows}
+                cols={cols}
+                required={required}
+                readOnly={readonly}
+                disabled={disabled}
+                onChange={onChangeFunction}
+                className={clsx(
+                    "rounded-md w-full",
+                    resizeClass,
+                    disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                    errors.length > 0 && "border-2 border-solid border-red-500",
+                    className
+                )}
+            />
+
+            <ShowFormErrors errors={errors} />
+        </>
     )
 }
 
