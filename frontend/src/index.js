@@ -1,20 +1,22 @@
-import React, { Suspense } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { Suspense } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import MainLayout from './layouts/MainLayout';
+import MainLayout from "./layouts/MainLayout";
 
-import Home from './pages/Home';
+import Home from "./pages/Home";
 
-import Loading from './ui/Loading';
+import Loading from "./ui/Loading";
 
-import Redirect from './utils/Redirect';
+import Redirect from "./utils/Redirect";
 
-import './i18n';
+import EventHistory from "./pages/EventHistory";
 
-import './index.pcss';
+import "./i18n";
 
-const container = document.getElementById('root');
+import "./index.pcss";
+
+const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
@@ -27,9 +29,14 @@ root.render(
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Home />} />
 
+                    <Route
+                        // path="objects/:itemCommonID/exemplars/:exemplarID/eventHistory"
+                        path="/event"
+                        element={<EventHistory />}
+                    />
                     <Route path="*" element={<Redirect to="/" />} />
                 </Route>
             </Routes>
         </BrowserRouter>
-    </Suspense>
+    </Suspense>,
 );
