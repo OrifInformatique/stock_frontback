@@ -17,7 +17,7 @@ const Controle = ({ control }) => {
             </p>
             <p>{control.controller}</p>
             <p>
-                <strong>Remarques</strong>
+                <strong>{t("remarks")}</strong>
             </p>
             <p>{control.remarks}</p>
         </>
@@ -29,9 +29,9 @@ const RetourDePret = ({ loanReturn }) => {
     return (
         <>
             <p>
-                <strong>Date du prêt</strong>
+                <strong>{t("loan_date")}</strong>
             </p>
-            <p>{loanReturn.date}</p>
+            <p>{loanReturn.loan_date}</p>
         </>
     );
 };
@@ -41,23 +41,23 @@ const MiseEnPret = ({ loan }) => {
     return (
         <>
             <p>
-                <strong>Date de retour prévue</strong>
+                <strong>{t("planned_return_date")}</strong>
             </p>
             <p>{loan.planned_return_date}</p>
             <p>
-                <strong>Prêté par</strong>
+                <strong>{t("loaned_by")}</strong>
             </p>
             <p>{loan.loaner}</p>
             <p>
-                <strong>Bénéficiaire du prêt</strong>
+                <strong>{t("loaned_to")}</strong>
             </p>
             <p>{loan.borrower_email}</p>
             <p>
-                <strong>Lieu du prêt</strong>
+                <strong>{t("loan_location")}</strong>
             </p>
             <p>{loan.item_localisation}</p>
             <p>
-                <strong>Remarques</strong>
+                <strong>{t("remarks")}</strong>
             </p>
             <p>{loan.remarks}</p>
         </>

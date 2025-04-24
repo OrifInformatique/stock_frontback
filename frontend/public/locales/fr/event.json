@@ -2,5 +2,11 @@
     "return": "Retour de prêt",
     "control": "Contrôle",
     "loan": "Mise en prêt",
-    "controlled_by": "Controlé par"
+    "controlled_by": "Controlé par",
+    "remarks": "Remarques",
+    "loan_date": " Date du prêt",
+    "planned_return_date": "Date de retour prévue",
+    "loaned_by": "Prêté par",
+    "loaned_to": "Bénéficiaire du prêt",
+    "loan_location": "Lieu du prêt"
 }
