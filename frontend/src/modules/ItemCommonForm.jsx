@@ -62,7 +62,7 @@ const ItemCommonForm = ({
                     imagePreviewSize={275}
                 />
 
-                <div className="">
+                <div>
                     <Label
                         forInput={"name"}
                         label={t("name", { ns: "item" })}

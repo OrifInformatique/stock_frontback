@@ -27,34 +27,40 @@ const MultiSelect = ({
     const { t } = useTranslation("misc");
 
     const [selectedCount, setSelectedCount] = useState(0);
+    const [selectedOptions, setSelectedOptions] = useState(defaultValues)
     const [isOpen, setIsOpen] = useState(false);
+
+    const isDisabled = disabled || options.length < 1;
 
     const handleSelectedOptions = (value) =>
     {
-        onChangeFunction((prev) =>
+        if(onChangeFunction)
+            onChangeFunction((prev) =>
+                prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+            );
+
+        setSelectedOptions((prev) =>
             prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
         );
     };
 
-    useEffect(() => setSelectedCount(selectedValues.length), [selectedValues]);
-
-    if(options.length < 1) disabled = true;
+    useEffect(() => setSelectedCount(selectedOptions.length), [selectedOptions]);
 
     return (
         <>
             <div className="relative">
                 <div
-                    onClick={() => { if(!disabled) setIsOpen((prev) => !prev) }}
+                    onClick={() => { if(!isDisabled) setIsOpen((prev) => !prev) }}
                     className={clsx(
                         "rounded-md w-full h-fit px-4 py-2 text-center select-none hover:cursor-pointer",
-                        disabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
+                        isDisabled ? "bg-stone-300 cursor-not-allowed" : "bg-background",
                         errors.length > 0 && "border-2 border-solid border-red-500",
                         className
                     )}
                 >
                     {selectedCount > 0 ? (
                         <p className={clsx(
-                            disabled
+                            isDisabled
                                 ? "hover:cursor-not-allowed"
                                 : "hover:cursor-pointer")
                         }>
@@ -65,7 +71,7 @@ const MultiSelect = ({
                         </p>
                     ) : (
                         <p className={clsx(
-                            disabled
+                            isDisabled
                                 ? "hover:cursor-not-allowed"
                                 : "hover:cursor-pointer")
                         }>
@@ -89,11 +95,11 @@ const MultiSelect = ({
                                 name={`${name}-${index}`}
                                 type="checkbox"
                                 value={option}
-                                {...(selectedValues && selectedValues.length > 0
+                                {...(defaultValues.length === 0 && onChangeFunction !== null
                                     ? { checked: selectedValues.includes(option) }
                                     : { defaultChecked: defaultValues.includes(option) })
                                 }
-                                onChange={onChangeFunction && (() => handleSelectedOptions(option))}
+                                onChange={() => handleSelectedOptions(option)}
                                 className="rounded-sm hover:cursor-pointer"
                             />
 
