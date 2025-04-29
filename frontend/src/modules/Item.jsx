@@ -9,6 +9,7 @@ import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
 import TextLink from "../ui/TextLink";
+import { useNavigate } from "react-router-dom";
 
 /**
  * Exemplary card, with minimal info.
@@ -21,6 +22,7 @@ import TextLink from "../ui/TextLink";
 const Item = ({ item }) =>
 {
     const { t } = useTranslation("item");
+    const navigate = useNavigate()
 
     return (
         <div className="flex flex-col gap-2 w-80 p-2 bg-background rounded-md break-words text-center">
@@ -40,7 +42,7 @@ const Item = ({ item }) =>
                     },
                     {
                         label: t("edit_exemplar", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => navigate(`/objects/${item.item_common_id}/exemplars/${item.id}/edit`)
                     },
                     {
                         label: t("delete_exemplar", { ns: "item" }),

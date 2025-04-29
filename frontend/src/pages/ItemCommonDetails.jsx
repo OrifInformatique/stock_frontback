@@ -1,6 +1,5 @@
-import React, { use, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { getItemCommon } from "../services/api/items";
@@ -14,6 +13,8 @@ import ButtonLink from "../ui/ButtonLink";
 import Heading from "../ui/Heading";
 import Loading from "../ui/Loading";
 
+import { jumpToAnchor } from "../utils/jumpToAnchor";
+
 /**
  * Page where we display the details of an item common and its items.
  *
@@ -26,6 +27,11 @@ const ItemCommonDetails = () =>
 
     const { itemCommonId, itemId } = useParams();
 
+    const location = useLocation();
+    const isObjectEditMode = location.pathname.endsWith(`${itemCommonId}/edit`);
+    const isExemplarAddMode = location.pathname.endsWith("exemplars/add");
+    const isExemplarEditMode = location.pathname.endsWith(`${itemId}/edit`);
+
     const [isLoading, setIsLoading] = useState(true);
 
     const [displayExemplarForm, setDisplayExemplarForm] = useState(false);
@@ -33,7 +39,8 @@ const ItemCommonDetails = () =>
 
     const [itemCommon, setItemCommon] = useState({});
 
-    useEffect(() => {
+    useEffect(() =>
+    {
         const fetchItemCommonData = async () =>
         {
             const data = await getItemCommon(parseInt(itemCommonId));
@@ -43,6 +50,19 @@ const ItemCommonDetails = () =>
         fetchItemCommonData();
         setIsLoading(false);
     }, [])
+
+    useEffect(() =>
+    {
+        if(isExemplarAddMode)
+            setDisplayExemplarForm(true);
+
+        else if(itemId && isExemplarEditMode)
+        {
+            const exemplarData = itemCommon.items?.find(item => item.id === parseInt(itemId));
+            editExemplar(exemplarData);
+        }
+    }, [itemCommon, isExemplarEditMode, isExemplarAddMode])
+
 
     /**
      * Hides the exemplar form and empty all form values.
@@ -87,22 +107,18 @@ const ItemCommonDetails = () =>
         const formData = Object.fromEntries(new FormData(event.target).entries());
         console.log(formData);
 
-        /*try
-        {
-            new XMLHttpRequest()
-                .open("POST", `${process.env.BACKEND_URL}/exemplars/add`)
-                .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-                .send(formData);
-        }
-
-        catch(error)
-        {
-            console.error("Error while creating a exemplar: ", error)
-        }*/
+        // ============================================== //
+        // Future POST request to backend will go here... //
+        // ============================================== //
 
         setDisplayExemplarForm(false);
         setExemplarFormData(null)
     }
+
+    useEffect(() => {
+        if (displayExemplarForm)
+            jumpToAnchor("exemplar-form");
+    }, [displayExemplarForm]);
 
     return (
         <div className="">
@@ -123,14 +139,22 @@ const ItemCommonDetails = () =>
                 <Loading />
             :
                 <>
-                    <ItemCommonDetailedCard itemCommon={itemCommon} />
+                    <ItemCommonDetailedCard
+                        itemCommon={itemCommon}
+                        updateItemCommon={isObjectEditMode}
+                    />
 
                     {displayExemplarForm && (
                         <>
-                            <Heading
-                                headingLevel={2}
-                                title={t("add_exemplar", { ns: "item" })}
-                            />
+                            <div id="exemplar-form">
+                                <Heading
+                                    headingLevel={2}
+                                    title={exemplarFormData
+                                        ? t("edit_exemplar", { ns: "item" })
+                                        : t("add_exemplar", { ns: "item" })
+                                    }
+                                />
+                            </div>
 
                             <form onSubmit={handleNewExemplarFormSubmit}>
                                 <ItemForm

@@ -15,11 +15,16 @@ import Tag from "../ui/Tag";
  * @returns {JSX.Element}
  *
  */
-const ItemCommonDetailedCard = ({ itemCommon }) =>
+const ItemCommonDetailedCard = ({
+    itemCommon,
+    updateItemCommon = false
+}) =>
 {
+    // FIX : Multiselect not displaying the correct selected count when editing an object from the Home page.
+
     const { t } = useTranslation(["item", "misc"]);
 
-    const [isUpdated, setIsUpdated] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(updateItemCommon);
 
     const handleObjectEditFormSubmit = (event) =>
     {
@@ -28,18 +33,9 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
         const formData = Object.fromEntries(new FormData(event.target).entries());
         console.log(formData);
 
-        /*try
-        {
-            new XMLHttpRequest()
-                .open("POST", `${process.env.BACKEND_URL}/objects/add`)
-                .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-                .send(formData);
-        }
-
-        catch(error)
-        {
-            console.error("Error while editing a object: ", error)
-        }*/
+        // ============================================== //
+        // Future POST request to backend will go here... //
+        // ============================================== //
 
         setIsUpdated(false);
     }

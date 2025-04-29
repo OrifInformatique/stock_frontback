@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -19,6 +20,7 @@ import Tag from "../ui/Tag";
 const ItemCommon = ({ itemCommon }) =>
 {
     const { t } = useTranslation("item");
+    const navigate = useNavigate();
 
     return (
         <div className="flex flex-col gap-2 w-80 p-2 bg-background rounded-md break-words text-center">
@@ -26,11 +28,11 @@ const ItemCommon = ({ itemCommon }) =>
                 <MeatballsMenu actions={[
                     {
                         label: t("add_exemplar", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => navigate(`/objects/${itemCommon.id}/exemplars/add`)
                     },
                     {
                         label: t("edit_object", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => navigate(`/objects/${itemCommon.id}/edit`)
                     },
                     {
                         label: t("delete_object", { ns: "item" }),

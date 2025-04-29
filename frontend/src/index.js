@@ -35,6 +35,11 @@ root.render(
                     />
 
                     <Route path="objects/:itemCommonId/">
+                        <Route
+                            path="edit"
+                            element={<ItemCommonDetails />}
+                        />
+
                         <Route path="exemplars/">
                             <Route
                                 index
@@ -42,7 +47,17 @@ root.render(
                             />
 
                             <Route
+                                path="add"
+                                element={<ItemCommonDetails />}
+                            />
+
+                            <Route
                                 path=":itemId"
+                                element={<ItemCommonDetails />}
+                            />
+
+                            <Route
+                                path=":itemId/edit"
                                 element={<ItemCommonDetails />}
                             />
                         </Route>

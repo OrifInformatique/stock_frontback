@@ -95,7 +95,7 @@ const MultiSelect = ({
                                 name={`${name}-${index}`}
                                 type="checkbox"
                                 value={option}
-                                {...(defaultValues.length === 0 && onChangeFunction !== null
+                                {...(onChangeFunction !== null
                                     ? { checked: selectedValues.includes(option) }
                                     : { defaultChecked: defaultValues.includes(option) })
                                 }
