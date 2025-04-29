@@ -20,35 +20,29 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
     const { t } = useTranslation(["item", "misc"]);
 
     const [isUpdated, setIsUpdated] = useState(false);
-    const [objectFormData, setObjectFormData] = useState({})
 
     const handleObjectEditFormSubmit = (event) =>
+    {
+        event.preventDefault();
+
+        const formData = Object.fromEntries(new FormData(event.target).entries());
+        console.log(formData);
+
+        /*try
         {
-            event.preventDefault();
-
-            setObjectFormData(() =>
-            {
-                const formData = Object.fromEntries(new FormData(event.target).entries());
-                console.log(formData);
-
-                /*try
-                {
-                    new XMLHttpRequest()
-                        .open("POST", `${process.env.BACKEND_URL}/objects/add`)
-                        .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-                        .send(formData);
-                }
-
-                catch(error)
-                {
-                    console.error("Error while editing a object: ", error)
-                }*/
-
-                return formData;
-            })
-
-            setIsUpdated(false);
+            new XMLHttpRequest()
+                .open("POST", `${process.env.BACKEND_URL}/objects/add`)
+                .setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+                .send(formData);
         }
+
+        catch(error)
+        {
+            console.error("Error while editing a object: ", error)
+        }*/
+
+        setIsUpdated(false);
+    }
 
     return (
         <section>
@@ -102,10 +96,13 @@ const ItemCommonDetailedCard = ({ itemCommon }) =>
                         <p>
                             {t("object_type")}<br/>
 
-                            <Tag
-                                text={itemCommon.item_tag}
-                                color={"bg-gray-500"}
-                            />
+                            {itemCommon.item_tags?.map(tag =>
+                                <Tag
+                                    key={tag}
+                                    text={tag}
+                                    color={"bg-gray-500"}
+                                />
+                            )}
                         </p>
 
                     </div>

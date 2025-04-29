@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getItems } from "../services/api/items"
+import { getItems } from "../services/api/items";
+import { getAllObjectTypes } from "../services/api/item_tags";
+import { getAllLoanStates } from "../services/api/loan_states";
+import { getAllGroups } from "../services/api/groups";
+import { getAllItemConditions } from "../services/api/item_conditions";
+import { getAllStockingPlaces } from "../services/api/stocking_places";
+
 
 import Loading from "../ui/Loading";
 
@@ -24,21 +30,25 @@ const Home = () =>
 
     const [searchBar, setSearchbar] = useState("");
 
+    const [objectTypes, setObjectTypes] = useState([]);
     const [selectedObjectTypes, setSelectedObjectTypes] = useState([]);
 
+    const [loanStates, setLoanStates] = useState([]);
     const [selectedLoanStates, setSelectedLoanStates] = useState([]);
 
+    const [exemplarConditions, setExemplarConditions] = useState([]);
     const [selectedExemplarConditions, setSelectedExemplarConditions] = useState([]);
 
+    const [groups, setGroups] = useState([]);
     const [selectedGroups, setSelectedGroups] = useState([]);
 
+    const [stockingPlaces, setStockingPlaces] = useState([]);
     const [selectedStockingPlaces, setSelectedStockingPlaces] = useState([]);
 
     const [selectedFilterOption, setSelectedFilterOption] = useState("name");
 
     const [filterByAscOrder, setFilterByAscOrder] = useState(true);
 
-    const [filters, setFilters] = useState([]);
     const [itemsCommon, setItemsCommon] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
 
@@ -60,7 +70,7 @@ const Home = () =>
                     || itemCommon.name.toLowerCase().includes(searchBar.toLowerCase()))
 
                 .filter(itemCommon => selectedObjectTypes.length === 0
-                    || selectedObjectTypes.some(type => itemCommon.item_tag === type))
+                    || selectedObjectTypes.some(type => itemCommon.item_tags.includes(type)))
 
                 .map(itemCommon => ({
                     ...itemCommon,
@@ -109,20 +119,20 @@ const Home = () =>
                     ...exemplar,
                     item_common_id: itemCommon.id,
                     name: itemCommon.name,
-                    item_tag: itemCommon.item_tag,
+                    item_tags: itemCommon.item_tags,
                     group: itemCommon.group,
                     image_url: itemCommon.image_url
                 }))
             );
 
             setFilteredItems(exemplars
-                .filter(exemplar => !searchbar
+                .filter(exemplar => !searchBar
                     || exemplar.inventory_prefix.toLowerCase().includes(searchBar.toLowerCase())
                     || exemplar.id.toString().toLowerCase().includes(searchBar.toLowerCase())
                     || `${exemplar.inventory_prefix}.${exemplar.id}`.toLowerCase().includes(searchBar.toLowerCase()))
 
                 .filter(exemplar => selectedObjectTypes.length === 0
-                    || selectedObjectTypes.some(type => exemplar.item_tag === type))
+                    || selectedObjectTypes.some(type => exemplar.item_tags.includes(type)))
 
                 .filter(exemplar => selectedLoanStates.length === 0
                     || selectedLoanStates.some(state => exemplar.loan_state === state))
@@ -150,33 +160,23 @@ const Home = () =>
         }
     }
 
-    const debugFilters = () =>
-    {
-        console.clear();
-        console.log("displayMode:", displayMode);
-        console.log("searchBar:", searchBar);
-        console.log("selectedObjectTypes:", selectedObjectTypes);
-        console.log("selectedLoanStates:", selectedLoanStates);
-        console.log("selectedExemplarConditions:", selectedExemplarConditions);
-        console.log("selectedGroups:", selectedGroups);
-        console.log("selectedStockingPlaces:", selectedStockingPlaces);
-        console.log("selectedFilterOption:", selectedFilterOption);
-        console.log("filterByAscOrder:", filterByAscOrder);
-    }
-
     /**
      * Fetch data from the API.
      */
     useEffect(() =>
     {
-        const fetchItems = async () =>
+        const fetchData = async () =>
         {
-            const data = await getItems();
-            setFilters(data.filters);
-            setItemsCommon(data.items_common);
-        };
+            setItemsCommon(await getItems());
 
-        fetchItems();
+            setObjectTypes(await getAllObjectTypes());
+            setLoanStates(await getAllLoanStates());
+            setExemplarConditions(await getAllItemConditions());
+            setGroups(await getAllGroups());
+            setStockingPlaces(await getAllStockingPlaces());
+        }
+
+        fetchData();
     }, []);
 
     /**
@@ -195,7 +195,9 @@ const Home = () =>
     useEffect(() => setSelectedFilterOption(
         displayMode === t("objects", { ns: "item" })
             ? "name"
-            : "inventory_prefix"), [displayMode]);
+            : "inventory_prefix"
+        ), [displayMode]
+    );
 
     /**
      * Filters the list of items common when a filter is updated.
@@ -204,7 +206,11 @@ const Home = () =>
         //debugFilters();
         filterItems();
 
-    }, [displayMode, searchBar, selectedObjectTypes, selectedLoanStates, selectedExemplarConditions, selectedGroups, selectedStockingPlaces, selectedFilterOption, filterByAscOrder]);
+    }, [displayMode, searchBar, selectedObjectTypes,
+        selectedLoanStates, selectedExemplarConditions,
+        selectedGroups, selectedStockingPlaces,
+        selectedFilterOption, filterByAscOrder
+    ]);
 
     return (
         <div className="relative">
@@ -215,23 +221,23 @@ const Home = () =>
                 searchBar={searchBar}
                 setSearchbar={setSearchbar}
 
-                objectTypes={filters.item_tags?.map(itemTag => itemTag.name)}
+                objectTypes={objectTypes?.map(objectType => objectType.name)}
                 selectedObjectTypes={selectedObjectTypes}
                 setSelectedObjectTypes={setSelectedObjectTypes}
 
-                loanStates={filters.loan_states?.map(loanState => loanState.name)}
+                loanStates={loanStates?.map(loanState => loanState.name)}
                 selectedLoanStates={selectedLoanStates}
                 setSelectedLoanStates={setSelectedLoanStates}
 
-                exemplarConditions={filters.item_conditions?.map(itemCondition => itemCondition.name)}
+                exemplarConditions={exemplarConditions?.map(exemplarCondition => exemplarCondition.name)}
                 selectedExemplarConditions={selectedExemplarConditions}
                 setSelectedExemplarConditions={setSelectedExemplarConditions}
 
-                groups={filters.item_groups?.map(itemGroup => itemGroup.name)}
+                groups={groups?.map(group => group.name)}
                 selectedGroups={selectedGroups}
                 setSelectedGroups={setSelectedGroups}
 
-                stockingPlaces={filters.stocking_places?.map(stockingPlace => stockingPlace.name)}
+                stockingPlaces={stockingPlaces?.map(stockingPlace => stockingPlace.name)}
                 selectedStockingPlaces={selectedStockingPlaces}
                 setSelectedStockingPlaces={setSelectedStockingPlaces}
 

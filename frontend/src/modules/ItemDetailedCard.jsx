@@ -69,6 +69,10 @@ const ItemDetailedCard = ({
                     {`${t("in", { ns: "misc" })} ${item.stocking_place}`}
                 </p>
 
+                {item.remarks && (
+                    <p>{item.remarks}</p>
+                )}
+
                 <p
                     onClick={() => setShowExtraInfos((prev) => !prev)}
                     className="space-x-1 hover:cursor-pointer select-none"
@@ -93,9 +97,9 @@ const ItemDetailedCard = ({
 
                     <p>{`${t("supplier_ref", { ns: "item" })} : ${item.supplier_ref}`}</p>
 
-                    <p>{`${t("bought_the", { ns: "misc" })} ${item.buying_date}, ${t("for_price", { ns: "misc" })} ${item.buying_price} CHF`}</p>
+                    <p>{`${t("bought_the", { ns: "misc" })} ${new Date(item.buying_date).toLocaleDateString("fr-CH")}, ${t("for_price", { ns: "misc" })} ${item.buying_price} CHF`}</p>
 
-                    <p>{`${t("warranty_duration", { ns: "item" })} : ${item.warranty_duration}`}</p>
+                    <p>{`${t("warranty_duration", { ns: "item" })} : ${item.warranty_duration} ${t("months", { ns: "misc" })}`}</p>
 
                     <Tag
                         text={item.warranty_state}

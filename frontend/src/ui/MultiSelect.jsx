@@ -89,7 +89,7 @@ const MultiSelect = ({
                                 name={`${name}-${index}`}
                                 type="checkbox"
                                 value={option}
-                                {...(selectedValues && selectedValues.length
+                                {...(selectedValues && selectedValues.length > 0
                                     ? { checked: selectedValues.includes(option) }
                                     : { defaultChecked: defaultValues.includes(option) })
                                 }

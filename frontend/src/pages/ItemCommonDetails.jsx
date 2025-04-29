@@ -65,8 +65,9 @@ const ItemCommonDetails = () =>
      * @returns {void}
      *
      */
-    const editExemplar = (exemplarData) =>
+    const editExemplar = async (exemplarData) =>
     {
+        if(displayExemplarForm) await cancelForm();
         setDisplayExemplarForm(true);
         setExemplarFormData(exemplarData);
     }

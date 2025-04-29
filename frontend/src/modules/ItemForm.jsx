@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+
+import { getAllItemConditions } from "../services/api/item_conditions";
+import { getAllStockingPlaces } from "../services/api/stocking_places";
+import { getAllSuppliers } from "../services/api/suppliers";
 
 import Button from "../ui/Button";
 import Heading from "../ui/Heading";
@@ -25,6 +29,26 @@ const ItemForm = ({
 }) =>
 {
     const { t } = useTranslation(["buttons", "item", "titles"]);
+
+        const [itemConditions, setItemConditions] = useState([]);
+        const [stockingPlaces, setStockingPlaces] = useState([]);
+        const [suppliers, setSuppliers] = useState([]);
+        // TODO : Include all infos about items and item commons
+
+        /**
+         * Fetch data from the API.
+         */
+        useEffect(() =>
+        {
+            const fetchData = async () =>
+            {
+                setItemConditions(await getAllItemConditions());
+                setStockingPlaces(await getAllStockingPlaces());
+                setSuppliers(await getAllSuppliers())
+            }
+
+            fetchData();
+        }, []);
 
     /**
      * Generates a inventory number for the item being created.
@@ -65,7 +89,7 @@ const ItemForm = ({
 
                                 <InputText
                                     name={"prefix"}
-                                    defaultValue={item?.inventory_prefix ?? ""}
+                                    defaultValue={item?.inventory_prefix}
                                 />
                             </div>
 
@@ -81,7 +105,7 @@ const ItemForm = ({
 
                                 <InputNumber
                                     name={"identifier"}
-                                    defaultValue={item?.id ?? ""}
+                                    defaultValue={item?.id}
                                     readonly={true}
                                 />
                             </div>
@@ -109,7 +133,7 @@ const ItemForm = ({
 
                         <InputText
                             name={"serial-number"}
-                            defaultValue={item?.serial_number ?? ""}
+                            defaultValue={item?.serial_number}
                         />
 
                         <Label
@@ -119,29 +143,49 @@ const ItemForm = ({
 
                         <Textarea
                             name={"remarks"}
-                            defaultValue={item?.remarks ?? ""}
+                            defaultValue={item?.remarks}
                             rows={5}
                         />
 
-                        <Label
-                            forInput={"item-condition"}
-                            label={t("exemplar_condition", { ns: "item"})}
-                        />
+                        {itemConditions.length > 0 && (
+                            <>
+                                <Label
+                                    forInput={"item-condition"}
+                                    label={t("exemplar_condition", { ns: "item"})}
+                                />
 
-                        <SingleSelect
-                            name={"item-condition"}
-                            selectedDefaultValue={item?.item_condition ?? ""}
-                        />
+                                <SingleSelect
+                                    name={"item-condition"}
+                                    options={itemConditions?.map(itemCondition => (
+                                        {
+                                            value: itemCondition.name,
+                                            label: itemCondition.name
+                                        }))
+                                    }
+                                    defaultValue={item?.item_condition}
+                                />
+                            </>
+                        )}
 
-                        <Label
-                            forInput={"stocking-place"}
-                            label={t("stocking_place", { ns: "item"})}
-                        />
+                        {stockingPlaces.length > 0 && (
+                            <>
+                                <Label
+                                    forInput={"stocking-place"}
+                                    label={t("stocking_place", { ns: "item"})}
+                                />
 
-                        <SingleSelect
-                            name={"stocking-place"}
-                            selectedDefaultValue={item?.stocking_place ?? ""}
-                        />
+                                <SingleSelect
+                                    name={"stocking-place"}
+                                    options={stockingPlaces?.map(stockingPlace => (
+                                        {
+                                            value: stockingPlace.name,
+                                            label: stockingPlace.name
+                                        }))
+                                    }
+                                    defaultValue={item?.stocking_place}
+                                />
+                            </>
+                        )}
                     </fieldset>
                 </div>
 
@@ -155,26 +199,21 @@ const ItemForm = ({
                             />
                         </legend>
 
-                        <div className="flex justify-between gap-4">
-                            <div className="basis-1/2">
+                        <div className="flex flex-col justify-between gap-2">
+                            <div>
                                 <Label
                                     forInput={"buying-price"}
                                     label={t("buying_price", { ns: "item"})}
                                 />
 
-                                <div className="flex gap-2">
-                                    <InputNumber
-                                        name={"buying-price"}
-                                        defaultValue={item?.buying_price ?? ""}
-                                    />
-
-                                    <p className="self-center">
-                                        CHF
-                                    </p>
-                                </div>
+                                <InputNumber
+                                    name={"buying-price"}
+                                    defaultValue={item?.buying_price}
+                                    unit={"CHF"}
+                                />
                             </div>
 
-                            <div className="basis-1/2">
+                            <div>
                                 <Label
                                     forInput={"buying-date"}
                                     label={t("buying_date", { ns: "item"})}
@@ -182,25 +221,22 @@ const ItemForm = ({
 
                                 <InputDate
                                     name={"buying-date"}
-                                    defaultValue={item?.buying_date ?? ""}
+                                    defaultValue={item?.buying_date}
                                 />
                             </div>
-                        </div>
 
-                        <Label
-                            forInput={"warranty-duration"}
-                            label={t("warranty_duration", { ns: "item"})}
-                        />
+                            <div>
+                                <Label
+                                    forInput={"warranty-duration"}
+                                    label={t("warranty_duration", { ns: "item"})}
+                                />
 
-                        <div className="flex gap-2 w-1/2">
-                            <InputNumber
-                                name={"warranty-duration"}
-                                defaultValue={item?.warranty_duration ?? ""}
-                            />
-
-                            <p className="self-center">
-                                {t("months", { ns: "misc" })}
-                            </p>
+                                <InputNumber
+                                    name={"warranty-duration"}
+                                    defaultValue={item?.warranty_duration}
+                                    unit={t("months", { ns: "misc" })}
+                                />
+                            </div>
                         </div>
                     </fieldset>
 
@@ -218,10 +254,16 @@ const ItemForm = ({
                             label={t("supplier", { ns: "item"})}
                         />
 
-                        <SingleSelect
-                            name={"supplier"}
-                            defaultValue={item?.supplier ?? ""}
-                        />
+                        {suppliers?.length > 0 && (
+                            <SingleSelect
+                                name="supplier"
+                                options={suppliers.map(supplier => ({
+                                    value: supplier.name,
+                                    label: supplier.name
+                                }))}
+                                defaultValue={item?.supplier}
+                            />
+                        )}
 
                         <Label
                             forInput={"supplier-ref"}
@@ -230,7 +272,7 @@ const ItemForm = ({
 
                         <InputText
                             name={"supplier-ref"}
-                            defaultValue={item?.supplier_ref ?? ""}
+                            defaultValue={item?.supplier_ref}
                         />
                     </fieldset>
 
