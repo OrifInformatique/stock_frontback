@@ -4,25 +4,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 /**
- * UI component to display images.
+ * UI component to display images. If the image can't be displayed, a placeholder will show instead.
  *
- * @param {string} src Source of the image.
+ * @param {string} [src=null] Source of the image. Null by default.
  *
- * @param {string} alt Alternative text of the image.
+ * @param {string} [alt=null] Alternative text of the image. Null by default.
  *
- * @param {number} size The desired image size, in pixels.
+ * @param {number} [size=300] The desired image size, in pixels. 300 by default.
  *
  * @returns {JSX.Elements}
  *
  */
 const Image = ({
-    src,
-    alt,
-    size
+    src = null,
+    alt = null,
+    size = 300
 }) =>
 {
+    if(src && !alt)
+        console.warn("For accessibility reasons, it's preferable to add an alternative text to the image");
+
     const [insertImagePlaceholder, setInsertImagePlaceholder] = useState(false)
 
+    /**
+     * Tries to display the image when the source is updated.
+     */
     useEffect(() =>
     {
         if(src)
@@ -42,9 +48,9 @@ const Image = ({
                 <img
                     src={src}
                     alt={alt}
-                    className={"h-auto rounded-md"}
                     style={{ width: `${size}px` }}
                     onError={() => setInsertImagePlaceholder(true)}
+                    className={"h-auto rounded-md"}
                 />
             )}
         </>

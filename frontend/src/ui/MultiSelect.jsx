@@ -3,12 +3,31 @@ import { useTranslation } from "react-i18next";
 
 import clsx from "clsx";
 
-import ShowFormErrors from "../utils/ShowFormErrors";
-
 import Label from "./Label";
+
+import ShowFormErrors from "../utils/ShowFormErrors";
 
 /**
  * UI component to select one or more options, in a dropdown.
+ *
+ * @param {string} name Name of the input. Required.
+ *
+ * @param {string[]} [options=[]] Options of the input. Empty array by default.
+ *
+ * @param {string} [selectedValues=[]] Value of the date field. Empty array by default. \
+ * If provided, it means you want to control the input, and have to provide a function to update it (onChangeFunction prop).
+ *
+ * @param {string} [defaultValues=[]] Default value of the date input. Empty array by default. \
+ * Only applies on uncontrolled inputs.
+ *
+ * @param {boolean} [disabled=false] Decide whether the field is disabled. False by default. \
+ * If options aren't provided or is empty, the input will also be disabled.
+ *
+ * @param {Function} [onChangeFunction=null] Function to call when the field is updated. Null by default.
+ *
+ * @param {string[]} [errors=[]] Invalid value errors for this field. Empty array by default.
+ *
+ * @param {string} [className=null] Additional and specific styles for the button. Null by default.
  *
  * @returns {JSX.Element}
  *
@@ -16,14 +35,20 @@ import Label from "./Label";
 const MultiSelect = ({
     name,
     options = [],
-    defaultValues = [],
     selectedValues = [],
-    onChangeFunction = null,
+    defaultValues = [],
     disabled = false,
+    onChangeFunction = null,
     errors = [],
     className = null
 }) =>
 {
+    if(!name)
+    {
+        console.error("MultiSelect must have a name.");
+        return;
+    }
+
     const { t } = useTranslation("misc");
 
     const [selectedCount, setSelectedCount] = useState(0);
@@ -32,6 +57,14 @@ const MultiSelect = ({
 
     const isDisabled = disabled || options.length < 1;
 
+    /**
+     * Updates the internal selected elements and calls the onChangeFunction if exists.
+     *
+     * @param {string} value The value being selected or unselected.
+     *
+     * @returns {void}
+     *
+     */
     const handleSelectedOptions = (value) =>
     {
         if(onChangeFunction)

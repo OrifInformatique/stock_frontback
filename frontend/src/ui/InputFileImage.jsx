@@ -3,15 +3,23 @@ import { useTranslation } from "react-i18next";
 
 import clsx from "clsx";
 
-import { formatBytes } from "../utils/fileUtils";
-import ShowFormErrors from "../utils/ShowFormErrors";
-
 import Button from "./Button";
 import Image from "./Image";
 import Label from "./Label";
 
+import { formatBytes } from "../utils/fileUtils";
+import ShowFormErrors from "../utils/ShowFormErrors";
+
 /**
  * UI component to display a image upload input.
+ *
+ * @param {string} name Name of the image upload input. Required.
+ *
+ * @param {number} [imagePreviewSize=300] Size of the image preview. 300 by default.
+ *
+ * @param {string[]} [errors=[]] Invalid value errors for this field. Empty array by default.
+ *
+ * @param {string} [className=null] Additional and specific styles for the image upload input. Null by default.
  *
  * @returns {JSX.Element}
  *
@@ -19,9 +27,16 @@ import Label from "./Label";
 const InputFileImage = ({
     name,
     imagePreviewSize = 300,
-    errors = []
+    errors = [],
+    className = null
 }) =>
 {
+    if(!name)
+    {
+        console.error("InputFileImage must have a name.");
+        return;
+    }
+
     const { t } = useTranslation(["buttons", "misc"]);
 
     const allowedFileTypes = ["image/png", "image/jpg", "image/jpeg"];
@@ -37,7 +52,7 @@ const InputFileImage = ({
      * Validates the selected file, ensures it matches allowed types, and updates
      * the preview source. Deletes any previously uploaded image if no file is selected.
      *
-     * @param {Event} event - The file input change event.
+     * @param {Event} event The file input change event.
      *
      * @returns {void}
      *
@@ -98,7 +113,10 @@ const InputFileImage = ({
 
     return (
         <>
-            <div className={clsx(errors.length > 0 && "border-2 border-solid border-red-500")}>
+            <div className={clsx(
+                    errors.length > 0 && "border-2 border-solid border-red-500",
+                    className
+            )}>
                 <div
                     onClick={() => document.getElementById(name).click()}
                     className="relative flex justify-center hover:cursor-pointer"

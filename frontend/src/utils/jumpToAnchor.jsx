@@ -4,6 +4,7 @@
  * @param {string} anchor
  *
  * @returns {void}
+ *
  */
 export const jumpToAnchor = (anchor) =>
 {

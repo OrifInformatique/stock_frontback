@@ -7,20 +7,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 /**
  * UI component to interact in the page.
  *
+ * @param {FontAwesomeIcon} [icon=null] Icon (provided by FontAwesome) of the button. Null by default,
+ *
+ * @param {string} [label=null] Label of the button. Null by default.
+ *
+ * @param {string} [title=null] Title of the button, showing when hovering the button. Null by default.
+ *
+ * @param {boolean} [keepLabel=false] Decide whether to keep the label on small screens. \
+ * If a button doesn't have an icon, it will automatically keep the label. \
+ * If a button have the keepLabel at true but no label, keepLabel will become false.
+ *
+ * @param {string} [type="button"] The type (attribute) of the button. "button" by default.
+ *
+ * @param {string} [variant="blue"] The color of the button. "blue" by default.
+ *
+ * @param {Function} [onClickFunction=null] The function to execute when the button is clicked. Null by default.
+ *
+ * @param {string} [className=null] Additional and specific styles for the button. Null by default.
+ *
  * @returns {JSX.Element}
  *
  */
 const Button = ({
     icon = null,
     label = null,
-    title,
+    title = null,
     keepLabel = false,
     type = "button",
     variant = "blue",
-    onClickFunction,
-    className
+    onClickFunction = null,
+    className = null
 }) =>
 {
+    if(!icon && !label)
+    {
+        console.error("Button must have an icon or a label or both.");
+        return;
+    }
+
     // Keep the label even on small screens
     const doKeepLabel = (keepLabel === true && label !== null) || icon === null;
 

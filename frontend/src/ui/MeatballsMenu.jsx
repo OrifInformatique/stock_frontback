@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./Button";
-import { useTranslation } from "react-i18next";
 
 /**
  * UI component to add a meatballs menu with personalized actions.
+ *
+ * @param {Array<any>} actions List of objects with a label, an icon, and an action. \
+ * label: Text of the action. \
+ * icon: Icon (FontAwesome) of the action. \
+ * action: Function to execute when the action is clicked.
  *
  * @returns {JSX.Element}
  *
@@ -16,19 +20,20 @@ const MeatballsMenu = ({
     actions,
 }) =>
 {
-    const [openMeatballsMenu, setOpenMeatballsMenu] = useState(false);
-
-    const toggleMeatballsMenu = () =>
+    if(!actions || actions.length < 1)
     {
-        setOpenMeatballsMenu(prev => !prev);
+        console.error("MeatballsMenu must have at least one action");
+        return;
     }
+
+    const [openMeatballsMenu, setOpenMeatballsMenu] = useState(false);
 
     return (
         <div className={`relative w-fit`}>
             <FontAwesomeIcon
                 icon={faEllipsis}
                 size="2xl"
-                onClick={toggleMeatballsMenu}
+                onClick={() => setOpenMeatballsMenu(prev => !prev)}
                 className="hover:cursor-pointer"
             />
 

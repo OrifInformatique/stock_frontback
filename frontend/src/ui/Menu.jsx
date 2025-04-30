@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./Button";
-import { useTranslation } from "react-i18next";
 
 /**
  * UI component to add a menu with personalized actions.
+ *
+ * @param {Array<any>} actions List of objects with a label, an icon, and an action. \
+ * label: Text of the action. \
+ * icon: Icon (FontAwesome) of the action. \
+ * action: Function to execute when the action is clicked.
+ *
+ * @param {string} [className=null] Additional and specific styles for the button. Null by default.
  *
  * @returns {JSX.Element}
  *
@@ -16,12 +23,24 @@ const Menu = ({
     className = null
 }) =>
 {
+    if(!actions || actions.length < 1)
+    {
+        console.error("Menu must have at least one action");
+        return;
+    }
+
     const { t } = useTranslation("buttons")
 
     const [openMenu, setOpenMenu] = useState(false);
     const [menuButtonIcon, setMenuButtonIcon] = useState(faBars);
     const [menuButtonLabel, setMenuButtonLabel] = useState(t("menu"));
 
+    /**
+     * Toggles the menu options and the text of the menu button.
+     *
+     * @returns {void}
+     *
+     */
     const toggleMenu = () =>
     {
         setOpenMenu(prev => {

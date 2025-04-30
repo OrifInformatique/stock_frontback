@@ -9,13 +9,21 @@ import Label from "./Label";
 /**
  * UI component to show a segmented control to choose between options.
  *
- * @param {string} name Name of the segmented control field.
+ * @param {string} name Name of the file input. Required.
  *
- * @param {string[]} options Options to choose from.
+ * @param {string[]} [options=[]] Options of the input. Empty array by default.
  *
- * @param {string} selectedValue Selected value.
+ * @param {string} [selectedValues=null] Value of the field. Null by default. \
+ * If provided, it means you want to control the input, and have to provide a function to update it (onChangeFunction prop).
  *
- * @param {Function} onChangeFunction Function to call on onChange (and onClick) event.
+ * @param {string} [defaultValue=null] Default value of the input. Null by default. \
+ * Only applies on uncontrolled inputs.
+ *
+ * @param {Function} [onChangeFunction=null] Function to call when the field is updated. Null by default.
+ *
+ * @param {string[]} [errors=[]] Invalid value errors for this field. Empty array by default.
+ *
+ * @param {string} [className=null] Additional and specific styles for the button. Null by default.
  *
  * @returns {JSX.Element}
  *
@@ -23,22 +31,37 @@ import Label from "./Label";
 const SegmentedControl = ({
     name,
     options = [],
-    defaultValue = null,
     selectedValue = null,
+    defaultValue = null,
     onChangeFunction = null,
     errors = [],
     className = null
 }) =>
 {
+    if(!name)
+    {
+        console.error("SegmentedControl must have a name.");
+        return;
+    }
+
     // TODO : Add the possibility to disable this component.
 
     const [selectedElement, setSelectedElement] = useState(selectedValue ?? defaultValue ?? options[0])
 
+    /**
+     * Updates the internal selected element and calls the onChangeFunction if exists.
+     *
+     * @param {string} option The selected option.
+     *
+     * @returns {void}
+     *
+     */
     const handleSelection = (option) =>
     {
         setSelectedElement(option);
 
-        return onChangeFunction(option)
+        if(onChangeFunction)
+            onChangeFunction(option)
     }
 
     return (
@@ -46,8 +69,7 @@ const SegmentedControl = ({
             <div className={clsx(
                 "flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black",
                 errors.length > 0 && "border-2 border-solid border-red-500"
-                )}
-            >
+            )}>
                 {options.map(option => {
 
                     const isSelected = selectedElement === option;
