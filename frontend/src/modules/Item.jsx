@@ -68,13 +68,13 @@ const Item = ({ item }) =>
 
             <Tag
                 text={item.item_condition}
-                color={setConditionTagColor(item.item_condition)}
+                color={item.item_condition && setConditionTagColor(item.item_condition)}
                 className={"mx-auto"}
             />
 
             <Tag
                 text={item.loan_state}
-                color={setLoanTagColor(item.loan_state)}
+                color={item.loan_state && setLoanTagColor(item.loan_state)}
                 className={"mx-auto"}
             />
         </div>
