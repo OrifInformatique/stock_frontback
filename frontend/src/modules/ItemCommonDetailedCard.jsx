@@ -83,7 +83,7 @@ const ItemCommonDetailedCard = ({
                             {t("group")}<br/>
 
                             <Tag
-                                text={itemCommon.group}
+                                text={itemCommon.group ?? " "}
                                 color={"bg-gray-500"}
                             />
                         </p>

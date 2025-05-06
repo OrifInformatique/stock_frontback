@@ -113,7 +113,8 @@ const ItemDetailedCard = ({
                     <ButtonLink
                         to={`${item.id}/event-history`}
                         title={t("event_history", { ns: "item" })}
-                        className={"inline-block basis-1/3 flex flex-wrap place-content-center size-10 !p-0"}>
+                        className={"inline-block basis-1/3 flex flex-wrap place-content-center size-10 !p-0"}
+                    >
                         <FontAwesomeIcon icon={faClockRotateLeft} />
                     </ButtonLink>
 
@@ -132,12 +133,12 @@ const ItemDetailedCard = ({
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <ButtonLink to={""}>
+                    <ButtonLink to={"/"}>
                         {t("add_loan", { ns: "item" })}
                     </ButtonLink>
 
                     <ButtonLink
-                        to={""}
+                        to={"/"}
                         className={"min-w-max"}
                     >
                         {t("add_control", { ns: "item" })}
