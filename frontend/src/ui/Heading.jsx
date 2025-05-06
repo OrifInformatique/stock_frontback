@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 /**
@@ -7,12 +8,15 @@ import React from "react";
  *
  * @param {string} title Text of the heading. Required.
  *
+ * @param {string} [className=null] Additional and specific styles for the date input. Null by default.
+ *
  * @returns {JSX.Element}
  *
  */
 const Heading = ({
     headingLevel,
-    title
+    title,
+    className = null
 }) =>
 {
     if(!headingLevel)
@@ -38,8 +42,13 @@ const Heading = ({
 
     return (
         <Tag
-            className="text-center my-4"
-            style={{ fontSize: `${size}px`}}>
+            style={{ fontSize: `${size}px`}}
+            className={clsx(
+                "text-center my-4",
+                `text-[${size}px]`,
+                className
+            )}
+        >
             {title}
         </Tag>
     )

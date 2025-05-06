@@ -63,6 +63,13 @@ const Item = ({ item }) =>
                 <Heading
                     headingLevel={3}
                     title={`${item.inventory_prefix}.${item.id}`}
+                    className={"!mb-0"}
+                />
+
+                <Heading
+                    headingLevel={3}
+                    title={item.name}
+                    className={"!mt-0"}
                 />
             </Link>
 
