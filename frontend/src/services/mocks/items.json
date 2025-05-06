@@ -36,35 +36,35 @@
         "items": [
           {
             "id": 101,
-            "inventory_prefix": "INF-001",
+            "inventory_prefix": "ORP-FOORD23",
             "item_condition": "À réparer",
             "loan_state": "Aucun prêt",
             "stocking_place": "Salle 101"
           },
           {
             "id": 102,
-            "inventory_prefix": "INF-002",
+            "inventory_prefix": "ORP-FOORD22",
             "item_condition": "Fonctionnel",
             "loan_state": "En prêt",
             "stocking_place": "Réserve B"
           },
           {
             "id": 103,
-            "inventory_prefix": "INF-003",
+            "inventory_prefix": "ORP-FOORD22",
             "item_condition": "Fonctionnel",
             "loan_state": "Aucun prêt",
             "stocking_place": "Salle 101"
           },
           {
             "id": 104,
-            "inventory_prefix": "INF-004",
+            "inventory_prefix": "ORP-FOORD23",
             "item_condition": "Fonctionnel",
             "loan_state": "Aucun prêt",
             "stocking_place": "Entrepôt central"
           },
           {
             "id": 105,
-            "inventory_prefix": "INF-005",
+            "inventory_prefix": "ORP-FOORD24",
             "item_condition": "Fonctionnel",
             "loan_state": "Aucun prêt",
             "stocking_place": "Réserve B"
@@ -80,7 +80,7 @@
         "items": [
           {
             "id": 201,
-            "inventory_prefix": "MOB-001",
+            "inventory_prefix": "ORP-MAMOB20",
             "item_condition": "Indisponible",
             "loan_state": "Aucun prêt",
             "stocking_place": "Salle 101"
@@ -96,14 +96,14 @@
         "items": [
           {
             "id": 301,
-            "inventory_prefix": "BUR-001",
+            "inventory_prefix": "ORP-FOIMP23",
             "item_condition": "À réparer",
             "loan_state": "En retard",
             "stocking_place": "Entrepôt central"
           },
           {
             "id": 302,
-            "inventory_prefix": "BUR-002",
+            "inventory_prefix": "ORP-FOIMP20",
             "item_condition": "À réparer",
             "loan_state": "Aucun prêt",
             "stocking_place": "Réserve B"
