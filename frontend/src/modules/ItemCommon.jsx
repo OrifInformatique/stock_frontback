@@ -62,7 +62,7 @@ const ItemCommon = ({ itemCommon }) =>
                 {itemCommon.items?.map(exemplar => (
                     <div
                         key={exemplar.id}
-                        className="flex justify-between items-center h-20 p-2 rounded-md bg-blue text-white">
+                        className="h-20 p-2 rounded-md bg-blue text-white">
                         <HTMLLink
                             to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
                             variant={"white"}
@@ -71,20 +71,19 @@ const ItemCommon = ({ itemCommon }) =>
                             <Heading
                                 headingLevel={3}
                                 title={`${exemplar.inventory_prefix}.${exemplar.id}`}
+                                className={"!my-0"}
                             />
                         </HTMLLink>
 
-                        <div className="flex flex-col justify-center gap-2">
+                        <div className="flex justify-center gap-2">
                             <Tag
                                 text={exemplar.item_condition}
                                 color={setConditionTagColor(exemplar.item_condition)}
-                                className={"mx-auto"}
                             />
 
                             <Tag
                                 text={exemplar.loan_state}
                                 color={setLoanTagColor(exemplar.loan_state)}
-                                className={"mx-auto"}
                             />
                         </div>
                     </div>
