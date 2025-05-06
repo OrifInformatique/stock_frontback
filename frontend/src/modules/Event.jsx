@@ -12,13 +12,9 @@ const Controle = ({ control }) => {
     const { t } = useTranslation("event");
     return (
         <>
-            <p>
-                <strong>{t("controlled_by")}</strong>
-            </p>
+            <p className="font-bold">{t("controlled_by")}</p>
             <p>{control.controller}</p>
-            <p>
-                <strong>{t("remarks")}</strong>
-            </p>
+            <p className="font-bold">{t("remarks")}</p>
             <p>{control.remarks}</p>
         </>
     );
@@ -28,9 +24,7 @@ const RetourDePret = ({ loanReturn }) => {
     const { t } = useTranslation("event");
     return (
         <>
-            <p>
-                <strong>{t("loan_date")}</strong>
-            </p>
+            <p className="font-bold">{t("loan_date")}</p>
             <p>{loanReturn.loan_date}</p>
         </>
     );
@@ -40,31 +34,23 @@ const MiseEnPret = ({ loan }) => {
     const { t } = useTranslation("event");
     return (
         <>
-            <p>
-                <strong>{t("planned_return_date")}</strong>
-            </p>
-            <p>{loan.planned_return_date}</p>
-            <p>
-                <strong>{t("loaned_by")}</strong>
-            </p>
-            <p>{loan.loaner}</p>
-            <p>
-                <strong>{t("loaned_to")}</strong>
-            </p>
+            <div className="w-44 inline-block">
+                <p className="font-bold w-full">{t("planned_return_date")}</p>
+                <p className="w-full">{loan.planned_return_date}</p>
+            </div>
+            <div className="w-40 inline-block ml-5">
+                <p className="font-bold w-full">{t("loaned_by")}</p>
+                <p className="w-full">{loan.loaner}</p>
+            </div>
+            <p className="font-bold">{t("loaned_to")}</p>
             <p>{loan.borrower_email}</p>
-            <p>
-                <strong>{t("loan_location")}</strong>
-            </p>
+            <p className="font-bold">{t("loan_location")}</p>
             <p>{loan.item_localisation}</p>
-            <p>
-                <strong>{t("remarks")}</strong>
-            </p>
+            <p className="font-bold">{t("remarks")}</p>
             <p>{loan.remarks}</p>
         </>
     );
 };
-
-//TODO: Add components for the 3 case
 
 const Event = ({ events }) => {
     const { t } = useTranslation("event");
@@ -81,16 +67,25 @@ const Event = ({ events }) => {
     };
 
     return (
-        <div>
-            {events.events?.map((event) => (
-                <details open>
-                    <summary>
-                        {event.date} {t(event.type)}
-                    </summary>
-                    <ChooseComponent event={event} />
-                </details>
-            ))}
-        </div>
+        <section className="flex justify-center">
+            <div className="divide-y-2 divide-zinc-600">
+                {events.events?.map((event) => (
+                    <details className="w-96 bg-zinc-300">
+                        <summary className="bg-zinc-500 pt-2 pb-2 list-none flex select-none content-center">
+                            <span className="bg-zinc-300 rounded-2xl ml-2 px-2 py-0.4 content-center">
+                                {event.date}
+                            </span>
+                            <span className="text-xl text-white pl-2 content-center">
+                                {t(event.type)}
+                            </span>
+                        </summary>
+                        <div className="p-3">
+                            <ChooseComponent event={event} />
+                        </div>
+                    </details>
+                ))}
+            </div>
+        </section>
     );
 };
 
