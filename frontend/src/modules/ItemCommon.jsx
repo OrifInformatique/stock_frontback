@@ -55,13 +55,14 @@ const ItemCommon = ({ itemCommon }) =>
                 {itemCommon.items?.map(exemplar => (
                     <div
                         key={exemplar.id}
-                        className="flex justify-between items-center h-20 p-2 rounded-md bg-blue text-white">
+                        className="h-20 p-2 rounded-md bg-blue text-white"
+                    >
                         <Heading
                             headingLevel={3}
                             title={`${exemplar.inventory_prefix}.${exemplar.id}`}
                         />
 
-                        <div className="flex flex-col justify-center gap-2">
+                        <div className="flex justify-center gap-2">
                             <Tag
                                 text={exemplar.item_condition}
                                 color={"blue-light"}

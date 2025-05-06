@@ -14,7 +14,7 @@ const Tag = ({ text, color }) =>
 {
     return (
         <div
-            className={`text-white w-fit px-1 rounded-md mx-auto bg-${color}`}
+            className={`text-white w-fit px-1 rounded-md bg-${color}`}
         >
             {text}
         </div>
