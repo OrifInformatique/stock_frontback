@@ -9,7 +9,7 @@ import ItemDetailedCard from "../modules/ItemDetailedCard";
 import ItemForm from "../modules/ItemForm";
 
 import Button from "../ui/Button";
-import ButtonLink from "../ui/ButtonLink";
+import Link from "../ui/HTMLLink";
 import Heading from "../ui/Heading";
 import Loading from "../ui/Loading";
 
@@ -127,13 +127,13 @@ const ItemCommonDetails = () =>
                 title={t("item_common_details", { ns: "titles" })}
             />
 
-            <ButtonLink
+            <Link
                 to={"/"}
-                variant={"blue"}
+                styleAsButton={true}
                 className={"block w-fit mx-auto my-4"}
             >
                 {t("back_to_list", { ns: "buttons" })}
-            </ButtonLink>
+            </Link>
 
             {isLoading ?
                 <Loading />

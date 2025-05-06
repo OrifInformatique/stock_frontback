@@ -33,7 +33,6 @@ const ItemForm = ({
         const [itemConditions, setItemConditions] = useState([]);
         const [stockingPlaces, setStockingPlaces] = useState([]);
         const [suppliers, setSuppliers] = useState([]);
-        // TODO : Include all infos about items and item commons
 
         /**
          * Fetch data from the API.

@@ -18,7 +18,7 @@ import {
 } from "../utils/tagColors";
 
 import Button from "../ui/Button";
-import ButtonLink from "../ui/ButtonLink";
+import HTMLLink from "../ui/HTMLLink";
 import Tag from "../ui/Tag";
 
 /**
@@ -110,13 +110,14 @@ const ItemDetailedCard = ({
 
             <div className="space-y-2">
                 <div className="flex gap-4">
-                    <ButtonLink
+                    <HTMLLink
                         to={`${item.id}/event-history`}
                         title={t("event_history", { ns: "item" })}
+                        styleAsButton={true}
                         className={"inline-block basis-1/3 flex flex-wrap place-content-center size-10 !p-0"}
                     >
                         <FontAwesomeIcon icon={faClockRotateLeft} />
-                    </ButtonLink>
+                    </HTMLLink>
 
                     <Button
                         icon={faPen}
@@ -133,16 +134,20 @@ const ItemDetailedCard = ({
                 </div>
 
                 <div className="flex flex-col gap-2">
-                    <ButtonLink to={"/"}>
-                        {t("add_loan", { ns: "item" })}
-                    </ButtonLink>
-
-                    <ButtonLink
+                    <HTMLLink
                         to={"/"}
+                        styleAsButton={true}
+                    >
+                        {t("add_loan", { ns: "item" })}
+                    </HTMLLink>
+
+                    <HTMLLink
+                        to={"/"}
+                        styleAsButton={true}
                         className={"min-w-max"}
                     >
                         {t("add_control", { ns: "item" })}
-                    </ButtonLink>
+                    </HTMLLink>
                 </div>
             </div>
         </div>

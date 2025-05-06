@@ -8,7 +8,7 @@ import Heading from "../ui/Heading";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
-import TextLink from "../ui/TextLink";
+import Link from "../ui/HTMLLink";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -59,12 +59,12 @@ const Item = ({ item }) =>
                 />
             </div>
 
-            <TextLink to={`/objects/${item.item_common_id}/exemplars/${item.id}`}>
+            <Link to={`/objects/${item.item_common_id}/exemplars/${item.id}`}>
                 <Heading
                     headingLevel={3}
                     title={`${item.inventory_prefix}.${item.id}`}
                 />
-            </TextLink>
+            </Link>
 
             <Tag
                 text={item.item_condition}

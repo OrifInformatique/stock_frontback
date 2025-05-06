@@ -7,7 +7,7 @@ import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
 
 import Heading from "../ui/Heading";
 import Image from "../ui/Image";
-import TextLink from "../ui/TextLink";
+import HTMLLink from "../ui/HTMLLink";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
 
@@ -50,12 +50,12 @@ const ItemCommon = ({ itemCommon }) =>
             </div>
 
             <div className="flex flex-wrap place-content-center min-h-24">
-                <TextLink to={`/objects/${itemCommon.id}/exemplars`}>
+                <HTMLLink to={`/objects/${itemCommon.id}/exemplars`}>
                     <Heading
                         headingLevel={2}
                         title={itemCommon.name}
                     />
-                </TextLink>
+                </HTMLLink>
             </div>
 
             <div className="flex flex-col gap-2 max-h-64 sm:max-h-60 overflow-y-auto">
@@ -63,15 +63,16 @@ const ItemCommon = ({ itemCommon }) =>
                     <div
                         key={exemplar.id}
                         className="flex justify-between items-center h-20 p-2 rounded-md bg-blue text-white">
-                        <TextLink
+                        <HTMLLink
                             to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
-                            className={"hover:text-white hover:underline"}
+                            variant={"white"}
+                            underlineOnHover={true}
                         >
                             <Heading
                                 headingLevel={3}
                                 title={`${exemplar.inventory_prefix}.${exemplar.id}`}
                             />
-                        </TextLink>
+                        </HTMLLink>
 
                         <div className="flex flex-col justify-center gap-2">
                             <Tag
