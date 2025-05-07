@@ -14,6 +14,8 @@ import Label from "../ui/Label";
 import SingleSelect from "../ui/SingleSelect";
 import Textarea from "../ui/Textarea";
 
+import { notDevelopedFeature } from "../utils/devUtils";
+
 /**
  * Displays the form to add or edit a item.
  *
@@ -55,7 +57,7 @@ const ItemForm = ({
      */
     const generateInventoryNumber = () =>
     {
-
+        notDevelopedFeature()
     }
 
     return (
@@ -112,6 +114,7 @@ const ItemForm = ({
 
                         <Button
                             label={t("generate_inventory_number", { ns: "buttons" })}
+                            onClickFunction={generateInventoryNumber}
                             className={"mt-2"}
                         />
                     </fieldset>
