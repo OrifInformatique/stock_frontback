@@ -42,10 +42,9 @@ const MeatballsMenu = ({
             {openMeatballsMenu && (
                 <div className="absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md">
                     {actions.map(action => (
-                        <>
+                        <div key={action.label}>
                             {action.isLink ? (
                                 <HTMLLink
-                                    key={action.label}
                                     to={action.action}
                                     title={action.label}
                                     styleAsButton={true}
@@ -61,7 +60,6 @@ const MeatballsMenu = ({
                                 </HTMLLink>
                             ) : (
                                 <Button
-                                    key={action.label}
                                     icon={action.icon}
                                     label={action.label}
                                     keepLabel={true}
@@ -69,7 +67,7 @@ const MeatballsMenu = ({
                                     className={"!rounded-md"}
                                 />
                             )}
-                        </>
+                        </div>
                     ))}
                 </div>
             )}

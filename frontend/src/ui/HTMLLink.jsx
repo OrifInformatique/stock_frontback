@@ -60,7 +60,7 @@ const HTMLLink = ({
                 "transition-all",
                 colorVariants[color],
                 underlineOnHover && "hover:underline",
-                styleAsButton && `px-4 py-2 rounded-md border-2 text-center duration-300`,
+                styleAsButton && `block px-4 py-2 rounded-md border-2 text-center duration-300`,
                 className
             )}
         >
