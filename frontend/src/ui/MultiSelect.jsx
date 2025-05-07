@@ -43,6 +43,8 @@ const MultiSelect = ({
     className = null
 }) =>
 {
+    // BUG : Internal state not resetting when clicking the reset filters on the Home page.
+
     if(!name)
     {
         console.error("MultiSelect must have a name.");

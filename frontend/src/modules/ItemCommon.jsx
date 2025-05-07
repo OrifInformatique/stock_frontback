@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 
-import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
-
 import Heading from "../ui/Heading";
-import Image from "../ui/Image";
 import HTMLLink from "../ui/HTMLLink";
+import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
+
+import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * Item common card, with minimal info.
@@ -36,7 +36,7 @@ const ItemCommon = ({ itemCommon }) =>
                     },
                     {
                         label: t("delete_object", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => notDevelopedFeature()
                     },
                 ]}/>
             </div>

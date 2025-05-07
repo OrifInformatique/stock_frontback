@@ -1,15 +1,16 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
 
 import Heading from "../ui/Heading";
+import HTMLLink from "../ui/HTMLLink";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
-import HTMLLink from "../ui/HTMLLink";
-import { useNavigate } from "react-router-dom";
+
+import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * Exemplary card, with minimal info.
@@ -30,15 +31,15 @@ const Item = ({ item }) =>
                 <MeatballsMenu actions={[
                     {
                         label: t("add_loan", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => notDevelopedFeature()
                     },
                     {
                         label: t("edit_loan", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => notDevelopedFeature()
                     },
                     {
                         label: t("return_loan", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => notDevelopedFeature()
                     },
                     {
                         label: t("edit_exemplar", { ns: "item" }),
@@ -46,7 +47,7 @@ const Item = ({ item }) =>
                     },
                     {
                         label: t("delete_exemplar", { ns: "item" }),
-                        action: () => alert("button clikced")
+                        action: () => notDevelopedFeature()
                     }
                 ]}/>
             </div>
