@@ -7,7 +7,10 @@ import ItemCommonForm from "../modules/ItemCommonForm";
 
 import Image from "../ui/Image";
 import Button from "../ui/Button";
+import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
+
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * Displays the details of an item common.
@@ -44,20 +47,21 @@ const ItemCommonDetailedCard = ({
         <section>
             {!isUpdated ? (
                 <div className="flex flex-col sm:flex-row justify-center w-min sm:w-fit gap-4 rounded-md mx-auto p-4 bg-background">
-                    <div className="flex sm:flex-col justify-end sm:justify-start sm:order-last gap-2 w-[275px] sm:w-fit">
-                        <Button
-                            icon={faPen}
-                            title={t("edit_object", { ns: "item" })}
-                            onClickFunction={() => setIsUpdated((prev) => !prev)}
-                            className={"!rounded-md"}
-                        />
-
-                        <Button
-                            icon={faTrash}
-                            title={t("delete_object", { ns: "item" })}
-                            onClickFunction={() => alert("button cliked!")}
-                            className={"!rounded-md"}
-                        />
+                    <div className="flex justify-end sm:justify-start sm:order-last w-[275px] sm:w-fit">
+                        <MeatballsMenu actions={[
+                            {
+                                isLink: false,
+                                label: t("edit_object", { ns: "item" }),
+                                icon: faPen,
+                                action: () => setIsUpdated((prev) => !prev)
+                            },
+                            {
+                                isLink: false,
+                                label: t("delete_object", { ns: "item" }),
+                                icon: faTrash,
+                                action: () => notDevelopedFeature()
+                            },
+                        ]}/>
                     </div>
 
                     <Image

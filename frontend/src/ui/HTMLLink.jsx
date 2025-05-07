@@ -48,8 +48,8 @@ const HTMLLink = ({
 
     const colorVariants =
     {
-        transparent: "bg-transparent border-transparent "  + (colorOnHover && "hover:text-blue"),
-        blue: "bg-blue border-blue " + (colorOnHover && "hover:text-blue")
+        transparent: "bg-transparent hover:bg-transparent border-transparent text-black "  + (colorOnHover && "hover:text-blue"),
+        blue: "bg-blue hover:bg-white border-blue text-white " + (colorOnHover && "hover:text-blue")
     }
 
     return (
@@ -60,7 +60,7 @@ const HTMLLink = ({
                 "transition-all",
                 colorVariants[color],
                 underlineOnHover && "hover:underline",
-                styleAsButton && `px-4 py-2 rounded-full sm:rounded-md bg-${color} hover:bg-white border-2 border-${color} text-white text-center duration-300`,
+                styleAsButton && `px-4 py-2 rounded-md border-2 text-center duration-300`,
                 className
             )}
         >

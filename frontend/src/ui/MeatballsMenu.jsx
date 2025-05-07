@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import clsx from "clsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "./Button";
+import HTMLLink from "./HTMLLink";
 
 /**
  * UI component to add a meatballs menu with personalized actions.
@@ -40,13 +42,34 @@ const MeatballsMenu = ({
             {openMeatballsMenu && (
                 <div className="absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md">
                     {actions.map(action => (
-                        <Button
-                            key={action.label}
-                            icon={action.icon}
-                            label={action.label}
-                            keepLabel={true}
-                            onClickFunction={action.action}
-                        />
+                        <>
+                            {action.isLink ? (
+                                <HTMLLink
+                                    key={action.label}
+                                    to={action.action}
+                                    title={action.label}
+                                    styleAsButton={true}
+                                >
+                                    {action.icon &&
+                                        <FontAwesomeIcon
+                                            icon={action.icon}
+                                            className={clsx(action.label && "mr-2")}
+                                        />
+                                    }
+
+                                    {action.label}
+                                </HTMLLink>
+                            ) : (
+                                <Button
+                                    key={action.label}
+                                    icon={action.icon}
+                                    label={action.label}
+                                    keepLabel={true}
+                                    onClickFunction={action.action}
+                                    className={"!rounded-md"}
+                                />
+                            )}
+                        </>
                     ))}
                 </div>
             )}

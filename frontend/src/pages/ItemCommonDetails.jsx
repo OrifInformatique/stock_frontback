@@ -139,7 +139,7 @@ const ItemCommonDetails = () =>
     }, [displayExemplarForm]);
 
     return (
-        <div className="">
+        <>
             <Heading
                 headingLevel={1}
                 title={t("item_common_details", { ns: "titles" })}
@@ -212,7 +212,7 @@ const ItemCommonDetails = () =>
                     </div>
                 </>
             }
-        </div>
+        </>
     )
 }
 

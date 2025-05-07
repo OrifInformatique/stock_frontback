@@ -65,7 +65,7 @@ const ItemCommon = ({ itemCommon }) =>
                 </HTMLLink>
             </div>
 
-            <div className="flex flex-col gap-2 max-h-64 sm:max-h-60 overflow-y-auto">
+            <div className="flex flex-col gap-2 max-h-[280px] sm:max-h-[250px] overflow-y-auto">
                 {itemCommon.items?.map(exemplar => (
                     <div
                         key={exemplar.id}

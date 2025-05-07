@@ -54,7 +54,7 @@ const Button = ({
             title={title}
             onClick={onClickFunction}
             className={clsx(
-                "rounded-full sm:rounded-md hover:bg-white border-2 text-white transition-colors duration-300",
+                "rounded-md hover:bg-white border-2 text-white transition-colors duration-300",
                 doKeepLabel
                     ? "size-full px-4 py-2 "
                     : label

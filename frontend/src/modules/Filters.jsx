@@ -102,7 +102,7 @@ const Filters = ({
                             icon={filterButtonIcon}
                             label={filtersButtonLabel}
                             onClickFunction={handleToggleFilters}
-                            className={"sm:!rounded-full"}
+                            className={"!rounded-full"}
                         />
                     </div>
                 </div>

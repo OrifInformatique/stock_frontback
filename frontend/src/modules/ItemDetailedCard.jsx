@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import clsx from "clsx";
+
+import { getAllLoanStates } from "../services/api/loan_states"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,15 +12,16 @@ import {
     faTrash
 } from "@fortawesome/free-solid-svg-icons";
 
+import HTMLLink from "../ui/HTMLLink";
+import Tag from "../ui/Tag";
+import MeatballsMenu from "../ui/MeatballsMenu";
+
 import {
     setConditionTagColor,
     setLoanTagColor,
     setWarrantyTagColor
 } from "../utils/tagColors";
-
-import Button from "../ui/Button";
-import HTMLLink from "../ui/HTMLLink";
-import Tag from "../ui/Tag";
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * Displays the details of an item.
@@ -34,24 +36,59 @@ const ItemDetailedCard = ({
     editExemplarFunction = null
 }) =>
 {
-    const { t } = useTranslation(["item", "misc"]);
-
-    const [showExtraInfos, setShowExtraInfos] = useState(false);
-
     if(!editExemplarFunction)
     {
         console.error("No function to edit an exemplar provided.");
         return;
     }
 
+    const { t } = useTranslation(["item", "misc"]);
+
+    const [showExtraInfos, setShowExtraInfos] = useState(false);
+    const [loanStates, setLoanStates] = useState([]);
+
+    /**
+     * Fetches all loan states, to determine the correct loan to display on each exemplar.
+     */
+    useEffect(() =>
+    {
+        const fetchLoanStates = async () =>
+        {
+            setLoanStates(await getAllLoanStates());
+        }
+        fetchLoanStates();
+    }, [])
+
     return (
         <div
             id={id}
             className={clsx(
-                "flex flex-col lg:flex-row justify-between gap-8 w-80 lg:w-[450px] p-4 rounded-md",
+                "w-80 lg:w-[450px] p-4 rounded-md",
                 isHighlighted ? "bg-amber-300" : "bg-background"
             )}
         >
+            <div className="flex justify-end">
+                <MeatballsMenu actions={[
+                    {
+                        isLink: true,
+                        label: t("event_history", { ns: "item" }),
+                        icon: faClockRotateLeft,
+                        action: `${item.id}/event-history`
+                    },
+                    {
+                        isLink: false,
+                        label: t("edit_exemplar", { ns: "item" }),
+                        icon: faPen,
+                        action: () => editExemplarFunction(item)
+                    },
+                    {
+                        isLink: false,
+                        label: t("delete_exemplar", { ns: "item" }),
+                        icon: faTrash,
+                        action: () => notDevelopedFeature()
+                    }
+                ]}/>
+            </div>
             <div className="space-y-2">
                 <p className="text-2xl">
                     {`${item.inventory_prefix}.${item.id}`}
@@ -70,7 +107,10 @@ const ItemDetailedCard = ({
                 </p>
 
                 <p>
-                    {`${t("in", { ns: "misc" })} ${item.stocking_place}`}
+                    {item.loan_state !== loanStates[0]?.name
+                        ? `${t("loaned_at", {ns: "misc" })} ${item.item_localization}`
+                        : `${t("in", { ns: "misc" })} ${item.stocking_place}`
+                    }
                 </p>
 
                 {item.remarks && (
@@ -86,12 +126,12 @@ const ItemDetailedCard = ({
                         size="lg"
                     />
 
-                    <span>{t("additional_infos", { ns: "misc" })}</span>
+                    <span>{t("other_infos", { ns: "misc" })}</span>
                 </p>
 
                 <div
                     className={clsx(
-                        "absolute w-5/6 max-w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md",
+                        "absolute w-5/6 max-w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md z-50",
                         !showExtraInfos && "hidden"
                     )}
                 >
@@ -112,47 +152,32 @@ const ItemDetailedCard = ({
                 </div>
             </div>
 
-            <div className="space-y-2">
-                <div className="flex gap-4">
-                    <HTMLLink
-                        to={`${item.id}/event-history`}
-                        title={t("event_history", { ns: "item" })}
-                        styleAsButton={true}
-                        className={"inline-block basis-1/3 flex flex-wrap place-content-center size-10 !p-0"}
-                    >
-                        <FontAwesomeIcon icon={faClockRotateLeft} />
-                    </HTMLLink>
-
-                    <Button
-                        icon={faPen}
-                        title={t("edit_exemplar", { ns: "item" })}
-                        onClickFunction={() => editExemplarFunction(item)}
-                        className={"basis-1/3"}
-                    />
-
-                    <Button
-                        icon={faTrash}
-                        title={t("delete_exemplar", { ns: "item" })}
-                        className={"basis-1/3"}
-                    />
-                </div>
-
-                <div className="flex flex-col gap-2">
+            <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
+                {item.loan_state !== loanStates[0]?.name ? (
                     <HTMLLink
                         to={"/"}
                         styleAsButton={true}
+                        className={"basis-1/2"}
+                    >
+                        {t("return_loan", { ns: "item" })}
+                    </HTMLLink>
+                ) : (
+                    <HTMLLink
+                        to={"/"}
+                        styleAsButton={true}
+                        className={"basis-1/2"}
                     >
                         {t("add_loan", { ns: "item" })}
                     </HTMLLink>
+                )}
 
-                    <HTMLLink
-                        to={"/"}
-                        styleAsButton={true}
-                        className={"min-w-max"}
-                    >
-                        {t("add_control", { ns: "item" })}
-                    </HTMLLink>
-                </div>
+                <HTMLLink
+                    to={"/"}
+                    styleAsButton={true}
+                    className={"basis-1/2"}
+                >
+                    {t("add_control", { ns: "item" })}
+                </HTMLLink>
             </div>
         </div>
     )
