@@ -8,7 +8,7 @@ import Heading from "../ui/Heading";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
-import Link from "../ui/HTMLLink";
+import HTMLLink from "../ui/HTMLLink";
 import { useNavigate } from "react-router-dom";
 
 /**
@@ -51,15 +51,22 @@ const Item = ({ item }) =>
                 ]}/>
             </div>
 
-            <div className="mx-auto">
+            <HTMLLink
+                to={`/objects/${item.item_common_id}/exemplars/${item.id}`}
+                color={"transparent"}
+                className={"mx-auto"}
+            >
                 <Image
                     src={item.image_url}
                     alt={item.name}
                     size={285}
                 />
-            </div>
+            </HTMLLink>
 
-            <Link to={`/objects/${item.item_common_id}/exemplars/${item.id}`}>
+            <HTMLLink
+                to={`/objects/${item.item_common_id}/exemplars/${item.id}`}
+                color={"transparent"}
+            >
                 <Heading
                     headingLevel={3}
                     title={`${item.inventory_prefix}.${item.id}`}
@@ -71,7 +78,7 @@ const Item = ({ item }) =>
                     title={item.name}
                     className={"!mt-0"}
                 />
-            </Link>
+            </HTMLLink>
 
             <Tag
                 text={item.item_condition}

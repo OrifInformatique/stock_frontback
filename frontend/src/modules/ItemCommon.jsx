@@ -41,16 +41,23 @@ const ItemCommon = ({ itemCommon }) =>
                 ]}/>
             </div>
 
-            <div className="mx-auto">
+            <HTMLLink
+                to={`/objects/${itemCommon.id}/exemplars`}
+                color={"transparent"}
+                className={"mx-auto"}
+            >
                 <Image
                     src={itemCommon.image_url}
                     alt={itemCommon.name}
                     size={285}
                 />
-            </div>
+            </HTMLLink>
 
             <div className="flex flex-wrap place-content-center min-h-24">
-                <HTMLLink to={`/objects/${itemCommon.id}/exemplars`}>
+                <HTMLLink
+                    to={`/objects/${itemCommon.id}/exemplars`}
+                    color={"transparent"}
+                >
                     <Heading
                         headingLevel={2}
                         title={itemCommon.name}
@@ -65,7 +72,8 @@ const ItemCommon = ({ itemCommon }) =>
                         className="h-20 p-2 rounded-md bg-blue text-white">
                         <HTMLLink
                             to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
-                            variant={"white"}
+                            variant={"transparent"}
+                            colorOnHover={false}
                             underlineOnHover={true}
                         >
                             <Heading

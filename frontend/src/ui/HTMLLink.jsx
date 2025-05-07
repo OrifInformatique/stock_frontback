@@ -10,9 +10,9 @@ import clsx from "clsx";
  *
  * @param {string} title Title of the link, showing when hovering the link. Null by default.
  *
- * @param {string} [variant="blue"] The color of the link. "blue" by default.
+ * @param {string} [color="blue"] The color of the link. "blue" by default.
  *
- * @param {boolean} [colorOnHover=true] Decide whether to color the text with the color defined in variant when hovered. True by default.
+ * @param {boolean} [colorOnHover=true] Decide whether to color the text with the color defined in color when hovered. True by default.
  *
  * @param {boolean} [underlineOnHover=false] Decide whether to underline the text when hovered. False by default.
  *
@@ -26,7 +26,7 @@ import clsx from "clsx";
 const HTMLLink = ({
     to,
     title = null,
-    variant = "blue",
+    color = "blue",
     colorOnHover = true,
     underlineOnHover = false,
     styleAsButton = false,
@@ -46,15 +46,21 @@ const HTMLLink = ({
         return;
     }
 
+    const colorVariants =
+    {
+        transparent: "bg-transparent border-transparent "  + (colorOnHover && "hover:text-blue"),
+        blue: "bg-blue border-blue " + (colorOnHover && "hover:text-blue")
+    }
+
     return (
         <Link
             to={to}
             title={title}
             className={clsx(
                 "transition-all",
-                colorOnHover && `hover:text-${variant}`,
+                colorVariants[color],
                 underlineOnHover && "hover:underline",
-                styleAsButton && `px-4 py-2 rounded-full sm:rounded-md bg-${variant} hover:bg-white border-2 border-${variant} text-white text-center duration-300`,
+                styleAsButton && `px-4 py-2 rounded-full sm:rounded-md bg-${color} hover:bg-white border-2 border-${color} text-white text-center duration-300`,
                 className
             )}
         >
