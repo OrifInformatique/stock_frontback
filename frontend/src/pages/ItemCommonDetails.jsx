@@ -39,6 +39,9 @@ const ItemCommonDetails = () =>
 
     const [itemCommon, setItemCommon] = useState({});
 
+    /**
+     * Fetches itemComment data on mount.
+     */
     useEffect(() =>
     {
         const fetchItemCommonData = async () =>
@@ -51,6 +54,9 @@ const ItemCommonDetails = () =>
         setIsLoading(false);
     }, [])
 
+    /**
+     * Checks if an exemplar is being edited from another page (via url).
+     */
     useEffect(() =>
     {
         if(isExemplarAddMode)
@@ -62,6 +68,15 @@ const ItemCommonDetails = () =>
             editExemplar(exemplarData);
         }
     }, [itemCommon, isExemplarEditMode, isExemplarAddMode])
+
+    /**
+     * Scrolls to the exemplar when one is clicked from the home page.
+     */
+    useEffect(() =>
+    {
+        if(itemId && itemCommon.items)
+            jumpToAnchor(itemId);
+    }, [itemCommon])
 
 
     /**
@@ -115,6 +130,9 @@ const ItemCommonDetails = () =>
         setExemplarFormData(null)
     }
 
+    /**
+     * When the exemplar form is opened, scroll to the top of it.
+     */
     useEffect(() => {
         if (displayExemplarForm)
             jumpToAnchor("exemplar-form");
@@ -185,6 +203,7 @@ const ItemCommonDetails = () =>
                         {itemCommon.items?.map(item =>
                             <ItemDetailedCard
                                 key={item.id}
+                                id={item.id}
                                 item={item}
                                 isHighlighted={item.id === parseInt(itemId)}
                                 editExemplarFunction={editExemplar}

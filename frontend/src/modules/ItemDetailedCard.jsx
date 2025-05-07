@@ -28,6 +28,7 @@ import Tag from "../ui/Tag";
  *
  */
 const ItemDetailedCard = ({
+    id = null,
     item = null,
     isHighlighted = false,
     editExemplarFunction = null
@@ -44,10 +45,13 @@ const ItemDetailedCard = ({
     }
 
     return (
-        <div className={clsx(
-            "flex flex-col lg:flex-row justify-between gap-8 w-80 lg:w-[450px] p-4 rounded-md",
-            isHighlighted ? "bg-amber-300" : "bg-background"
-        )}>
+        <div
+            id={id}
+            className={clsx(
+                "flex flex-col lg:flex-row justify-between gap-8 w-80 lg:w-[450px] p-4 rounded-md",
+                isHighlighted ? "bg-amber-300" : "bg-background"
+            )}
+        >
             <div className="space-y-2">
                 <p className="text-2xl">
                     {`${item.inventory_prefix}.${item.id}`}
