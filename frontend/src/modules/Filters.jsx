@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFileExport } from "@fortawesome/free-solid-svg-icons";
-
-import { useTranslation } from "react-i18next";
 
 import Button from "../ui/Button";
 import Label from "../ui/Label";
@@ -12,6 +12,8 @@ import MultiSelect from "../ui/MultiSelect";
 import SegmentedControl from "../ui/SegmentedControl";
 import SingleSelect from "../ui/SingleSelect";
 import Toggle from "../ui/Toggle";
+
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * All filters for searching specific exemplars.
@@ -32,6 +34,7 @@ const Filters = ({
 }) =>
 {
     const { t } = useTranslation(["buttons", "filters", "item", "misc"]);
+    const navigate = useNavigate();
 
     const [expandFilters, setExpandFilters] = useState(false);
     const [filterButtonIcon, setFilterButtonIcon] = useState(faFilter);
@@ -216,16 +219,19 @@ const Filters = ({
                 )}
             </div>
 
+            {/* TODO : The menu should be in the header instead. */}
             <div className="fixed sm:static bottom-4 right-4 sm:w-1/4 lg:w-fit lg:order-last z-20">
                 <Menu
                     actions={[
                         {
                             icon: faPlus,
-                            label: t("new", { ns: "buttons" })
+                            label: t("new", { ns: "buttons" }),
+                            action: () => navigate("/objects/add")
                         },
                         {
                             icon: faFileExport,
-                            label: t("export", { ns: "buttons" })
+                            label: t("export", { ns: "buttons" }),
+                            action: () => notDevelopedFeature()
                         }
                     ]}
                     className={"sm:flex-col-reverse"}

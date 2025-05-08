@@ -11,6 +11,7 @@ import HTMLLink from "./HTMLLink";
  * UI component to add a meatballs menu with personalized actions.
  *
  * @param {Array<any>} actions List of objects with a label, an icon, and an action. \
+ * isLink: Define whether the action is a link or not.
  * label: Text of the action. \
  * icon: Icon (FontAwesome) of the action. \
  * action: Function to execute when the action is clicked.

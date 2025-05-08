@@ -6,7 +6,6 @@ import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ItemCommonForm from "../modules/ItemCommonForm";
 
 import Image from "../ui/Image";
-import Button from "../ui/Button";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
 
