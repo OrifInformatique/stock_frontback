@@ -43,8 +43,6 @@ const MultiSelect = ({
     className = null
 }) =>
 {
-    // BUG : Internal state not resetting when clicking the reset filters on the Home page.
-
     if(!name)
     {
         console.error("MultiSelect must have a name.");
@@ -79,6 +77,17 @@ const MultiSelect = ({
         );
     };
 
+    /**
+     * Synchronizes the internal state when we update the selectedValues prop outside of this component.
+     */
+    useEffect(() => {
+        if (onChangeFunction !== null)
+            setSelectedOptions(selectedValues);
+    }, [selectedValues, onChangeFunction]);
+
+    /**
+     * Updates the count of selected items when the selectedOptions list is updated.
+     */
     useEffect(() => setSelectedCount(selectedOptions.length), [selectedOptions]);
 
     return (

@@ -10,8 +10,6 @@ import HTMLLink from "../ui/HTMLLink";
 
 const ItemCommonCreation = () =>
 {
-    // BUG : Image not loading the onError placeholder when adding a itemCommon.
-
     const { t } = useTranslation(["buttons", "item", "titles"]);
     const navigate = useNavigate()
 
