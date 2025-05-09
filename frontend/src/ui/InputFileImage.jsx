@@ -123,6 +123,7 @@ const InputFileImage = ({
                 >
                     <Image
                         src={imagePreviewSrc}
+                        alt={"Image provided by user."}
                         size={imagePreviewSize}
                     />
 
