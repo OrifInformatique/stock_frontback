@@ -50,7 +50,7 @@ const ItemCommonDetailedCard = ({
     return (
         <section>
             {!isUpdated ? (
-                <div className="flex flex-col sm:flex-row justify-center w-min sm:w-fit gap-4 rounded-md mx-auto p-4 bg-background">
+                <div className="flex flex-col sm:flex-row w-fit justify-center gap-4 rounded-md mx-auto p-4 bg-background">
                     {showButtonsAndOptions &&
                         <div className="flex justify-end sm:justify-start sm:order-last w-[275px] sm:w-fit">
                             <MeatballsMenu actions={[
