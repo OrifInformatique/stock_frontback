@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 import clsx from "clsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,6 +32,8 @@ const MeatballsMenu = ({
 
     const [openMeatballsMenu, setOpenMeatballsMenu] = useState(false);
 
+    const ref = useOnclickOutside(() => setOpenMeatballsMenu(false));
+
     return (
         <div className={`relative w-fit`}>
             <FontAwesomeIcon
@@ -41,7 +44,10 @@ const MeatballsMenu = ({
             />
 
             {openMeatballsMenu && (
-                <div className="absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md">
+                <div
+                    ref={ref}
+                    className="absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md"
+                >
                     {actions.map(action => (
                         <div key={action.label}>
                             {action.isLink ? (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 import { useTranslation } from "react-i18next";
 
 import clsx from "clsx";
@@ -50,6 +51,8 @@ const MultiSelect = ({
     }
 
     const { t } = useTranslation("misc");
+
+    const ref = useOnclickOutside(() => setIsOpen(false))
 
     const [selectedCount, setSelectedCount] = useState(0);
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
@@ -135,8 +138,9 @@ const MultiSelect = ({
 
                 <div
                     id={`${name}-multiselect`}
-                    className={`${!isOpen && "!hidden"} block absolute border border-blue min-w-max w-full py-2 space-y-2 rounded-md z-50 bg-white`}
+                    ref={ref}
                     onClick={(e) => e.stopPropagation()}
+                    className={`${!isOpen && "!hidden"} block absolute border border-blue min-w-max w-full py-2 space-y-2 rounded-md z-50 bg-white`}
                 >
                     {options.map((option, index) => (
                         <div
