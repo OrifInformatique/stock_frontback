@@ -86,6 +86,15 @@ const MultiSelect = ({
     }, [selectedValues, onChangeFunction]);
 
     /**
+     * Synchronizes the internal state when a uncontrolled multiselect have default values.
+     */
+    useEffect(() =>
+    {
+        if(onChangeFunction === null && defaultValues.length > 0)
+            setSelectedOptions(defaultValues)
+    }, [defaultValues]);
+
+    /**
      * Updates the count of selected items when the selectedOptions list is updated.
      */
     useEffect(() => setSelectedCount(selectedOptions.length), [selectedOptions]);

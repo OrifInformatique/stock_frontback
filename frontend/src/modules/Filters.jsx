@@ -219,7 +219,6 @@ const Filters = ({
                 )}
             </div>
 
-            {/* TODO : The menu should be in the header instead. */}
             <div className="fixed sm:static bottom-4 right-4 sm:w-1/4 lg:w-fit lg:order-last z-20">
                 <Menu
                     actions={[

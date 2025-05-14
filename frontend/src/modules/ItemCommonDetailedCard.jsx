@@ -22,8 +22,6 @@ const ItemCommonDetailedCard = ({
     updateItemCommon = false
 }) =>
 {
-    // FIX : Multiselect not displaying the correct selected count when editing an object from the Home page.
-
     const { t } = useTranslation(["item", "misc"]);
 
     const [isUpdated, setIsUpdated] = useState(updateItemCommon);
