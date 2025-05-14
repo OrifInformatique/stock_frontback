@@ -36,10 +36,10 @@ const ItemInformation = () => {
         async function fetchData() {
             setDataLoading(true);
             try {
-                const itemResponse = await fetch(`http://localhost/stock/public/api/items/${id}`);
+                const itemResponse = await fetch(`https://stock.sectioninformatique.ch/api/items/${id}`);
                 const { item } = await itemResponse.json();
 
-                const itemCommonResponse = await fetch(`http://localhost/stock/public/api/items/${id}/item_common`);
+                const itemCommonResponse = await fetch(`https://stock.sectioninformatique.ch/api/items/${id}/item_common`);
                 const { item_common } = await itemCommonResponse.json();
 
                 setItemData(item);

@@ -111,10 +111,10 @@ const ItemHistory = () => {
         async function fetchData() {
             setDataLoading(true);
             try {
-                const historyResponse = await fetch(`http://localhost/stock/public/api/items/${id}/history`);
+                const historyResponse = await fetch(`https://stock.sectioninformatique.ch/api/items/${id}/history`);
                 const { history } = await historyResponse.json();
 
-                const itemResponse = await fetch(`http://localhost/stock/public/api/items/${id}`);
+                const itemResponse = await fetch(`https://stock.sectioninformatique.ch/api/items/${id}`);
                 const { item } = await itemResponse.json();
 
                 setHistoryData(history);
