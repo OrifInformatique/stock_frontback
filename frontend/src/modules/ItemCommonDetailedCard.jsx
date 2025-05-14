@@ -42,6 +42,10 @@ const ItemCommonDetailedCard = ({
         setIsUpdated(false);
     }
 
+    /**
+     * Toggles the display of buttons and options for item and exemplar
+     * when the item common form is opened or closed.
+     */
     useEffect(() =>
     {
         setShowButtonsAndOptions(!isUpdated);
