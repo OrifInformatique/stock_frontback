@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +19,9 @@ import { notDevelopedFeature } from "../utils/devUtils";
  */
 const ItemCommonDetailedCard = ({
     itemCommon,
-    updateItemCommon = false
+    updateItemCommon = false,
+    showButtonsAndOptions = true,
+    setShowButtonsAndOptions = null
 }) =>
 {
     const { t } = useTranslation(["item", "misc"]);
@@ -40,26 +42,33 @@ const ItemCommonDetailedCard = ({
         setIsUpdated(false);
     }
 
+    useEffect(() =>
+    {
+        setShowButtonsAndOptions(!isUpdated);
+    }, [isUpdated])
+
     return (
         <section>
             {!isUpdated ? (
                 <div className="flex flex-col sm:flex-row justify-center w-min sm:w-fit gap-4 rounded-md mx-auto p-4 bg-background">
-                    <div className="flex justify-end sm:justify-start sm:order-last w-[275px] sm:w-fit">
-                        <MeatballsMenu actions={[
-                            {
-                                isLink: false,
-                                label: t("edit_object", { ns: "item" }),
-                                icon: faPen,
-                                action: () => setIsUpdated((prev) => !prev)
-                            },
-                            {
-                                isLink: false,
-                                label: t("delete_object", { ns: "item" }),
-                                icon: faTrash,
-                                action: () => notDevelopedFeature()
-                            },
-                        ]}/>
-                    </div>
+                    {showButtonsAndOptions &&
+                        <div className="flex justify-end sm:justify-start sm:order-last w-[275px] sm:w-fit">
+                            <MeatballsMenu actions={[
+                                {
+                                    isLink: false,
+                                    label: t("edit_object", { ns: "item" }),
+                                    icon: faPen,
+                                    action: () => setIsUpdated((prev) => !prev)
+                                },
+                                {
+                                    isLink: false,
+                                    label: t("delete_object", { ns: "item" }),
+                                    icon: faTrash,
+                                    action: () => notDevelopedFeature()
+                                },
+                            ]}/>
+                        </div>
+                    }
 
                     <Image
                         src={itemCommon.image_url}

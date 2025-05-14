@@ -38,6 +38,8 @@ const ItemCommonDetails = () =>
     const [exemplarFormData, setExemplarFormData] = useState(null)
 
     const [itemCommon, setItemCommon] = useState({});
+    const [filteredExemplars, setFilteredExemplars] = useState([]);
+    const [showButtonsAndOptions, setShowButtonsAndOptions] = useState(true);
 
     /**
      * Fetches itemComment data on mount.
@@ -48,6 +50,7 @@ const ItemCommonDetails = () =>
         {
             const data = await getItemCommon(parseInt(itemCommonId));
             setItemCommon(data);
+            setFilteredExemplars(data.items)
         };
 
         fetchItemCommonData();
@@ -60,7 +63,7 @@ const ItemCommonDetails = () =>
     useEffect(() =>
     {
         if(isExemplarAddMode)
-            setDisplayExemplarForm(true);
+            displayForm();
 
         else if(itemId && isExemplarEditMode)
         {
@@ -78,6 +81,17 @@ const ItemCommonDetails = () =>
             jumpToAnchor(itemId);
     }, [itemCommon])
 
+    /**
+     * Displays the form.
+     *
+     * @return {void}
+     *
+     */
+    const displayForm = () =>
+    {
+        setDisplayExemplarForm(true);
+        setShowButtonsAndOptions(false);
+    }
 
     /**
      * Hides the exemplar form and empty all form values.
@@ -88,7 +102,8 @@ const ItemCommonDetails = () =>
     const cancelForm = () =>
     {
         setDisplayExemplarForm(false);
-        setExemplarFormData(null)
+        setShowButtonsAndOptions(true);
+        setExemplarFormData(null);
     }
 
     /**
@@ -103,7 +118,7 @@ const ItemCommonDetails = () =>
     const editExemplar = async (exemplarData) =>
     {
         if(displayExemplarForm) await cancelForm();
-        setDisplayExemplarForm(true);
+        displayForm();
         setExemplarFormData(exemplarData);
     }
 
@@ -126,17 +141,25 @@ const ItemCommonDetails = () =>
         // Future POST request to backend will go here... //
         // ============================================== //
 
-        setDisplayExemplarForm(false);
-        setExemplarFormData(null)
+        cancelForm();
     }
 
     /**
      * When the exemplar form is opened, scroll to the top of it.
      */
     useEffect(() => {
-        if (displayExemplarForm)
+        if(displayExemplarForm)
             jumpToAnchor("exemplar-form");
     }, [displayExemplarForm]);
+
+    /**
+     * Filters the item common exemplars to hide the exemplar being updated.
+     */
+    useEffect(() =>
+    {
+        setFilteredExemplars(itemCommon.items?.filter(item =>
+            exemplarFormData === null || item.id !== exemplarFormData.id));
+    }, [exemplarFormData])
 
     return (
         <>
@@ -160,6 +183,8 @@ const ItemCommonDetails = () =>
                     <ItemCommonDetailedCard
                         itemCommon={itemCommon}
                         updateItemCommon={isObjectEditMode}
+                        showButtonsAndOptions={showButtonsAndOptions}
+                        setShowButtonsAndOptions={setShowButtonsAndOptions}
                     />
 
                     {displayExemplarForm && (
@@ -194,19 +219,20 @@ const ItemCommonDetails = () =>
                     {!displayExemplarForm && (
                         <Button
                             label={t("add_exemplar", { ns: "item" })}
-                            onClickFunction={() => setDisplayExemplarForm(true)}
+                            onClickFunction={displayForm}
                             className={"block w-fit mx-auto"}
                         />
                     )}
 
                     <div className="flex flex-wrap justify-center gap-4 p-4">
-                        {itemCommon.items?.map(item =>
+                        {filteredExemplars?.map(item =>
                             <ItemDetailedCard
                                 key={item.id}
                                 id={item.id}
                                 item={item}
                                 isHighlighted={item.id === parseInt(itemId)}
                                 editExemplarFunction={editExemplar}
+                                showButtonsAndOptions={showButtonsAndOptions}
                             />
                         )}
                     </div>
