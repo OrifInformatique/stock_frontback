@@ -12,8 +12,7 @@ i18n
     fallbackLng: "fr",
     debug: false,
     backend: {
-      loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : ""}
-        /locales/{{lng}}/{{ns}}.json`,
+      loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : "/"}locales/{{lng}}/{{ns}}.json`,
     },
     defaultNS: "common",
     ns: ["common", "itemInformation", "itemHistory"],

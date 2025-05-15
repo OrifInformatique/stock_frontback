@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 const Logo = ({ className }) => {
   return (
-    <img className={clsx("h-10", className)} src="/images/logo.png" />
+    <img className={clsx("h-10", className)} src={process.env.APP_ROOT + "images/logo.png"} />
   );
 }
 
