@@ -1,4 +1,4 @@
-import itemsData from "../mocks/items.json";
+import items from "../mocks/items.json";
 
 /**
  * Gets all the items.
@@ -24,7 +24,7 @@ export const getItems = async () =>
         return await response.json();
         */
 
-        return itemsData;
+        return items;
     }
 
     catch(error)
@@ -33,3 +33,37 @@ export const getItems = async () =>
         return [];
     }
 };
+
+/**
+ * Gets a item common by its ID.
+ *
+ * @returns {Object}
+ *
+ */
+export const getItemCommon = async (itemCommonId) =>
+    {
+        try
+        {
+            // Uncomment below to use the real backend.
+            /*
+            const response = await fetch(`${process.env.BACKEND_URL}/`);
+
+            if (!response.ok)
+            {
+                const error = await response.text();
+                console.error(`${response.status} ${response.statusText} : ${error}`);
+                return [];
+            }
+
+            return await response.json();
+            */
+
+            return items.filter(itemCommon => itemCommon.id === itemCommonId)[0];
+        }
+
+        catch(error)
+        {
+            console.error(`Error while fetching data: ${error.message}`);
+            return [];
+        }
+    };

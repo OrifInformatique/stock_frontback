@@ -31,7 +31,7 @@ const Filters = ({
     filterByAscOrder, setFilterByAscOrder
 }) =>
 {
-    const { t } = useTranslation(["filters", "item", "misc"]);
+    const { t } = useTranslation(["buttons", "filters", "item", "misc"]);
 
     const [expandFilters, setExpandFilters] = useState(false);
     const [filterButtonIcon, setFilterButtonIcon] = useState(faFilter);
@@ -93,7 +93,7 @@ const Filters = ({
                                 : t("home_searchbar_placeholder_exemplars", { ns: "filters"})}
                             value={searchBar}
                             onChangeFunction={handleSearchBar}
-                            className={"!rounded-full h-10"}
+                            className={"!rounded-full"}
                         />
                     </div>
 
@@ -102,7 +102,7 @@ const Filters = ({
                             icon={filterButtonIcon}
                             label={filtersButtonLabel}
                             onClickFunction={handleToggleFilters}
-                            className={"sm:!rounded-full"}
+                            className={"!rounded-full"}
                         />
                     </div>
                 </div>
@@ -221,11 +221,11 @@ const Filters = ({
                     actions={[
                         {
                             icon: faPlus,
-                            label: t("new", { ns: "misc" })
+                            label: t("new", { ns: "buttons" })
                         },
                         {
                             icon: faFileExport,
-                            label: t("export", { ns: "misc" })
+                            label: t("export", { ns: "buttons" })
                         }
                     ]}
                     className={"sm:flex-col-reverse"}

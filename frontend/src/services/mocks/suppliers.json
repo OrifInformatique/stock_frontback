@@ -1,0 +1,110 @@
+[
+    {
+        "supplier_id": 1,
+        "name": "Inconnu",
+        "address_line1": "",
+        "address_line2": "",
+        "zip": "",
+        "city": "",
+        "country": null,
+        "tel": "",
+        "email": "",
+        "archive": null
+    },
+    {
+        "supplier_id": 2,
+        "name": "ARP Suisse SA",
+        "address_line1": "Avenue de la Gottaz 28",
+        "address_line2": "",
+        "zip": "1110",
+        "city": "Morges",
+        "country": null,
+        "tel": "041 799 09 09",
+        "email": "",
+        "archive": null
+    },
+    {
+        "supplier_id": 3,
+        "name": "Accesstech AG",
+        "address_line1": "Bürgenstrasse 12",
+        "address_line2": "",
+        "zip": "6005",
+        "city": "Luzern",
+        "country": null,
+        "tel": "032 725 32 25",
+        "email": "info@accesstech.ch",
+        "archive": null
+    },
+    {
+        "supplier_id": 4,
+        "name": "Digitec Galaxus AG",
+        "address_line1": "Pfingstweidstrasse 60b",
+        "address_line2": "",
+        "zip": "8005",
+        "city": "Zürich",
+        "country": null,
+        "tel": "+41 44 575 96 00",
+        "email": "d2b@digitec.ch",
+        "archive": null
+    },
+    {
+        "supplier_id": 5,
+        "name": "FST (Fondation Suisse pour les Téléthèses)",
+        "address_line1": "c\/o Julien Torrent",
+        "address_line2": "Rue des Charmettes 10c",
+        "zip": "2000",
+        "city": "Neuchâtel",
+        "country": null,
+        "tel": "032 732 97 77",
+        "email": "torrent@fst.ch",
+        "archive": null
+    },
+    {
+        "supplier_id": 6,
+        "name": "Distrelec Group AG",
+        "address_line1": "Grabenstrasse 6",
+        "address_line2": "",
+        "zip": "8606",
+        "city": "Nänikon",
+        "country": null,
+        "tel": "044 944 99 22",
+        "email": "info@distrelec.com",
+        "archive": null
+    },
+    {
+        "supplier_id": 7,
+        "name": "SIS - Service informatique de l'Orif",
+        "address_line1": "Z.I. Le Trési 9 B",
+        "address_line2": "",
+        "zip": "1028",
+        "city": "Préverenges",
+        "country": "",
+        "tel": "058 300 31 11",
+        "email": "",
+        "archive": null
+    },
+    {
+        "supplier_id": 8,
+        "name": "BRACK.CH SA",
+        "address_line1": "Centre CACIB",
+        "address_line2": "Av. des Baumettes 9",
+        "zip": "1020",
+        "city": "Renens",
+        "country": null,
+        "tel": "021 633 07 07",
+        "email": "business@brack.ch",
+        "archive": null
+    },
+    {
+        "supplier_id": 9,
+        "name": "Bechtle AG",
+        "address_line1": "Birkenstrasse 43B",
+        "address_line2": "",
+        "zip": "6343",
+        "city": "Rotkreuz",
+        "country": "Suisse",
+        "tel": "+41 21 637 60 84",
+        "email": "marie.dufour@bechtle.com ",
+        "archive": null
+    }
+]
