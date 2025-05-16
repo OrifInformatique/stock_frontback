@@ -69,7 +69,7 @@ const Event = ({ events }) => {
     return (
         <section className="flex justify-center">
             <div className="divide-y-2 divide-zinc-600">
-                {events.events?.map((event) => (
+                {events?.map((event) => (
                     <details className="w-96 bg-zinc-300">
                         <summary className="bg-zinc-500 pt-2 pb-2 list-none flex select-none content-center">
                             <span className="bg-zinc-300 rounded-2xl ml-2 px-2 py-0.4 content-center">
