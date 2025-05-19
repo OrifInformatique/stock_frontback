@@ -10,7 +10,7 @@ import ItemCommonDetails from './pages/ItemCommonDetails';
 import Loading from './ui/Loading';
 
 import Redirect from './utils/Redirect';
-
+import EventHistory from "./pages/EventHistory";
 import './i18n';
 
 import './index.pcss';
@@ -61,9 +61,12 @@ root.render(
                                 element={<ItemCommonDetails />}
                             />
                         </Route>
-
-                    </Route>
-
+					</Route>
+					<Route
+						// path="objects/:itemCommonID/exemplars/:exemplarID/eventHistory"
+						path="/event"
+						element={<EventHistory />}
+					/>
                     <Route
                         path="*"
                         element={<Redirect to="/" />}
