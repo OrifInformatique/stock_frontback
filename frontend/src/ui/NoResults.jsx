@@ -8,7 +8,9 @@ import React from "react";
  * @returns {JSX.Element}
  *
  */
-const NoResults = ({ text = "Aucun résultat !" }) =>
+const NoResults = ({
+    text = "Aucun résultat !"
+}) =>
 {
     return (
         <div className="m-auto p-12 text-center">

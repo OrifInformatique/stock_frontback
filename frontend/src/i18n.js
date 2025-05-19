@@ -19,7 +19,7 @@ i18n
             loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : ""}/locales/{{lng}}/{{ns}}.json`
         },
 
-        ns: ["filters", "item", "misc"],
+        ns: ["buttons", "filters", "item", "misc", "titles"],
 
         interpolation:
         {

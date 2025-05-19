@@ -1,114 +1,166 @@
-{
-    "filters": {
-      "item_tags": [
-        { "id": 1, "name": "Électronique" },
-        { "id": 2, "name": "Mobilier" },
-        { "id": 3, "name": "Papeterie" }
-      ],
-      "loan_states": [
-        { "id": 1, "name": "Aucun prêt" },
-        { "id": 2, "name": "En prêt" },
-        { "id": 3, "name": "En retard" }
-      ],
-      "item_conditions": [
-        { "id": 1, "name": "Fonctionnel" },
-        { "id": 2, "name": "À réparer" },
-        { "id": 3, "name": "Indisponible" }
-      ],
-      "item_groups": [
-        { "id": 1, "name": "Bureautique" },
-        { "id": 2, "name": "Informatique" },
-        { "id": 3, "name": "Entrepôt" }
-      ],
-      "stocking_places": [
-        { "id": 1, "name": "Salle 101" },
-        { "id": 2, "name": "Réserve B" },
-        { "id": 3, "name": "Entrepôt central" }
-      ]
-    },
-    "items_common": [
-      {
+[
+    {
         "id": 1,
-        "image_url": "0046_picture.png",
+        "image_url": "/images/0046_picture.png",
         "name": "Ordinateur Portable Dell XPS",
+        "description": "Laptop 17 pouces",
         "group": "Informatique",
-        "item_tag": "Électronique",
+        "item_tags": [
+            "Électronique"
+        ],
         "items": [
-          {
-            "id": 101,
-            "inventory_prefix": "INF-001",
-            "item_condition": "À réparer",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Salle 101"
-          },
-          {
-            "id": 102,
-            "inventory_prefix": "INF-002",
-            "item_condition": "Fonctionnel",
-            "loan_state": "En prêt",
-            "stocking_place": "Réserve B"
-          },
-          {
-            "id": 103,
-            "inventory_prefix": "INF-003",
-            "item_condition": "Fonctionnel",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Salle 101"
-          },
-          {
-            "id": 104,
-            "inventory_prefix": "INF-004",
-            "item_condition": "Fonctionnel",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Entrepôt central"
-          },
-          {
-            "id": 105,
-            "inventory_prefix": "INF-005",
-            "item_condition": "Fonctionnel",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Réserve B"
-          }
+            {
+                "id": 101,
+                "inventory_prefix": "INF-001",
+                "item_condition": "À réparer",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Salle 101",
+                "serial_number": "SN-228006",
+                "buying_price": 1250.52,
+                "buying_date": "2023-09-21",
+                "warranty_duration": 24,
+                "warranty_state": "En garantie",
+                "supplier": "ARP Suisse SA",
+                "supplier_ref": "REF-1841",
+                "remarks": ""
+            },
+            {
+                "id": 102,
+                "inventory_prefix": "INF-002",
+                "item_condition": "Fonctionnel",
+                "loan_state": "En prêt",
+                "item_localization": "Poste OR240420",
+                "stocking_place": "Réserve B",
+                "serial_number": "SN-352117",
+                "buying_price": 821.9,
+                "buying_date": "2024-03-10",
+                "warranty_duration": 48,
+                "warranty_state": "En garantie",
+                "supplier": "ARP Suisse SA",
+                "supplier_ref": "REF-7138",
+                "remarks": "Utilisé pour les formations."
+            },
+            {
+                "id": 103,
+                "inventory_prefix": "INF-003",
+                "item_condition": "Fonctionnel",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Salle 101",
+                "serial_number": "SN-661021",
+                "buying_price": 1259.24,
+                "buying_date": "2021-12-03",
+                "warranty_duration": 36,
+                "warranty_state": "Garantie expirée",
+                "supplier": "Digitec Galaxus AG",
+                "supplier_ref": "REF-3234",
+                "remarks": ""
+            },
+            {
+                "id": 104,
+                "inventory_prefix": "INF-004",
+                "item_condition": "Fonctionnel",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Entrepôt central",
+                "serial_number": "SN-211129",
+                "buying_price": 1277.38,
+                "buying_date": "2021-09-29",
+                "warranty_duration": 12,
+                "warranty_state": "Garantie expirée",
+                "supplier": "Accesstech AG",
+                "supplier_ref": "REF-1816",
+                "remarks": "Clavier QWERTY, non modifié."
+            },
+            {
+                "id": 105,
+                "inventory_prefix": "INF-005",
+                "item_condition": "Fonctionnel",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Réserve B",
+                "serial_number": "SN-325503",
+                "buying_price": 804.79,
+                "buying_date": "2021-01-13",
+                "warranty_duration": 24,
+                "warranty_state": "Garantie expirée",
+                "supplier": "BRACK.CH SA",
+                "supplier_ref": "REF-6422",
+                "remarks": "État général correct, à nettoyer."
+            }
         ]
-      },
-      {
+    },
+    {
         "id": 2,
-        "image_url": "0138_picture.png",
+        "image_url": "/images/0138_picture.png",
         "name": "Chaise de bureau ergonomique",
+        "description": "Dossier et assise réglable",
         "group": "Entrepôt",
-        "item_tag": "Mobilier",
+        "item_tags": [
+            "Mobilier"
+        ],
         "items": [
-          {
-            "id": 201,
-            "inventory_prefix": "MOB-001",
-            "item_condition": "Indisponible",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Salle 101"
-          }
+            {
+                "id": 201,
+                "inventory_prefix": "MOB-001",
+                "item_condition": "Indisponible",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Salle 101",
+                "serial_number": "SN-125638",
+                "buying_price": 1935.99,
+                "buying_date": "2023-08-01",
+                "warranty_duration": 12,
+                "warranty_state": "En garantie",
+                "supplier": "ARP Suisse SA",
+                "supplier_ref": "REF-7774",
+                "remarks": "Roulette manquante, en commande."
+            }
         ]
-      },
-      {
+    },
+    {
         "id": 3,
-        "image_url": "0037_picture.png",
+        "image_url": "/images/0037_picture.png",
         "name": "Imprimante HP LaserJet",
+        "description": "Imprimante couleurs pour feuilles A4",
         "group": "Bureautique",
-        "item_tag": "Électronique",
+        "item_tags": [
+            "Électronique"
+        ],
         "items": [
-          {
-            "id": 301,
-            "inventory_prefix": "BUR-001",
-            "item_condition": "À réparer",
-            "loan_state": "En retard",
-            "stocking_place": "Entrepôt central"
-          },
-          {
-            "id": 302,
-            "inventory_prefix": "BUR-002",
-            "item_condition": "À réparer",
-            "loan_state": "Aucun prêt",
-            "stocking_place": "Réserve B"
-          }
+            {
+                "id": 301,
+                "inventory_prefix": "BUR-001",
+                "item_condition": "À réparer",
+                "loan_state": "En retard",
+                "item_localization": "Dervey Dylan, section informatique",
+                "stocking_place": "Entrepôt central",
+                "serial_number": "SN-527218",
+                "buying_price": 1866.68,
+                "buying_date": "2024-02-09",
+                "warranty_duration": 48,
+                "warranty_state": "En garantie",
+                "supplier": "Inconnu",
+                "supplier_ref": "",
+                "remarks": ""
+            },
+            {
+                "id": 302,
+                "inventory_prefix": "BUR-002",
+                "item_condition": "À réparer",
+                "loan_state": "Aucun prêt",
+                "item_localization": "",
+                "stocking_place": "Réserve B",
+                "serial_number": "SN-588106",
+                "buying_price": 1850.69,
+                "buying_date": "2021-08-06",
+                "warranty_duration": 36,
+                "warranty_state": "Garantie expirée",
+                "supplier": "Bechtle AG",
+                "supplier_ref": "REF-9112",
+                "remarks": "Toner vide, pas de remplacement prévu."
+            }
         ]
-      }
-    ]
-  }
+    }
+]

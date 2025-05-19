@@ -13,7 +13,10 @@ import ItemCommon from "../modules/ItemCommon";
  * @returns {JSX.Element}
  *
  */
-const ItemsList = ({ items = [], displayExemplars }) =>
+const ItemsList = ({
+    items = [],
+    displayExemplars
+}) =>
 {
     return (
         <section className="flex flex-wrap justify-center gap-4 mt-36 lg:mt-24 p-4">

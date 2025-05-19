@@ -1,6 +1,16 @@
 {
-    "menu": "Menu",
-    "close": "Fermer",
-    "new": "Nouveau",
-    "export": "Exporter"
+    "add_or_edit_an_image": "Ajouter ou modifier une image",
+    "other_infos": "Autres informations",
+    "bought_the": "Acheté le",
+    "for_price": "à",
+    "in": "Dans",
+    "in_months": "en mois",
+    "loaned_at": "Prêté à",
+    "linked_file": "Fichier joint",
+    "months": "mois",
+    "no_description": "Pas de description",
+    "no_image": "Aucune image",
+    "none_selected": "Aucun sélectioné",
+    "selected": "sélectionné",
+    "selected_plural": "sélectionnés"
 }
