@@ -25,9 +25,20 @@ const EventHistory = () => {
 
     return (
         <>
-            <h1>Historique des évènements</h1>
-            <div>
-                <Image src={"0046_picture.png"} size={100} />
+            <div className="flex justify-center flex-row">
+                <div className="flex flex-col content-center">
+                    <h1 className="text-4xl text-center">
+                        Historique des évènements
+                    </h1>
+                    <div className="p-3 bg-zinc-300">
+                        <Image
+                            src={`/images/${info.image_url}`}
+                            alt={`Image of ${info.name}`}
+                            size={150}
+                        />
+                    </div>
+                    <h2 className="text-2xl">Liste des évènements</h2>
+                </div>
             </div>
             {/* <Button label={"test"} />; */}
             <Event events={events} />
