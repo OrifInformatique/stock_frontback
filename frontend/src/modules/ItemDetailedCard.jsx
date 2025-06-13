@@ -73,7 +73,7 @@ const ItemDetailedCard = ({
                         isLink: true,
                         label: t("event_history", { ns: "item" }),
                         icon: faClockRotateLeft,
-                        action: `${item.id}/event-history`
+                        action: `${isHighlighted ? "" : item.id+"/"}event-history`
                     },
                     {
                         isLink: false,
