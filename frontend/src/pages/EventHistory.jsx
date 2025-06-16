@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Event from "../modules/Event";
 import { getEvents } from "../services/api/events";
-// import Link from "../ui/HTMLLink.jsx";
-import Button from "../ui/Button";
+import Link from "../ui/HTMLLink.jsx";
 import Image from "../ui/Image.jsx";
 
 const EventHistory = () => {
@@ -12,6 +11,7 @@ const EventHistory = () => {
     const [events, setEvents] = useState([]);
     const [info, setInfo] = useState({});
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -33,28 +33,12 @@ const EventHistory = () => {
                     <h1 className="text-4xl text-center">
                         {t("event_history")}
                     </h1>
-                    <Button
-                        onClickFunction={() => {
-                            if (window.history.length > 1) {
-                                window.history.back();
-                            } else {
-                                navigate("/");
-                            }
-                        }} // HACK: Currently only works if comming from a previous page if comming from a link from another platform it won't be able to go anywhere
-                        label={t("return_to_item")}
-                    ></Button>
-                    {/* <Link */}
-                    {/*     to={ */}
-                    {/* <Navigate to="/nextpath" state={{ from: location }} /> */}
-                    {/*     } */}
-                    {/*     styleAsButton={true} */}
-                    {/* > */}
-                    {/*     {t("return_to_item")} */}
-                    {/* </Link> */}
-                    {/* TODO: search if it is possible to get the last pages url
-					FIX: after looking it seems it is not possible to get the last pages url whithout sending it first
-					but there are ways to do it pretty easely in react-router-dom or we could use the browsers history of pages but that could create issues
-					but in both versions we need to use a button and not a link as they are functions that need to be called*/}
+                    <Link
+                        to={location.state?.from?.pathname}
+                        styleAsButton={true}
+                    >
+                        {t("return_to_item")}
+                    </Link>
                     <div className="p-3 bg-zinc-300 my-5 rounded-md flex flex-row">
                         <Image
                             src={`/images/${info.image_url}`}

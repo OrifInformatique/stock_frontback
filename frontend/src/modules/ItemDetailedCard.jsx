@@ -15,6 +15,7 @@ import {
 import HTMLLink from "../ui/HTMLLink";
 import Tag from "../ui/Tag";
 import MeatballsMenu from "../ui/MeatballsMenu";
+import { useNavigate, useLocation } from "react-router";
 
 import {
     setConditionTagColor,
@@ -45,7 +46,11 @@ const ItemDetailedCard = ({
     const { t } = useTranslation(["item", "misc"]);
 
     const [showExtraInfos, setShowExtraInfos] = useState(false);
+	const [newPath, setNewPath] = useState("")
     const [loanStates, setLoanStates] = useState([]);
+	const navigate = useNavigate();
+	const location = useLocation();
+	const segments = location.pathname.split("/").filter(Boolean);
 
     /**
      * Fetches all loan states, to determine the correct loan to display on each exemplar.
@@ -57,7 +62,18 @@ const ItemDetailedCard = ({
             setLoanStates(await getAllLoanStates());
         }
         fetchLoanStates();
+		createItemPath();
+		
     }, [])
+
+	const createItemPath = ()=> 
+	{
+		if (segments.length > 3 && segments[segments.length - 2] === "exemplars") {
+			segments.pop();
+			segments.push(item.id)
+			setNewPath("/" + segments.join("/"))
+		}
+	}
 
     return (
         <div
@@ -70,10 +86,10 @@ const ItemDetailedCard = ({
             <div className="flex justify-end">
                 <MeatballsMenu actions={[
                     {
-                        isLink: true,
+                        isLink: false,
                         label: t("event_history", { ns: "item" }),
                         icon: faClockRotateLeft,
-                        action: `${isHighlighted ? "" : item.id+"/"}event-history`
+                        action: () => navigate(`${newPath}/event-history`, { state: { from: location } }),
                     },
                     {
                         isLink: false,
