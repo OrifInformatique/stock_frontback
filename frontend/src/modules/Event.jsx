@@ -68,14 +68,14 @@ const Event = ({ events }) => {
 
     return (
         <section className="flex justify-center">
-            <div className="divide-y-2 divide-zinc-600">
+            <div className="divide-y-2 divide-white">
                 {events?.map((event, index) => (
                     <details
                         key={`${event.type}-${event.inventory_control_id ?? ""}${event.loan_id ?? ""}`}
-                        className="w-96 bg-zinc-300"
+                        className="w-96 bg-background"
                     >
-                        <summary className="bg-zinc-500 pt-2 pb-2 list-none flex select-none content-center">
-                            <span className="bg-zinc-300 rounded-2xl ml-2 px-2 py-0.4 content-center">
+                        <summary className="bg-blue/90 pt-2 pb-2 list-none flex select-none content-center">
+                            <span className="bg-background rounded-2xl ml-2 px-2 py-0.4 content-center">
                                 {event.date}
                             </span>
                             <span className="text-xl text-white pl-2 content-center">

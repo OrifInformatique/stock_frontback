@@ -7,7 +7,7 @@ import Link from "../ui/HTMLLink.jsx";
 import Image from "../ui/Image.jsx";
 
 const EventHistory = () => {
-    const { t } = useTranslation("event");
+    const { t } = useTranslation(["event", "item"]);
     const [events, setEvents] = useState([]);
     const [info, setInfo] = useState({});
     const navigate = useNavigate();
@@ -28,18 +28,19 @@ const EventHistory = () => {
 
     return (
         <>
-            <div className="flex justify-center flex-row mb-5">
+            <div className="flex justify-center flex-row">
                 <div className="flex flex-col content-center">
                     <h1 className="text-4xl text-center">
-                        {t("event_history")}
+                        {t("event_history", { ns: "event" })}
                     </h1>
                     <Link
                         to={location.state?.from?.pathname}
                         styleAsButton={true}
+                        className="block w-fit mx-auto my-4"
                     >
-                        {t("return_to_item")}
+                        {t("return_to_item", { ns: "event" })}
                     </Link>
-                    <div className="p-3 bg-zinc-300 my-5 rounded-md flex flex-row">
+                    <div className="p-3 bg-background mb-5 mt-0 rounded-md flex flex-row">
                         <Image
                             src={`/images/${info.image_url}`}
                             alt={`Image of ${info.name}`}
@@ -50,7 +51,25 @@ const EventHistory = () => {
                             <p>{info.name}</p>
                         </div>
                     </div>
-                    <h2 className="text-2xl text-center">{t("event_list")}</h2>
+                    <h2 className="text-2xl text-center">
+                        {t("event_list", { ns: "event" })}
+                    </h2>
+                    <div className="flex flex-row">
+                        <Link
+                            to={"/"}
+                            styleAsButton={true}
+                            className="block w-fit mx-auto my-4"
+                        >
+                            {t("add_loan", { ns: "item" })}
+                        </Link>
+                        <Link
+                            to={"/"}
+                            styleAsButton={true}
+                            className="block w-fit mx-auto my-4"
+                        >
+                            {t("add_control", { ns: "item" })}
+                        </Link>
+                    </div>
                 </div>
             </div>
             <Event events={events} />
