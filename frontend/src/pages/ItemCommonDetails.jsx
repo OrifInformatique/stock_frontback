@@ -40,7 +40,7 @@ const ItemCommonDetails = () =>
     const [itemCommon, setItemCommon] = useState({});
 
     /**
-     * Fetches itemComment data on mount.
+     * Fetches itemCommon data on mount.
      */
     useEffect(() =>
     {
