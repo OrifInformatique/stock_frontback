@@ -5,11 +5,13 @@
     "controlled_by": "Controlé par",
     "remarks": "Remarques",
     "loan_date": " Date du prêt",
+    "control_date": "Date du contrôle",
     "planned_return_date": "Date de retour prévue",
     "loaned_by": "Prêté par",
     "loaned_to": "Bénéficiaire du prêt",
     "loan_location": "Lieu du prêt",
     "event_history": "Historique des évènements",
     "event_list": "Liste des évènements",
-    "return_to_item": "Retour à l'objet"
+    "return_to_item": "Retour à l'objet",
+    "controller": "Contrôleur"
 }

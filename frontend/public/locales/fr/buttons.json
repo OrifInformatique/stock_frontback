@@ -7,5 +7,7 @@
     "generate_inventory_number": "Générer un numéro d'inventaire",
     "menu": "Menu",
     "new": "Nouveau",
-    "save": "Sauvegarder"
+    "save": "Sauvegarder",
+    "add": "Ajouter"
 }
+

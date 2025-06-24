@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+import { createPortal } from "react-dom";
 import Event from "../modules/Event";
 import { getEvents } from "../services/api/events";
 import Link from "../ui/HTMLLink.jsx";
 import Image from "../ui/Image.jsx";
+import Button from "../ui/Button.jsx";
+import AddControlForm from "../modules/AddControlForm.jsx";
 
 const EventHistory = () => {
     const { t } = useTranslation(["event", "item"]);
@@ -12,6 +15,9 @@ const EventHistory = () => {
     const [info, setInfo] = useState({});
     const navigate = useNavigate();
     const location = useLocation();
+    const [showControl, setShowControl] = useState(false);
+
+    const [displayLoanForm, setDisplayLoanForm] = useState(false);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -55,20 +61,23 @@ const EventHistory = () => {
                         {t("event_list", { ns: "event" })}
                     </h2>
                     <div className="flex flex-row">
-                        <Link
-                            to={"/"}
-                            styleAsButton={true}
+                        <Button
+                            label={t("add_loan", { ns: "item" })}
+                            onClickFunction={() => setDisplayLoanForm(true)}
                             className="block w-fit mx-auto my-4"
-                        >
-                            {t("add_loan", { ns: "item" })}
-                        </Link>
-                        <Link
-                            to={"/"}
-                            styleAsButton={true}
-                            className="block w-fit mx-auto my-4"
-                        >
-                            {t("add_control", { ns: "item" })}
-                        </Link>
+                        />
+                        <Button
+                            label={t("add_control", { ns: "item" })}
+                            onClickFunction={() => setShowControl(true)}
+                            className="w-fit h-fit mx-auto my-4"
+                        />
+                        {showControl &&
+                            createPortal(
+                                <AddControlForm
+                                    onClose={() => setShowControl(false)}
+                                />,
+                                document.body,
+                            )}
                     </div>
                 </div>
             </div>
