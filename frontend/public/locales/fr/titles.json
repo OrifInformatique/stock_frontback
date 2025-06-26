@@ -2,5 +2,8 @@
     "exemplar_details": "Détails de l'exemplaire",
     "item_common_details": "Détails de l'objet",
     "purchase_details": "Détails de l'achat",
-    "supplier_details": "Détails du fournisseur"
+    "supplier_details": "Détails du fournisseur",
+    "loan_time": "Temporalité du prêt",
+    "place_and_borrower": "Lieu et bénéficiaire du prêt"
 }
+
