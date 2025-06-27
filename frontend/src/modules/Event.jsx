@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { createPortal } from "react-dom";
+import Button from "../ui/Button";
+import AddControlForm from "./AddControlForm";
 
 /**
  * Item common card.
@@ -52,8 +55,9 @@ const MiseEnPret = ({ loan }) => {
     );
 };
 
-const Event = ({ events }) => {
+const Event = ({ events, setDisplayLoanForm }) => {
     const { t } = useTranslation("event");
+    const [showControl, setShowControl] = useState(false);
 
     const ChooseComponent = ({ event }) => {
         switch (event.type) {
@@ -67,12 +71,35 @@ const Event = ({ events }) => {
     };
 
     return (
-        <section className="flex justify-center">
-            <div className="divide-y-2 divide-white">
+        <section>
+            <h2 className="text-2xl text-center">
+                {t("event_list", { ns: "event" })}
+            </h2>
+            <div className="flex flex-row justify-evenly">
+                <Button
+                    label={t("add_loan", { ns: "item" })}
+                    onClickFunction={() => setDisplayLoanForm(true)}
+                    className="w-44 h-fit my-4"
+                />
+                <Button
+                    label={t("add_control", { ns: "item" })}
+                    onClickFunction={() => setShowControl(true)}
+                    className="w-44 h-fit my-4 px-0"
+                />
+                {showControl &&
+                    createPortal(
+                        <AddControlForm
+                            onClose={() => setShowControl(false)}
+                        />,
+                        document.body,
+                    )}
+            </div>
+
+            <div className="divide-y-2 divide-white w-full sm:w-fit">
                 {events?.map((event, index) => (
                     <details
                         key={`${event.type}-${event.inventory_control_id ?? ""}${event.loan_id ?? ""}`}
-                        className="w-96 bg-background"
+                        className="w-full sm:w-96 bg-background"
                     >
                         <summary className="bg-blue/90 pt-2 pb-2 list-none flex select-none content-center">
                             <span className="bg-background rounded-2xl ml-2 px-2 py-0.4 content-center">

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import InputDate from "../ui/InputDate";
 import TextArea from "../ui/Textarea";
+import { createPortal } from "react-dom";
 
 /**
  * Handles the submit of the exemplar form.

@@ -11,7 +11,7 @@ import SingleSelect from "../ui/SingleSelect";
 import Textarea from "../ui/Textarea";
 import SegmentedControl from "../ui/SegmentedControl";
 
-const LoanForm = () => {
+const LoanForm = ({ setDisplayLoanForm }) => {
     const { t } = useTranslation(["event", "buttons", "titles"]);
 
     const [displayExternalUserSelect, setDisplayExternalUserSelect] =
@@ -22,7 +22,7 @@ const LoanForm = () => {
             <form className="flex-col gap">
                 {/*Loan times*/}
                 <fieldset className="flex flex-col">
-                    <legend>
+                    <legend className="w-full">
                         <Heading
                             headingLevel={3}
                             title={t("loan_time", { ns: "titles" })}
@@ -96,7 +96,16 @@ const LoanForm = () => {
                             />
                             {/*TODO: add segmented control */}
                         </div>
-                        {!displayExternalUserSelect && (
+                        {displayExternalUserSelect ? (
+                            <div>
+                                <Label
+                                    forInput="external_email"
+                                    label={t("external_email", { ns: "event" })}
+                                />
+                                <InputText name="external_email" />
+                                {/* TODO: Input text */}
+                            </div>
+                        ) : (
                             <div>
                                 <Label
                                     forInput="select_user"
@@ -108,18 +117,7 @@ const LoanForm = () => {
                                         { label: "test2", value: "test2" },
                                     ]}
                                     name="select_user"
-                                    // options={["test", "test2"]}
                                 />
-                            </div>
-                        )}
-                        {displayExternalUserSelect && (
-                            <div>
-                                <Label
-                                    forInput="external_email"
-                                    label={t("external_email", { ns: "event" })}
-                                />
-                                <InputText name="external_email" />
-                                {/* TODO: Input text */}
                             </div>
                         )}
                         <div>
@@ -134,11 +132,12 @@ const LoanForm = () => {
                 <fieldset className="flex flex-row justify-evenly">
                     <Button
                         label={t("cancel", { ns: "buttons" })}
-                        className="w-28 h-fit my-4"
+                        className="w-32 h-fit my-4"
+                        onClickFunction={() => setDisplayLoanForm(false)}
                     />
                     <Button
                         label={t("save", { ns: "buttons" })}
-                        className="w-28 h-fit my-4 px-0"
+                        className="w-32 h-fit my-4 px-0"
                     />
                 </fieldset>
             </form>
