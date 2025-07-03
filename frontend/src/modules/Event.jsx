@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { createPortal } from "react-dom";
 import Button from "../ui/Button";
 import AddControlForm from "./AddControlForm";
+import Heading from "../ui/Heading";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 /**
  * Item common card.
@@ -46,7 +47,11 @@ const MiseEnPret = ({ loan }) => {
                 <p className="w-full">{loan.loaner}</p>
             </div>
             <p className="font-bold">{t("loaned_to")}</p>
-            <p>{loan.borrower_email}</p>
+            <p>
+                {loan.borrower_email
+                    ? loan.borrower_email
+                    : loan.borrower_user.username}
+            </p>
             <p className="font-bold">{t("loan_location")}</p>
             <p>{loan.item_localisation}</p>
             <p className="font-bold">{t("remarks")}</p>
@@ -55,7 +60,15 @@ const MiseEnPret = ({ loan }) => {
     );
 };
 
-const Event = ({ events, setDisplayLoanForm }) => {
+const Event = ({
+    events,
+    setDisplayLoanForm,
+    setLoanFormData,
+    combineLoanAndReturn,
+    setIsReturn,
+    setControlFormData,
+    controlFormData,
+}) => {
     const { t } = useTranslation("event");
     const [showControl, setShowControl] = useState(false);
 
@@ -72,27 +85,38 @@ const Event = ({ events, setDisplayLoanForm }) => {
 
     return (
         <section>
-            <h2 className="text-2xl text-center">
-                {t("event_list", { ns: "event" })}
-            </h2>
+            <header className="w-full content-center text-center">
+                <Heading
+                    headingLevel={3}
+                    title={t("event_list", { ns: "event" })}
+                    className="my-0"
+                />
+            </header>
             <div className="flex flex-row justify-evenly">
                 <Button
                     label={t("add_loan", { ns: "item" })}
-                    onClickFunction={() => setDisplayLoanForm(true)}
+                    onClickFunction={() => {
+                        setLoanFormData(null);
+                        setIsReturn(false);
+                        setDisplayLoanForm(true);
+                    }}
                     className="w-44 h-fit my-4"
                 />
                 <Button
                     label={t("add_control", { ns: "item" })}
-                    onClickFunction={() => setShowControl(true)}
+                    onClickFunction={() => {
+                        setShowControl(true);
+                        setControlFormData(null);
+                    }}
                     className="w-44 h-fit my-4 px-0"
                 />
-                {showControl &&
-                    createPortal(
-                        <AddControlForm
-                            onClose={() => setShowControl(false)}
-                        />,
-                        document.body,
-                    )}
+                {showControl && (
+                    <AddControlForm
+                        open={showControl}
+                        onClose={() => setShowControl(false)}
+                        controlFormData={controlFormData}
+                    />
+                )}
             </div>
 
             <div className="divide-y-2 divide-white w-full sm:w-fit">
@@ -108,6 +132,35 @@ const Event = ({ events, setDisplayLoanForm }) => {
                             <span className="text-xl text-white pl-2 content-center">
                                 {t(event.type)}
                             </span>
+                            <Button
+                                // label="test"
+                                onClickFunction={() => {
+                                    if (event.type === "loan") {
+                                        setDisplayLoanForm(true);
+                                        setLoanFormData(
+                                            combineLoanAndReturn(
+                                                event.loan_id,
+                                                events,
+                                            ),
+                                        );
+                                        setIsReturn(false);
+                                    } else if (event.type === "return") {
+                                        setDisplayLoanForm(true);
+                                        setLoanFormData(
+                                            combineLoanAndReturn(
+                                                event.loan_id,
+                                                events,
+                                            ),
+                                        );
+                                        setIsReturn(true);
+                                    } else {
+                                        setShowControl(true);
+                                        setControlFormData(event);
+                                    }
+                                }}
+                                icon={faPen}
+                                className="ml-auto mr-2 max-h-8 max-w-8"
+                            />
                         </summary>
                         <div className="p-3">
                             <ChooseComponent event={event} />

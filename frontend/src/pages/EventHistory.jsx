@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
-import { createPortal } from "react-dom";
 import Event from "../modules/Event";
 import { getEvents } from "../services/api/events";
 import Link from "../ui/HTMLLink.jsx";
 import Image from "../ui/Image.jsx";
-import Button from "../ui/Button.jsx";
-import AddControlForm from "../modules/AddControlForm.jsx";
+import LoanForm from "../modules/LoanForm.jsx";
+import Heading from "../ui/Heading.jsx";
 
 const EventHistory = () => {
     const { t } = useTranslation(["event", "item"]);
@@ -15,9 +14,10 @@ const EventHistory = () => {
     const [info, setInfo] = useState({});
     const navigate = useNavigate();
     const location = useLocation();
-    const [showControl, setShowControl] = useState(false);
-
     const [displayLoanForm, setDisplayLoanForm] = useState(false);
+    const [loanFormData, setLoanFormData] = useState({});
+    const [isReturn, setIsReturn] = useState(false);
+    const [controlFormData, setControlFormData] = useState({});
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -32,13 +32,30 @@ const EventHistory = () => {
         fetchEvents();
     }, []);
 
+    const combineLoanAndReturn = (input, events) => {
+        const loan = events.find(
+            (event) => event.loan_id === input && event.type === "loan",
+        );
+        const return_data = events.find(
+            (event) => event.loan_id === input && event.type === "return",
+        );
+        if (return_data) {
+            loan["return_date"] = return_data.date;
+        }
+        console.log("Loan data", loan);
+        console.log("Return data", return_data);
+        console.log("Combined loan and return data", loan);
+        return loan;
+    };
+
     return (
         <>
             <div className="flex justify-center flex-row">
-                <div className="flex flex-col content-center">
-                    <h1 className="text-4xl text-center">
-                        {t("event_history", { ns: "event" })}
-                    </h1>
+                <div className="flex flex-col">
+                    <Heading
+                        headingLevel={1}
+                        title={t("event_history", { ns: "event" })}
+                    />
                     <Link
                         to={location.state?.from?.pathname}
                         styleAsButton={true}
@@ -57,31 +74,26 @@ const EventHistory = () => {
                             <p>{info.name}</p>
                         </div>
                     </div>
-                    <h2 className="text-2xl text-center">
-                        {t("event_list", { ns: "event" })}
-                    </h2>
-                    <div className="flex flex-row">
-                        <Button
-                            label={t("add_loan", { ns: "item" })}
-                            onClickFunction={() => setDisplayLoanForm(true)}
-                            className="block w-fit mx-auto my-4"
+                    {displayLoanForm ? (
+                        <LoanForm
+                            setDisplayLoanForm={setDisplayLoanForm}
+                            loanFormData={loanFormData}
+                            isReturn={isReturn}
                         />
-                        <Button
-                            label={t("add_control", { ns: "item" })}
-                            onClickFunction={() => setShowControl(true)}
-                            className="w-fit h-fit mx-auto my-4"
+                    ) : (
+                        <Event
+                            events={events}
+                            setDisplayLoanForm={setDisplayLoanForm}
+                            setLoanFormData={setLoanFormData}
+                            combineLoanAndReturn={combineLoanAndReturn}
+                            setIsReturn={setIsReturn}
+                            setControlFormData={setControlFormData}
+                            isReturn={isReturn}
+                            controlFormData={controlFormData}
                         />
-                        {showControl &&
-                            createPortal(
-                                <AddControlForm
-                                    onClose={() => setShowControl(false)}
-                                />,
-                                document.body,
-                            )}
-                    </div>
+                    )}
                 </div>
             </div>
-            <Event events={events} />
         </>
     );
 };

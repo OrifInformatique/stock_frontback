@@ -2,11 +2,12 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import InputDate from "../ui/InputDate";
-import TextArea from "../ui/Textarea";
+import Textarea from "../ui/Textarea";
 import { createPortal } from "react-dom";
+import Label from "../ui/Label";
 
 /**
- * Handles the submit of the exemplar form.
+ * Handles the submit of the control form.
  *
  * @param {Event}
  *
@@ -24,30 +25,46 @@ const handleNewControlSubmit = (event) => {
     // ============================================== //
 };
 
-const AddControlForm = ({ onClose }) => {
+const AddControlForm = ({ open, onClose, controlFormData }) => {
     const { t } = useTranslation(["buttons", "item", "event"]);
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    if (!open) return null;
+    return createPortal(
+        <section className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <form
-                className="bg-background p-6 rounded-lg shadow-lg min-w-96 min-h-64"
+                className="bg-background p-6 rounded-lg shadow-lg min-w-80 min-h-64"
                 onSubmit={handleNewControlSubmit}
             >
-                <div className="flex flex-row">
+                <fieldset className="flex flex-row">
                     <div className="flex flex-col">
                         <p>{t("controller", { ns: "event" })}</p>
                         <p>
                             {/* TODO: Insert user name here*/}
-                            Undefined
+                            {controlFormData?.controller ||
+                                t("unknown", { ns: "event" })}
                         </p>
                     </div>
                     <div className="ml-auto">
-                        <p>{t("control_date", { ns: "event" })}</p>
-                        <InputDate name="InputDate" />
+                        <Label
+                            forInput="control_date"
+                            label={t("control_date", { ns: "event" })}
+                        />
+                        <InputDate
+                            name="control_date"
+                            defaultValue={controlFormData?.date}
+                        />
                     </div>
-                </div>
-                <p>{t("remarks", { ns: "item" })}</p>
-                <TextArea className="mb-4 h-28" />
-                <div className="flex flex-row">
+                </fieldset>
+
+                <Label
+                    forInput="remarks_field"
+                    label={t("remarks", { ns: "item" })}
+                />
+                <Textarea
+                    name="remarks_field"
+                    className="mb-4 h-28 min-w-80 min-h-6"
+                    defaultValue={controlFormData?.remarks}
+                />
+                <fieldset className="flex flex-row">
                     <Button
                         label={t("cancel", { ns: "buttons" })}
                         onClickFunction={onClose}
@@ -57,9 +74,10 @@ const AddControlForm = ({ onClose }) => {
                         label={t("add", { ns: "buttons" })}
                         className="w-fit h-fit"
                     />
-                </div>
+                </fieldset>
             </form>
-        </div>
+        </section>,
+        document.body,
     );
 };
 

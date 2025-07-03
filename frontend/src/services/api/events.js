@@ -1,7 +1,7 @@
 import eventsData from "../mocks/events.json";
 
 /**
- * Gets all the items.
+ * Gets all the events.
  *
  * @returns {Array}
  *

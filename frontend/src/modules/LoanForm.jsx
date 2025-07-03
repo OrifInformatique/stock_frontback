@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import Button from "../ui/Button";
@@ -10,12 +10,24 @@ import Label from "../ui/Label";
 import SingleSelect from "../ui/SingleSelect";
 import Textarea from "../ui/Textarea";
 import SegmentedControl from "../ui/SegmentedControl";
+import { getUsers } from "../services/api/users";
 
-const LoanForm = ({ setDisplayLoanForm }) => {
+const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
     const { t } = useTranslation(["event", "buttons", "titles"]);
+    const [users, setUsers] = useState({});
 
-    const [displayExternalUserSelect, setDisplayExternalUserSelect] =
-        useState(false);
+    const [displayExternalUserSelect, setDisplayExternalUserSelect] = useState(
+        loanFormData?.borrower_email !== "",
+    );
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const fetchedUsers = await getUsers();
+            setUsers(fetchedUsers);
+            console.log("Fetched users", fetchedUsers);
+        };
+        fetchUsers();
+    }, []);
 
     return (
         <section className="flex justify-center">
@@ -34,7 +46,11 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                 forInput="loan_date"
                                 label={t("loan_date", { ns: "event" })}
                             />
-                            <InputDate name={"loan_date"} />
+                            <InputDate
+                                name={"loan_date"}
+                                defaultValue={loanFormData?.date}
+                                disabled={isReturn}
+                            />
                         </div>
                         <div className="flex flex-col">
                             <div>
@@ -44,7 +60,13 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                         ns: "event",
                                     })}
                                 />
-                                <InputDate name={"planned_return_date"} />
+                                <InputDate
+                                    name={"planned_return_date"}
+                                    defaultValue={
+                                        loanFormData?.planned_return_date
+                                    }
+                                    disabled={isReturn}
+                                />
                             </div>
                             <div>
                                 <Label
@@ -53,7 +75,11 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                         ns: "event",
                                     })}
                                 />
-                                <InputDate name={"actual_return_date"} />
+                                <InputDate
+                                    name={"actual_return_date"}
+                                    defaultValue={loanFormData?.return_date}
+                                    disabled={!isReturn}
+                                />
                             </div>
                         </div>
                     </div>
@@ -72,7 +98,11 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                 forInput="loan_location"
                                 label={t("loan_location", { ns: "event" })}
                             />
-                            <InputText name="loan_location" />
+                            <InputText
+                                name="loan_location"
+                                defaultValue={loanFormData?.item_localisation}
+                                disabled={isReturn}
+                            />
                         </div>
                         <div>
                             <Label
@@ -85,6 +115,11 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                     t("site_user", { ns: "event" }),
                                     t("external_person", { ns: "event" }),
                                 ]}
+                                selectedValue={
+                                    loanFormData?.borrower_email
+                                        ? t("external_person", { ns: "event" })
+                                        : t("site_user", { ns: "event" })
+                                }
                                 onChangeFunction={(value) => {
                                     setDisplayExternalUserSelect(
                                         value ===
@@ -93,6 +128,7 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                             }),
                                     );
                                 }} // Show external user select if "external_person" is selected
+                                disabled={isReturn}
                             />
                             {/*TODO: add segmented control */}
                         </div>
@@ -102,8 +138,12 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                     forInput="external_email"
                                     label={t("external_email", { ns: "event" })}
                                 />
-                                <InputText name="external_email" />
-                                {/* TODO: Input text */}
+                                <InputText
+                                    name="external_email"
+                                    defaultValue={loanFormData?.borrower_email}
+                                    disabled={isReturn}
+                                />
+                                {/* TODO: Since no mail component exists currently uses text input */}
                             </div>
                         ) : (
                             <div>
@@ -111,12 +151,20 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                     forInput="select_user"
                                     label={t("site_user", { ns: "event" })}
                                 />
+                                {/* FIX: Bug where the default value is not selected if we don't go on external user and then back */}
                                 <SingleSelect
-                                    options={[
-                                        { label: "test", value: "test" },
-                                        { label: "test2", value: "test2" },
-                                    ]}
+                                    options={(Array.isArray(users)
+                                        ? users
+                                        : []
+                                    ).map((user) => ({
+                                        label: user.username,
+                                        value: user.id,
+                                    }))}
                                     name="select_user"
+                                    defaultValue={
+                                        loanFormData?.borrower_user?.id
+                                    }
+                                    disabled={isReturn}
                                 />
                             </div>
                         )}
@@ -125,7 +173,11 @@ const LoanForm = ({ setDisplayLoanForm }) => {
                                 forInput="remarks"
                                 label={t("remarks", { ns: "event" })}
                             />
-                            <Textarea name="remarks" />
+                            <Textarea
+                                name="remarks"
+                                defaultValue={loanFormData?.remarks}
+                                disabled={isReturn}
+                            />
                         </div>
                     </div>
                 </fieldset>
