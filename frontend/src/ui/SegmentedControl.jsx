@@ -25,6 +25,8 @@ import Label from "./Label";
  *
  * @param {string} [className=null] Additional and specific styles for the button. Null by default.
  *
+ * @param {boolean} [disabled=false] Decide whether the field is disabled. False by default. \
+ *
  * @returns {JSX.Element}
  *
  */
@@ -35,18 +37,19 @@ const SegmentedControl = ({
     defaultValue = null,
     onChangeFunction = null,
     errors = [],
-    className = null
-}) =>
-{
-    if(!name)
-    {
+    className = null,
+    disabled = false,
+}) => {
+    if (!name) {
         console.error("SegmentedControl must have a name.");
         return;
     }
 
     // TODO : Add the possibility to disable this component.
 
-    const [selectedElement, setSelectedElement] = useState(selectedValue ?? defaultValue ?? options[0])
+    const [selectedElement, setSelectedElement] = useState(
+        selectedValue ?? defaultValue ?? options[0],
+    );
 
     /**
      * Updates the internal selected element and calls the onChangeFunction if exists.
@@ -56,45 +59,46 @@ const SegmentedControl = ({
      * @returns {void}
      *
      */
-    const handleSelection = (option) =>
-    {
+    const handleSelection = (option) => {
         setSelectedElement(option);
 
-        if(onChangeFunction)
-            onChangeFunction(option)
-    }
+        if (onChangeFunction) onChangeFunction(option);
+    };
 
     return (
         <>
-            <div className={clsx(
-                "flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black",
-                errors.length > 0 && "border-2 border-solid border-red-500"
-            )}>
-                {options.map(option => {
-
+            <div
+                className={clsx(
+                    "flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black",
+                    errors.length > 0 && "border-2 border-solid border-red-500",
+                )}
+            >
+                {options.map((option) => {
                     const isSelected = selectedElement === option;
 
                     return (
                         <div
                             key={option}
-                            onClick={() => handleSelection(option)}
+                            onClick={() =>
+                                !disabled ? handleSelection(option) : ""
+                            }
                             className={clsx(
                                 "flex flex-1 justify-center align-center bg-background first:rounded-l-full last:rounded-r-full px-2 py-1 transition-colors hover:cursor-pointer text-center",
                                 isSelected && "bg-blue text-white",
-                                className
+                                className,
                             )}
                         >
                             <input
                                 id={option}
                                 name={name}
                                 type="radio"
-                                {...selectedValue !== null
+                                {...(selectedValue !== null
                                     ? { value: selectedValue }
-                                    : { defaultValue: defaultValue }
-                                }
+                                    : { defaultValue: defaultValue })}
                                 checked={isSelected}
                                 onChange={() => handleSelection(option)}
                                 className="hidden"
+                                disabled={disabled}
                             />
 
                             <Label
@@ -103,13 +107,13 @@ const SegmentedControl = ({
                                 inline={true}
                             />
                         </div>
-                    )}
-                )}
+                    );
+                })}
             </div>
 
             <ShowFormErrors errors={errors} />
         </>
-    )
-}
+    );
+};
 
 export default SegmentedControl;
