@@ -42,16 +42,13 @@ const EventHistory = () => {
         if (return_data) {
             loan["return_date"] = return_data.date;
         }
-        console.log("Loan data", loan);
-        console.log("Return data", return_data);
-        console.log("Combined loan and return data", loan);
         return loan;
     };
 
     return (
         <>
             <div className="flex justify-center flex-row">
-                <div className="flex flex-col">
+                <div className="flex flex-col justify-center items-center ">
                     <Heading
                         headingLevel={1}
                         title={t("event_history", { ns: "event" })}
@@ -63,7 +60,7 @@ const EventHistory = () => {
                     >
                         {t("return_to_item", { ns: "event" })}
                     </Link>
-                    <div className="p-3 bg-background mb-5 mt-0 rounded-md flex flex-row">
+                    <div className="p-3 bg-background mb-5 mt-0 rounded-md flex flex-row w-96">
                         <Image
                             src={`/images/${info.image_url}`}
                             alt={`Image of ${info.name}`}

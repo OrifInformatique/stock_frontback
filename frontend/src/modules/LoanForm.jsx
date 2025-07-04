@@ -31,7 +31,7 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
 
     return (
         <section className="flex justify-center">
-            <form className="flex-col gap">
+            <form className="flex flex-col gap justify-center items-center">
                 {/*Loan times*/}
                 <fieldset className="flex flex-col">
                     <legend className="w-full">
@@ -40,8 +40,8 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                             title={t("loan_time", { ns: "titles" })}
                         />
                     </legend>
-                    <div className="flex flex-row">
-                        <div>
+                    <div className="flex flex-row gap justify-evenly">
+                        <div className="mr-1 flex flex-col">
                             <Label
                                 forInput="loan_date"
                                 label={t("loan_date", { ns: "event" })}
@@ -52,7 +52,7 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                 disabled={isReturn}
                             />
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col ml-1">
                             <div>
                                 <Label
                                     forInput="planned_return_date"
@@ -85,14 +85,14 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                     </div>
                 </fieldset>
                 {/* Loaner and place of loan */}
-                <fieldset>
-                    <legend>
+                <fieldset className="flex flex-col items-center">
+                    <legend className="w-full text-center">
                         <Heading
                             headingLevel={3}
                             title={t("place_and_borrower", { ns: "titles" })}
                         />
                     </legend>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col justify-center ">
                         <div>
                             <Label
                                 forInput="loan_location"
@@ -129,6 +129,7 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     );
                                 }} // Show external user select if "external_person" is selected
                                 disabled={isReturn}
+                                className="h-10"
                             />
                             {/*TODO: add segmented control */}
                         </div>
@@ -177,11 +178,12 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                 name="remarks"
                                 defaultValue={loanFormData?.remarks}
                                 disabled={isReturn}
+                                className="max-w-80 min-w-80 mb-4 h-28 min-h-6 sm:min-w-80 sm:max-w-full"
                             />
                         </div>
                     </div>
                 </fieldset>
-                <fieldset className="flex flex-row justify-evenly">
+                <fieldset className="flex flex-row justify-evenly min-w-80 max-w-80">
                     <Button
                         label={t("cancel", { ns: "buttons" })}
                         className="w-32 h-fit my-4"

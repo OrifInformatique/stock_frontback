@@ -61,7 +61,7 @@ const AddControlForm = ({ open, onClose, controlFormData }) => {
                 />
                 <Textarea
                     name="remarks_field"
-                    className="mb-4 h-28 min-w-80 min-h-6"
+                    className="mb-4 h-28 min-w-80 min-h-6 max-w-full max-h-full resize"
                     defaultValue={controlFormData?.remarks}
                 />
                 <fieldset className="flex flex-row">
