@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import InputDate from "../ui/InputDate";
-import InputNumber from "../ui/InputNumber";
 import InputText from "../ui/InputText";
 import Label from "../ui/Label";
 import SingleSelect from "../ui/SingleSelect";
@@ -14,7 +13,10 @@ import { getUsers } from "../services/api/users";
 
 const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
     const { t } = useTranslation(["event", "buttons", "titles"]);
-    const [users, setUsers] = useState({});
+    const [users, setUsers] = useState([]);
+    const [userType, setUserType] = useState(
+        loanFormData?.borrower_email !== "" ? "external_person" : "site_user",
+    );
 
     const [displayExternalUserSelect, setDisplayExternalUserSelect] = useState(
         loanFormData?.borrower_email !== "",
@@ -28,6 +30,15 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
         };
         fetchUsers();
     }, []);
+
+    useEffect(() => {
+        setUserType(
+            loanFormData?.borrower_email !== ""
+                ? "external_person"
+                : "site_user",
+        );
+        setDisplayExternalUserSelect(loanFormData?.borrower_email !== "");
+    }, [loanFormData?.borrower_email]);
 
     return (
         <section className="flex justify-center">
@@ -116,17 +127,20 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     t("external_person", { ns: "event" }),
                                 ]}
                                 selectedValue={
-                                    loanFormData?.borrower_email
+                                    userType === "external_person"
                                         ? t("external_person", { ns: "event" })
                                         : t("site_user", { ns: "event" })
                                 }
                                 onChangeFunction={(value) => {
-                                    setDisplayExternalUserSelect(
+                                    const isExternal =
                                         value ===
-                                            t("external_person", {
-                                                ns: "event",
-                                            }),
+                                        t("external_person", { ns: "event" });
+                                    setUserType(
+                                        isExternal
+                                            ? "external_person"
+                                            : "site_user",
                                     );
+                                    setDisplayExternalUserSelect(isExternal);
                                 }} // Show external user select if "external_person" is selected
                                 disabled={isReturn}
                                 className="h-10"
@@ -152,7 +166,7 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     forInput="select_user"
                                     label={t("site_user", { ns: "event" })}
                                 />
-                                {/* FIX: Bug where the default value is not selected if we don't go on external user and then back */}
+                                {/* FIX: Bug where the default value is not selected */}
                                 <SingleSelect
                                     options={(Array.isArray(users)
                                         ? users
