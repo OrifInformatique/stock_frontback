@@ -22,11 +22,14 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
         loanFormData?.borrower_email !== "",
     );
 
+    const [selectedUserId, setSelectedUserId] = useState(
+        loanFormData?.borrower_user?.id ?? "",
+    );
+
     useEffect(() => {
         const fetchUsers = async () => {
             const fetchedUsers = await getUsers();
             setUsers(fetchedUsers);
-            console.log("Fetched users", fetchedUsers);
         };
         fetchUsers();
     }, []);
@@ -167,20 +170,20 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     label={t("site_user", { ns: "event" })}
                                 />
                                 {/* FIX: Bug where the default value is not selected */}
-                                <SingleSelect
-                                    options={(Array.isArray(users)
-                                        ? users
-                                        : []
-                                    ).map((user) => ({
-                                        label: user.username,
-                                        value: user.id,
-                                    }))}
-                                    name="select_user"
-                                    defaultValue={
-                                        loanFormData?.borrower_user?.id
-                                    }
-                                    disabled={isReturn}
-                                />
+                                {users.length > 0 && (
+                                    <SingleSelect
+                                        options={users.map((user) => ({
+                                            label: user.username,
+                                            value: String(user.id),
+                                        }))}
+                                        name="select_user"
+                                        selectedValue={selectedUserId}
+                                        onChangeFunction={(value) =>
+                                            setSelectedUserId(value)
+                                        }
+                                        disabled={isReturn}
+                                    />
+                                )}
                             </div>
                         )}
                         <div>

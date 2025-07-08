@@ -27,7 +27,7 @@ const EventHistory = () => {
                 events.sort((a, b) => new Date(b.date) - new Date(a.date)),
             );
             setInfo(info);
-            console.log("Fetched events", events, info);
+            // console.log("Fetched events", events, info);
         };
         fetchEvents();
     }, []);

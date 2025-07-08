@@ -68,6 +68,7 @@ const Event = ({
     setIsReturn,
     setControlFormData,
     controlFormData,
+    isReturn,
 }) => {
     const { t } = useTranslation("event");
     const [showControl, setShowControl] = useState(false);

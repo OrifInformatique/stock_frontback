@@ -18,7 +18,7 @@ const handleNewControlSubmit = (event) => {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target).entries());
-    console.log(formData);
+    // console.log(formData);
 
     // ============================================== //
     // Future POST request to backend will go here... //
