@@ -76,7 +76,7 @@ const Event = ({
 
     useEffect(() => {
         const removed_controls = events.filter(
-            (event) => event.type != "return",
+            (event) => event.type != "return" || event.type != "loan",
         );
         if (removed_controls[0]?.type == "return") {
             setLatestEventIsReturn(true);

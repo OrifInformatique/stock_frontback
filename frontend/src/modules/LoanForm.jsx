@@ -82,19 +82,20 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     disabled={isReturn}
                                 />
                             </div>
-                            <div>
-                                <Label
-                                    forInput="actual_return_date"
-                                    label={t("actual_return_date", {
-                                        ns: "event",
-                                    })}
-                                />
-                                <InputDate
-                                    name={"actual_return_date"}
-                                    defaultValue={loanFormData?.return_date}
-                                    disabled={!isReturn}
-                                />
-                            </div>
+                            {isReturn && (
+                                <div>
+                                    <Label
+                                        forInput="actual_return_date"
+                                        label={t("actual_return_date", {
+                                            ns: "event",
+                                        })}
+                                    />
+                                    <InputDate
+                                        name={"actual_return_date"}
+                                        defaultValue={loanFormData?.return_date}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </fieldset>
