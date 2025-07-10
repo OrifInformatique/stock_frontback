@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../ui/Button";
 import AddControlForm from "./AddControlForm";
@@ -68,10 +68,27 @@ const Event = ({
     setIsReturn,
     setControlFormData,
     controlFormData,
-    isReturn,
 }) => {
     const { t } = useTranslation("event");
     const [showControl, setShowControl] = useState(false);
+    const [latestEventIsReturn, setLatestEventIsReturn] = useState(false);
+    const [latestLoanData, setLatestLoanData] = useState({});
+
+    useEffect(() => {
+        const removed_controls = events.filter(
+            (event) => event.type != "return",
+        );
+        if (removed_controls[0]?.type == "return") {
+            setLatestEventIsReturn(true);
+        } else {
+            setLatestEventIsReturn(false);
+            setLatestLoanData(removed_controls[0]);
+        }
+    }, [events]);
+
+    useEffect(() => {
+        console.log(latestEventIsReturn);
+    }, [latestEventIsReturn]);
 
     const ChooseComponent = ({ event }) => {
         switch (event.type) {
@@ -94,15 +111,28 @@ const Event = ({
                 />
             </header>
             <div className="flex flex-row justify-evenly">
-                <Button
-                    label={t("add_loan", { ns: "item" })}
-                    onClickFunction={() => {
-                        setLoanFormData(null);
-                        setIsReturn(false);
-                        setDisplayLoanForm(true);
-                    }}
-                    className="w-44 h-fit my-4"
-                />
+                {latestEventIsReturn ? (
+                    <Button
+                        label={t("add_loan", { ns: "item" })}
+                        onClickFunction={() => {
+                            setLoanFormData(null);
+                            setIsReturn(false);
+                            setDisplayLoanForm(true);
+                        }}
+                        className="w-44 h-fit my-4"
+                    />
+                ) : (
+                    <Button
+                        label={t("return_loan", { ns: "item" })}
+                        onClickFunction={() => {
+                            setLoanFormData(latestLoanData);
+                            setIsReturn(true);
+                            setDisplayLoanForm(true);
+                        }}
+                        className="w-44 h-fit my-4"
+                    />
+                )}
+
                 <Button
                     label={t("add_control", { ns: "item" })}
                     onClickFunction={() => {
