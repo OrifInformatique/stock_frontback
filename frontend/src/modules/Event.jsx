@@ -164,7 +164,6 @@ const Event = ({
                                 {t(event.type)}
                             </span>
                             <Button
-                                // label="test"
                                 onClickFunction={() => {
                                     if (event.type === "loan") {
                                         setDisplayLoanForm(true);

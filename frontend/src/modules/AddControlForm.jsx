@@ -18,7 +18,20 @@ const handleNewControlSubmit = (event) => {
     event.preventDefault();
 
     const formData = Object.fromEntries(new FormData(event.target).entries());
-    // console.log(formData);
+    console.log(formData);
+
+    try {
+        const response = fetch("/api/controls", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        console.log("Control form submitted successfully:", response);
+    } catch (error) {
+        console.error("Error submitting control form:", error);
+    }
 
     // ============================================== //
     // Future POST request to backend will go here... //
@@ -72,6 +85,7 @@ const AddControlForm = ({ open, onClose, controlFormData }) => {
                     />
                     <Button
                         label={t("add", { ns: "buttons" })}
+                        type="submit"
                         className="w-fit h-fit"
                     />
                 </fieldset>

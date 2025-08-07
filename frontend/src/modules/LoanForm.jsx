@@ -11,6 +11,38 @@ import Textarea from "../ui/Textarea";
 import SegmentedControl from "../ui/SegmentedControl";
 import { getUsers } from "../services/api/users";
 
+/**
+ * Handles the submit of the control form.
+ *
+ * @param {Event}
+ *
+ * @returns {void}
+ *
+ */
+const handleLoanSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = Object.fromEntries(new FormData(event.target).entries());
+    console.log(formData);
+
+    try {
+        const response = fetch("/api/loan", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+        console.log("Loan form submitted successfully:", response);
+    } catch (error) {
+        console.error("Error submitting loan form:", error);
+    }
+
+    // ============================================== //
+    // Future POST request to backend will go here... //
+    // ============================================== //
+};
+
 const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
     const { t } = useTranslation(["event", "buttons", "titles"]);
     const [users, setUsers] = useState([]);
@@ -45,7 +77,10 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
 
     return (
         <section className="flex justify-center">
-            <form className="flex flex-col gap justify-center items-center">
+            <form
+                className="flex flex-col gap justify-center items-center"
+                onSubmit={handleLoanSubmit}
+            >
                 {/*Loan times*/}
                 <fieldset className="flex flex-col">
                     <legend className="w-full">
@@ -170,7 +205,6 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                                     forInput="select_user"
                                     label={t("site_user", { ns: "event" })}
                                 />
-                                {/* FIX: Bug where the default value is not selected */}
                                 {users.length > 0 && (
                                     <SingleSelect
                                         options={users.map((user) => ({
@@ -209,6 +243,7 @@ const LoanForm = ({ setDisplayLoanForm, loanFormData, isReturn }) => {
                     />
                     <Button
                         label={t("save", { ns: "buttons" })}
+                        type="submit"
                         className="w-32 h-fit my-4 px-0"
                     />
                 </fieldset>
