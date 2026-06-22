@@ -4,7 +4,7 @@ import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFi
 
 import { useTranslation } from "react-i18next";
 
-import Button from "../ui/Button";
+import { Button } from "@orif-informatique/react-components-library";
 import Label from "../ui/Label";
 import InputText from "../ui/InputText";
 import Menu from "../ui/Menu";
@@ -101,7 +101,7 @@ const Filters = ({
                         <Button
                             icon={filterButtonIcon}
                             label={filtersButtonLabel}
-                            onClickFunction={handleToggleFilters}
+                            onClick={handleToggleFilters}
                             className={"!rounded-full"}
                         />
                     </div>
@@ -209,7 +209,7 @@ const Filters = ({
                                 icon={faRotate}
                                 label={t("reset_filters", { ns: "filters" })}
                                 keepLabel={true}
-                                onClickFunction={resetFilters}
+                                onClick={resetFilters}
                             />
                         </div>
                     </div>
