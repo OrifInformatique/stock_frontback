@@ -4,13 +4,9 @@ import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFi
 
 import { useTranslation } from "react-i18next";
 
-import { Button } from "@orif-informatique/react-components-library";
-import Label from "../ui/Label";
-import InputText from "../ui/InputText";
+import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-informatique/react-components-library";
 import Menu from "../ui/Menu";
-import MultiSelect from "../ui/MultiSelect";
 import SegmentedControl from "../ui/SegmentedControl";
-import SingleSelect from "../ui/SingleSelect";
 import Toggle from "../ui/Toggle";
 
 /**
@@ -102,6 +98,7 @@ const Filters = ({
                             icon={filterButtonIcon}
                             label={filtersButtonLabel}
                             onClick={handleToggleFilters}
+                            variant="secondary"
                             className={"!rounded-full"}
                         />
                     </div>
@@ -209,6 +206,7 @@ const Filters = ({
                                 icon={faRotate}
                                 label={t("reset_filters", { ns: "filters" })}
                                 keepLabel={true}
+                                variant="secondary"
                                 onClick={resetFilters}
                             />
                         </div>

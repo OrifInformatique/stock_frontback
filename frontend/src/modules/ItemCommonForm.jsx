@@ -3,16 +3,8 @@ import { useTranslation } from "react-i18next";
 
 import { getAllObjectTypes } from "../services/api/item_tags";
 import { getAllGroups } from "../services/api/groups";
-
-import Button from "../ui/Button";
-import InputFile from "../ui/InputFile";
-import InputFileImage from "../ui/InputFileImage";
-import InputText from "../ui/InputText";
-import Label from "../ui/Label";
-import MultiSelect from "../ui/MultiSelect";
-import SingleSelect from "../ui/SingleSelect";
-import Textarea from "../ui/Textarea";
-
+import { Textarea, Button, InputFile, InputFileImage,
+Label, MultiSelect, SingleSelect, InputText} from "@orif-informatique/react-components-library";
 /**
  * Displays the form to add or edit a item common.
  *
@@ -51,7 +43,7 @@ const ItemCommonForm = ({
             {startCancelButton &&
                 <Button
                     label={t("cancel", { ns: "buttons" })}
-                    onClickFunction={cancelButtonOnClickFunction}
+                    onClick={cancelButtonOnClickFunction}
                     className={"block w-fit mx-auto"}
                 />
             }

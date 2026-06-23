@@ -8,10 +8,11 @@ import ItemCommonDetailedCard from "../modules/ItemCommonDetailedCard";
 import ItemDetailedCard from "../modules/ItemDetailedCard";
 import ItemForm from "../modules/ItemForm";
 
-import Button from "../ui/Button";
-import Link from "../ui/HTMLLink";
 import Heading from "../ui/Heading";
 import Loading from "../ui/Loading";
+import HTMLLink from "../ui/HTMLLink";
+
+import { Button } from "@orif-informatique/react-components-library";
 
 import { jumpToAnchor } from "../utils/jumpToAnchor";
 
@@ -145,13 +146,13 @@ const ItemCommonDetails = () =>
                 title={t("item_common_details", { ns: "titles" })}
             />
 
-            <Link
+            <HTMLLink
                 to={"/"}
                 styleAsButton={true}
                 className={"block w-fit mx-auto my-4"}
             >
                 {t("back_to_list", { ns: "buttons" })}
-            </Link>
+            </HTMLLink>
 
             {isLoading ?
                 <Loading />
@@ -180,7 +181,7 @@ const ItemCommonDetails = () =>
                                     startCancelButton={true}
                                     endCancelButton={true}
                                     submitButton={true}
-                                    cancelButtonOnClickFunction={cancelForm}
+                                    cancelButtononClick={cancelForm}
                                 />
                             </form>
                         </>
@@ -194,7 +195,7 @@ const ItemCommonDetails = () =>
                     {!displayExemplarForm && (
                         <Button
                             label={t("add_exemplar", { ns: "item" })}
-                            onClickFunction={() => setDisplayExemplarForm(true)}
+                            onClick={() => setDisplayExemplarForm(true)}
                             className={"block w-fit mx-auto"}
                         />
                     )}

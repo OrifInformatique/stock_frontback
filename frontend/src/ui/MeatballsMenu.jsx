@@ -4,8 +4,9 @@ import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
-import Button from "./Button";
 import HTMLLink from "./HTMLLink";
+
+import { Button } from "@orif-informatique/react-components-library";
 
 /**
  * UI component to add a meatballs menu with personalized actions.
@@ -63,7 +64,7 @@ const MeatballsMenu = ({
                                     icon={action.icon}
                                     label={action.label}
                                     keepLabel={true}
-                                    onClickFunction={action.action}
+                                    onClick={action.action}
                                     className={"!rounded-md"}
                                 />
                             )}

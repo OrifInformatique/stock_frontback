@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import Button from "./Button";
+import { Button } from "@orif-informatique/react-components-library";
 
 /**
  * UI component to add a menu with personalized actions.
@@ -72,7 +72,7 @@ const Menu = ({
                 icon={menuButtonIcon}
                 label={menuButtonLabel}
                 keepLabel={openMenu}
-                onClickFunction={toggleMenu}
+                onClick={toggleMenu}
                 className={"!rounded-full !min-w-max"}
             />
         </div>

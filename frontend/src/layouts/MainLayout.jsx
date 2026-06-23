@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from "react-router-dom";
-
+import { Header, Footer, ScrollToTopButton} from "@orif-informatique/react-components-library";
 /**
  * Layout for all pages.
  *
@@ -10,17 +10,15 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => {
     return (
         <>
-            <header>
-                Header works!
-            </header>
+            <Header
+            logoPath="/images/logo.svg"
+            />
 
             <main>
                 <Outlet />
             </main>
-
-            <footer>
-                Footer works!
-            </footer>
+            <ScrollToTopButton onClick={()=>{}}/>
+            <Footer/>
         </>
     )
 }
