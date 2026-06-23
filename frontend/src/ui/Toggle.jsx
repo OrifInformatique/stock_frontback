@@ -7,7 +7,7 @@ import ShowFormErrors from "../utils/ShowFormErrors";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import Label from "./Label";
+import { Label } from "@orif-informatique/react-components-library";
 
 /**
  * UI component to display checkbox input, designed as a toggle.

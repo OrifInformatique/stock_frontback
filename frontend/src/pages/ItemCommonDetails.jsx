@@ -197,6 +197,7 @@ const ItemCommonDetails = () =>
                             label={t("add_exemplar", { ns: "item" })}
                             onClick={() => setDisplayExemplarForm(true)}
                             className={"block w-fit mx-auto"}
+                            variant="secondary"
                         />
                     )}
 

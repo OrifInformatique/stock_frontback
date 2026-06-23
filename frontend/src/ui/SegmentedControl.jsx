@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import ShowFormErrors from "../utils/ShowFormErrors";
 
-import Label from "./Label";
+import { Label } from "@orif-informatique/react-components-library";
 
 /**
  * UI component to show a segmented control to choose between options.
