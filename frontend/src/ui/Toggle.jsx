@@ -91,7 +91,7 @@ const Toggle = ({
                 </button>
 
                 <Label
-                    forInput={name}
+                    htmlFor={name}
                     label={label}
                     inline={true}
                 />

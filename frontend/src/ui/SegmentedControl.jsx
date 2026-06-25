@@ -80,9 +80,12 @@ const SegmentedControl = ({
                             onClick={() => handleSelection(option)}
                             className={clsx(
                                 "flex flex-1 justify-center align-center bg-background first:rounded-l-full last:rounded-r-full px-2 py-1 transition-colors hover:cursor-pointer text-center",
-                                isSelected && "bg-blue text-white",
                                 className
-                            )}
+                            )} //defined colors no longer work after the new tailwind update
+                            style={{
+                                backgroundColor: isSelected && '#005ba9',
+                                color: isSelected && '#ffffff',
+                            }}
                         >
                             <input
                                 id={option}
@@ -98,10 +101,10 @@ const SegmentedControl = ({
                             />
 
                             <Label
-                                forInput={option}
-                                label={option}
-                                inline={true}
-                            />
+                                htmlFor={option}
+                            >
+                                <Label.Title unstyled>{option}</Label.Title>
+                            </Label>
                         </div>
                     )}
                 )}

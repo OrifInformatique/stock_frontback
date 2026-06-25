@@ -150,6 +150,7 @@ const ItemCommonDetails = () =>
                 to={"/"}
                 styleAsButton={true}
                 className={"block w-fit mx-auto my-4"}
+                title={t("back_to_list", { ns: "buttons" })}
             >
                 {t("back_to_list", { ns: "buttons" })}
             </HTMLLink>
@@ -197,7 +198,6 @@ const ItemCommonDetails = () =>
                             label={t("add_exemplar", { ns: "item" })}
                             onClick={() => setDisplayExemplarForm(true)}
                             className={"block w-fit mx-auto"}
-                            variant="secondary"
                         />
                     )}
 

@@ -62,7 +62,7 @@ const Menu = ({
                         icon={action.icon}
                         label={action.label}
                         keepLabel={true}
-                        onClickFunction={action.action}
+                        onClick={action.action}
                         className={"!rounded-full !min-w-max"}
                     />
                 )

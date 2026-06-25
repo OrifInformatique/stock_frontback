@@ -45,20 +45,13 @@ const MeatballsMenu = ({
                     {actions.map(action => (
                         <div key={action.label}>
                             {action.isLink ? (
+
                                 <HTMLLink
                                     to={action.action}
+                                    icon={action.icon}
                                     title={action.label}
                                     styleAsButton={true}
-                                >
-                                    {action.icon &&
-                                        <FontAwesomeIcon
-                                            icon={action.icon}
-                                            className={clsx(action.label && "mr-2")}
-                                        />
-                                    }
-
-                                    {action.label}
-                                </HTMLLink>
+                                />
                             ) : (
                                 <Button
                                     icon={action.icon}
