@@ -5,15 +5,8 @@ import { getAllItemConditions } from "../services/api/item_conditions";
 import { getAllStockingPlaces } from "../services/api/stocking_places";
 import { getAllSuppliers } from "../services/api/suppliers";
 
-import Button from "../ui/Button";
 import Heading from "../ui/Heading";
-import InputDate from "../ui/InputDate";
-import InputNumber from "../ui/InputNumber";
-import InputText from "../ui/InputText";
-import Label from "../ui/Label";
-import SingleSelect from "../ui/SingleSelect";
-import Textarea from "../ui/Textarea";
-
+import { Button, Label, Textarea, InputText, InputNumber , InputDate, SingleSelect } from "@orif-informatique/react-components-library";
 import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
@@ -65,7 +58,7 @@ const ItemForm = ({
             {startCancelButton &&
                 <Button
                     label={t("cancel", { ns: "buttons" })}
-                    onClickFunction={cancelButtonOnClickFunction}
+                    onClick={cancelButtonOnClickFunction}
                     className={"block w-fit mx-auto"}
                 />
             }

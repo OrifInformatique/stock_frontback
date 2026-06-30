@@ -34,10 +34,8 @@ const ItemDetailedCard = ({
     item = null,
     isHighlighted = false,
     editExemplarFunction = null
-}) =>
-{
-    if(!editExemplarFunction)
-    {
+}) => {
+    if (!editExemplarFunction) {
         console.error("No function to edit an exemplar provided.");
         return;
     }
@@ -50,15 +48,12 @@ const ItemDetailedCard = ({
     /**
      * Fetches all loan states, to determine the correct loan to display on each exemplar.
      */
-    useEffect(() =>
-    {
-        const fetchLoanStates = async () =>
-        {
+    useEffect(() => {
+        const fetchLoanStates = async () => {
             setLoanStates(await getAllLoanStates());
         }
         fetchLoanStates();
     }, [])
-
     return (
         <div
             id={id}
@@ -87,7 +82,7 @@ const ItemDetailedCard = ({
                         icon: faTrash,
                         action: () => notDevelopedFeature()
                     }
-                ]}/>
+                ]} />
             </div>
             <div className="space-y-2">
                 <p className="text-2xl">
@@ -108,7 +103,7 @@ const ItemDetailedCard = ({
 
                 <p>
                     {item.loan_state !== loanStates[0]?.name
-                        ? `${t("loaned_at", {ns: "misc" })} ${item.item_localization}`
+                        ? `${t("loaned_at", { ns: "misc" })} ${item.item_localization}`
                         : `${t("in", { ns: "misc" })} ${item.stocking_place}`
                     }
                 </p>
@@ -158,6 +153,7 @@ const ItemDetailedCard = ({
                         to={"/"}
                         styleAsButton={true}
                         className={"basis-1/2"}
+                        title={t("return_loan", { ns: "item" })}
                     >
                         {t("return_loan", { ns: "item" })}
                     </HTMLLink>
@@ -166,6 +162,7 @@ const ItemDetailedCard = ({
                         to={"/"}
                         styleAsButton={true}
                         className={"basis-1/2"}
+                        title={t("add_loan", { ns: "item" })}
                     >
                         {t("add_loan", { ns: "item" })}
                     </HTMLLink>
@@ -175,6 +172,7 @@ const ItemDetailedCard = ({
                     to={"/"}
                     styleAsButton={true}
                     className={"basis-1/2"}
+                    title={t("add_control", { ns: "item" })}
                 >
                     {t("add_control", { ns: "item" })}
                 </HTMLLink>

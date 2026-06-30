@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Heading from "../ui/Heading";
-import HTMLLink from "../ui/HTMLLink";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
+import HTMLLink from "../ui/HTMLLink";
 
 import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
 import { notDevelopedFeature } from "../utils/devUtils";
@@ -69,14 +69,14 @@ const ItemCommon = ({ itemCommon }) =>
                 {itemCommon.items?.map(exemplar => (
                     <div
                         key={exemplar.id}
-                        className="h-20 p-2 rounded-md bg-blue text-white">
+                        className="h-20 p-2 rounded-md bg-blue !text-black">
                         <HTMLLink
                             to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
-                            variant={"transparent"}
-                            colorOnHover={false}
+                            color="transparent"
                             underlineOnHover={true}
                         >
                             <Heading
+                            //text is white here
                                 headingLevel={3}
                                 title={`${exemplar.inventory_prefix}.${exemplar.id}`}
                                 className={"!my-0"}
