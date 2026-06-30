@@ -213,7 +213,7 @@ const Home = () =>
     ]);
 
     return (
-        <div className="relative">
+        <div className="relative mb-140">
             <Filters
                 setDisplayModeFunction={setDisplayMode}
                 selectedDisplayMode={displayMode}

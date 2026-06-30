@@ -22,8 +22,7 @@ import { jumpToAnchor } from "../utils/jumpToAnchor";
  * @returns {JSX.Element}
  *
  */
-const ItemCommonDetails = () =>
-{
+const ItemCommonDetails = () => {
     const { t } = useTranslation(["item", "misc", "titles"]);
 
     const { itemCommonId, itemId } = useParams();
@@ -43,10 +42,8 @@ const ItemCommonDetails = () =>
     /**
      * Fetches itemComment data on mount.
      */
-    useEffect(() =>
-    {
-        const fetchItemCommonData = async () =>
-        {
+    useEffect(() => {
+        const fetchItemCommonData = async () => {
             const data = await getItemCommon(parseInt(itemCommonId));
             setItemCommon(data);
         };
@@ -58,13 +55,11 @@ const ItemCommonDetails = () =>
     /**
      * Checks if an exemplar is being edited from another page (via url).
      */
-    useEffect(() =>
-    {
-        if(isExemplarAddMode)
+    useEffect(() => {
+        if (isExemplarAddMode)
             setDisplayExemplarForm(true);
 
-        else if(itemId && isExemplarEditMode)
-        {
+        else if (itemId && isExemplarEditMode) {
             const exemplarData = itemCommon.items?.find(item => item.id === parseInt(itemId));
             editExemplar(exemplarData);
         }
@@ -73,9 +68,8 @@ const ItemCommonDetails = () =>
     /**
      * Scrolls to the exemplar when one is clicked from the home page.
      */
-    useEffect(() =>
-    {
-        if(itemId && itemCommon.items)
+    useEffect(() => {
+        if (itemId && itemCommon.items)
             jumpToAnchor(itemId);
     }, [itemCommon])
 
@@ -86,8 +80,7 @@ const ItemCommonDetails = () =>
      * @returns {void}
      *
      */
-    const cancelForm = () =>
-    {
+    const cancelForm = () => {
         setDisplayExemplarForm(false);
         setExemplarFormData(null)
     }
@@ -101,9 +94,8 @@ const ItemCommonDetails = () =>
      * @returns {void}
      *
      */
-    const editExemplar = async (exemplarData) =>
-    {
-        if(displayExemplarForm) await cancelForm();
+    const editExemplar = async (exemplarData) => {
+        if (displayExemplarForm) await cancelForm();
         setDisplayExemplarForm(true);
         setExemplarFormData(exemplarData);
     }
@@ -116,8 +108,7 @@ const ItemCommonDetails = () =>
      * @returns {void}
      *
      */
-    const handleNewExemplarFormSubmit = (event) =>
-    {
+    const handleNewExemplarFormSubmit = (event) => {
         event.preventDefault();
 
         const formData = Object.fromEntries(new FormData(event.target).entries());
@@ -140,7 +131,7 @@ const ItemCommonDetails = () =>
     }, [displayExemplarForm]);
 
     return (
-        <>
+        <div>
             <Heading
                 headingLevel={1}
                 title={t("item_common_details", { ns: "titles" })}
@@ -157,12 +148,8 @@ const ItemCommonDetails = () =>
 
             {isLoading ?
                 <Loading />
-            :
+                :
                 <>
-                    <ItemCommonDetailedCard
-                        itemCommon={itemCommon}
-                        updateItemCommon={isObjectEditMode}
-                    />
 
                     {displayExemplarForm && (
                         <>
@@ -200,21 +187,27 @@ const ItemCommonDetails = () =>
                             className={"block w-fit mx-auto"}
                         />
                     )}
+                    <div className="flex">
+                        <ItemCommonDetailedCard
+                            itemCommon={itemCommon}
+                            updateItemCommon={isObjectEditMode}
+                        />
 
-                    <div className="flex flex-wrap justify-center gap-4 p-4">
-                        {itemCommon.items?.map(item =>
-                            <ItemDetailedCard
-                                key={item.id}
-                                id={item.id}
-                                item={item}
-                                isHighlighted={item.id === parseInt(itemId)}
-                                editExemplarFunction={editExemplar}
-                            />
-                        )}
+                        <div className="flex flex-row h-200 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll">
+                            {itemCommon.items?.map(item =>
+                                <ItemDetailedCard
+                                    key={item.id}
+                                    id={item.id}
+                                    item={item}
+                                    isHighlighted={item.id === parseInt(itemId)}
+                                    editExemplarFunction={editExemplar}
+                                />
+                            )}
+                        </div>
                     </div>
                 </>
             }
-        </>
+        </div>
     )
 }
 

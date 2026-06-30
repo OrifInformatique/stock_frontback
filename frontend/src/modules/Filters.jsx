@@ -69,8 +69,8 @@ const Filters = ({
     }
 
     return (
-        <section className="fixed top-8 left-0 sm:flex flex-wrap lg:flex-nowrap justify-between lg:justify-center lg:gap-2 w-full p-2 my-2 z-[100]">
-            <div className="w-full sm:w-1/2 lg:w-1/4 h-[56px] p-2 bg-gray-300 rounded-full">
+        <section className="fixed top-25 left-0 sm:flex flex-wrap lg:flex-nowrap justify-between lg:justify-center lg:gap-2 w-full p-2 my-2 z-[100]">
+            <div className="w-full sm:w-1/2 lg:w-1/4 h-[56px] p-2 bg-gray-300 rounded-[5px]">
                 <SegmentedControl
                     name={"displayMode"}
                     options={[t("objects", { ns: "item"}), t("exemplars", { ns: "item"})]}
@@ -79,7 +79,7 @@ const Filters = ({
                 />
             </div>
 
-            <div className="relative flex flex-col sm:order-last lg:order-none w-full lg:w-3/5 h-fit rounded-[28px] my-2 lg:my-0 p-2 bg-gray-300">
+            <div className="relative flex flex-col sm:order-last lg:order-none w-full lg:w-3/5 h-fit rounded-[5px] my-2 lg:my-0 p-2 bg-gray-300">
                 <div className="flex justify-between z-20">
                     <div className="w-full pr-2">
                         <InputText
@@ -89,7 +89,7 @@ const Filters = ({
                                 : t("home_searchbar_placeholder_exemplars", { ns: "filters"})}
                             value={searchBar}
                             onChangeFunction={handleSearchBar}
-                            className={"!rounded-full"}
+                            className={"!rounded-[5px]"}
                         />
                     </div>
 
@@ -99,13 +99,13 @@ const Filters = ({
                             label={filtersButtonLabel}
                             onClick={handleToggleFilters}
                             variant="secondary"
-                            className={"!rounded-full"}
+                            className={"!rounded-[5px]"}
                         />
                     </div>
                 </div>
 
                 {expandFilters && (
-                    <div className="absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[25px] z-10">
+                    <div className="absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[5px] z-10">
                         <div>
                             <Label
                                 forInput={"object-type"}

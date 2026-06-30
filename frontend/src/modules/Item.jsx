@@ -11,7 +11,9 @@ import HTMLLink from "../ui/HTMLLink";
 
 import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
 import { notDevelopedFeature } from "../utils/devUtils";
+import "../style.css"
 
+import { faClock } from "@fortawesome/free-solid-svg-icons";
 /**
  * Exemplary card, with minimal info.
  *
@@ -20,13 +22,12 @@ import { notDevelopedFeature } from "../utils/devUtils";
  * @returns {JSX.Element}
  *
  */
-const Item = ({ item }) =>
-{
+const Item = ({ item }) => {
     const { t } = useTranslation("item");
     const navigate = useNavigate()
 
     return (
-        <div className="flex flex-col gap-2 w-80 p-2 bg-background rounded-md break-words text-center">
+        <div className="appear flex flex-col gap-2 w-60 h-95 p-2 bg-background rounded-md break-words text-center transition duration-100 hover:scale-105">
             <div className="flex justify-end">
                 <MeatballsMenu actions={[
                     {
@@ -49,7 +50,7 @@ const Item = ({ item }) =>
                         label: t("delete_exemplar", { ns: "item" }),
                         action: () => notDevelopedFeature()
                     }
-                ]}/>
+                ]} />
             </div>
 
             <HTMLLink
@@ -67,6 +68,7 @@ const Item = ({ item }) =>
             <HTMLLink
                 to={`/objects/${item.item_common_id}/exemplars/${item.id}`}
                 color={"transparent"}
+                className={"relative !bottom-[20px]"}
             >
                 <Heading
                     headingLevel={3}
@@ -77,21 +79,23 @@ const Item = ({ item }) =>
                 <Heading
                     headingLevel={3}
                     title={item.name}
-                    className={"!mt-0"}
+                    className={"!mt-0 !text-[16px]"}
                 />
             </HTMLLink>
+            <div className={"relative align-center"}>
+                <Tag
+                    text={item.item_condition}
+                    color={item.item_condition && setConditionTagColor(item.item_condition)}
+                    className={"relative !bottom-10 mx-2"}
+                />
 
-            <Tag
-                text={item.item_condition}
-                color={item.item_condition && setConditionTagColor(item.item_condition)}
-                className={"mx-auto"}
-            />
-
-            <Tag
-                text={item.loan_state}
-                color={item.loan_state && setLoanTagColor(item.loan_state)}
-                className={"mx-auto"}
-            />
+                <Tag
+                    icon={faClock}
+                    text={item.loan_state}
+                    color={item.loan_state && setLoanTagColor(item.loan_state)}
+                    className={"relative !bottom-10 mx-2"}
+                />
+            </div>
         </div>
     )
 }
