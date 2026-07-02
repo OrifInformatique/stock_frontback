@@ -25,7 +25,7 @@ const ItemCommon = ({ itemCommon }) =>
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col gap-2 w-60 h-80 p-2 bg-background rounded-md break-words text-center appear transition duration-100 hover:scale-105">
+        <div className="flex flex-col gap-2 w-60 h-80 p-2 bg-background rounded-md break-words text-center appear transition duration-100 hover:scale-105 hover:border-t-2 border-[#005ba9]">
             <div className="flex justify-end">
                 <MeatballsMenu actions={[
                     {
@@ -51,7 +51,7 @@ const ItemCommon = ({ itemCommon }) =>
                 <Image
                     src={itemCommon.image_url}
                     alt={itemCommon.name}
-                    size={285}
+                    size={205}
                 />
             </HTMLLink>
             

@@ -28,7 +28,7 @@ const Tag = ({
 
     return (
         <span className={clsx(
-            "text-white px-1 rounded-md",
+            "text-white px-1 py-0.5 rounded-md",
             color,
             className
         )}>

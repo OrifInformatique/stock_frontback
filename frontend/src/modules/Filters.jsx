@@ -95,7 +95,7 @@ const Filters = ({
 
                     <div className="shrink-0">
                         <Button
-                            icon={filterButtonIcon}
+                            icon="filter"
                             label={filtersButtonLabel}
                             onClick={handleToggleFilters}
                             variant="secondary"
@@ -203,7 +203,7 @@ const Filters = ({
 
                         <div className="col-span-full sm:col-auto">
                             <Button
-                                icon={faRotate}
+                                icon="restore"
                                 label={t("reset_filters", { ns: "filters" })}
                                 keepLabel={true}
                                 variant="secondary"
@@ -218,11 +218,11 @@ const Filters = ({
                 <Menu
                     actions={[
                         {
-                            icon: faPlus,
+                            icon: "plus",
                             label: t("new", { ns: "buttons" })
                         },
                         {
-                            icon: faFileExport,
+                            icon: "export",
                             label: t("export", { ns: "buttons" })
                         }
                     ]}

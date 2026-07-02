@@ -59,7 +59,8 @@ const ItemDetailedCard = ({
             id={id}
             className={clsx(
                 "w-80 lg:w-[450px] p-4 rounded-md",
-                isHighlighted ? "bg-amber-300" : "bg-background"
+                isHighlighted ? "bg-amber-200" : "bg-background",
+                isHighlighted ? "border-t-3 border-amber-400" : ""
             )}
         >
             <div className="flex justify-end">
@@ -67,19 +68,19 @@ const ItemDetailedCard = ({
                     {
                         isLink: true,
                         label: t("event_history", { ns: "item" }),
-                        icon: faClockRotateLeft,
+                        icon: "history",
                         action: `${item.id}/event-history`
                     },
                     {
                         isLink: false,
                         label: t("edit_exemplar", { ns: "item" }),
-                        icon: faPen,
+                        icon: "edit",
                         action: () => editExemplarFunction(item)
                     },
                     {
                         isLink: false,
                         label: t("delete_exemplar", { ns: "item" }),
-                        icon: faTrash,
+                        icon: "delete",
                         action: () => notDevelopedFeature()
                     }
                 ]} />

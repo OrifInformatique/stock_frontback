@@ -13,13 +13,16 @@ const MainLayout = () => {
         <>
             <Header
             logoPath="/images/logo.svg"
+            style={{zIndex:500}}
             />
 
             <main>
                 <Outlet />
             </main>
             <ScrollToTopButton onClick={()=>{}}/>
-            <Footer/>
+            <Footer
+            style={{zIndex:500}}
+            />
         </>
     )
 }

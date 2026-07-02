@@ -25,9 +25,8 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 const Item = ({ item }) => {
     const { t } = useTranslation("item");
     const navigate = useNavigate()
-
     return (
-        <div className="appear flex flex-col gap-2 w-60 h-95 p-2 bg-background rounded-md break-words text-center transition duration-100 hover:scale-105">
+        <div className="appear flex flex-col gap-2 w-60 h-95 p-2 bg-background rounded-md break-words text-center transition duration-100 hover:scale-105 hover:border-t-2 border-[#005ba9]">
             <div className="flex justify-end">
                 <MeatballsMenu actions={[
                     {
@@ -61,7 +60,7 @@ const Item = ({ item }) => {
                 <Image
                     src={item.image_url}
                     alt={item.name}
-                    size={285}
+                    size={205}
                 />
             </HTMLLink>
 
@@ -90,7 +89,6 @@ const Item = ({ item }) => {
                 />
 
                 <Tag
-                    icon={faClock}
                     text={item.loan_state}
                     color={item.loan_state && setLoanTagColor(item.loan_state)}
                     className={"relative !bottom-10 mx-2"}

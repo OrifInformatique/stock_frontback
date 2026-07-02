@@ -6,9 +6,10 @@ import { getAllStockingPlaces } from "../services/api/stocking_places";
 import { getAllSuppliers } from "../services/api/suppliers";
 
 import Heading from "../ui/Heading";
-import { Button, Label, Textarea, InputText, InputNumber , InputDate, SingleSelect } from "@orif-informatique/react-components-library";
+import PopUpContainer from "../ui/PopUpContainer";
+import { Button, Label, Textarea, InputText, InputNumber, InputDate, SingleSelect } from "@orif-informatique/react-components-library";
 import { notDevelopedFeature } from "../utils/devUtils";
-
+import "../style.css"
 /**
  * Displays the form to add or edit a item.
  *
@@ -20,48 +21,51 @@ const ItemForm = ({
     startCancelButton = false,
     endCancelButton = false,
     submitButton = false,
-    cancelButtonOnClickFunction = null
-}) =>
-{
+    cancelButtonOnClickFunction = null,
+    title = ""
+}) => {
     const { t } = useTranslation(["buttons", "item", "titles"]);
 
-        const [itemConditions, setItemConditions] = useState([]);
-        const [stockingPlaces, setStockingPlaces] = useState([]);
-        const [suppliers, setSuppliers] = useState([]);
+    const [itemConditions, setItemConditions] = useState([]);
+    const [stockingPlaces, setStockingPlaces] = useState([]);
+    const [suppliers, setSuppliers] = useState([]);
 
-        /**
-         * Fetch data from the API.
-         */
-        useEffect(() =>
-        {
-            const fetchData = async () =>
-            {
-                setItemConditions(await getAllItemConditions());
-                setStockingPlaces(await getAllStockingPlaces());
-                setSuppliers(await getAllSuppliers())
-            }
+    /**
+     * Fetch data from the API.
+     */
+    useEffect(() => {
+        const fetchData = async () => {
+            setItemConditions(await getAllItemConditions());
+            setStockingPlaces(await getAllStockingPlaces());
+            setSuppliers(await getAllSuppliers())
+        }
 
-            fetchData();
-        }, []);
+        fetchData();
+    }, []);
 
     /**
      * Generates a inventory number for the item being created.
      *
      */
-    const generateInventoryNumber = () =>
-    {
+    const generateInventoryNumber = () => {
         notDevelopedFeature()
     }
 
     return (
-        <div className="w-full my-4 space-y-2 p-4">
+        <PopUpContainer title={title} >
             {startCancelButton &&
                 <Button
-                    label={t("cancel", { ns: "buttons" })}
                     onClick={cancelButtonOnClickFunction}
-                    className={"block w-fit mx-auto"}
+                    icon="cross"
+                    variant="link"
+                    className="hover:cursor-pointer"
                 />
             }
+
+            <Heading
+                headingLevel={2}
+                title={title}
+            />
 
             <div className="sm:flex sm:gap-8 sm:w-fit sm:mx-auto">
                 <div>
@@ -94,7 +98,7 @@ const ItemForm = ({
                             <div className="basis-1/4">
                                 <Label
                                     forInput={"identifier"}
-                                    label={t("identifier", { ns: "item"})}
+                                    label={t("identifier", { ns: "item" })}
                                 />
 
                                 <InputNumber
@@ -123,7 +127,7 @@ const ItemForm = ({
 
                         <Label
                             forInput={"serial-number"}
-                            label={t("serial_number", { ns: "item"})}
+                            label={t("serial_number", { ns: "item" })}
                         />
 
                         <InputText
@@ -133,7 +137,7 @@ const ItemForm = ({
 
                         <Label
                             forInput={"remarks"}
-                            label={t("remarks", { ns: "item"})}
+                            label={t("remarks", { ns: "item" })}
                         />
 
                         <Textarea
@@ -146,7 +150,7 @@ const ItemForm = ({
                             <>
                                 <Label
                                     forInput={"item-condition"}
-                                    label={t("exemplar_condition", { ns: "item"})}
+                                    label={t("exemplar_condition", { ns: "item" })}
                                 />
 
                                 <SingleSelect
@@ -166,7 +170,7 @@ const ItemForm = ({
                             <>
                                 <Label
                                     forInput={"stocking-place"}
-                                    label={t("stocking_place", { ns: "item"})}
+                                    label={t("stocking_place", { ns: "item" })}
                                 />
 
                                 <SingleSelect
@@ -198,7 +202,7 @@ const ItemForm = ({
                             <div>
                                 <Label
                                     forInput={"buying-price"}
-                                    label={t("buying_price", { ns: "item"})}
+                                    label={t("buying_price", { ns: "item" })}
                                 />
 
                                 <InputNumber
@@ -211,7 +215,7 @@ const ItemForm = ({
                             <div>
                                 <Label
                                     forInput={"buying-date"}
-                                    label={t("buying_date", { ns: "item"})}
+                                    label={t("buying_date", { ns: "item" })}
                                 />
 
                                 <InputDate
@@ -223,7 +227,7 @@ const ItemForm = ({
                             <div>
                                 <Label
                                     forInput={"warranty-duration"}
-                                    label={t("warranty_duration", { ns: "item"})}
+                                    label={t("warranty_duration", { ns: "item" })}
                                 />
 
                                 <InputNumber
@@ -246,7 +250,7 @@ const ItemForm = ({
 
                         <Label
                             forInput={"supplier"}
-                            label={t("supplier", { ns: "item"})}
+                            label={t("supplier", { ns: "item" })}
                         />
 
                         {suppliers?.length > 0 && (
@@ -262,7 +266,7 @@ const ItemForm = ({
 
                         <Label
                             forInput={"supplier-ref"}
-                            label={t("supplier_ref", { ns: "item"})}
+                            label={t("supplier_ref", { ns: "item" })}
                         />
 
                         <InputText
@@ -270,27 +274,26 @@ const ItemForm = ({
                             defaultValue={item?.supplier_ref}
                         />
                     </fieldset>
-
-                    {(endCancelButton || submitButton) &&
-                        <div className="flex gap-2 mt-4">
-                            {endCancelButton &&
-                                <Button
-                                    label={t("cancel", { ns: "buttons" })}
-                                    onClickFunction={cancelButtonOnClickFunction}
-                                />
-                            }
-
-                            {submitButton &&
-                                <Button
-                                    type={"submit"}
-                                    label={t("save", { ns: "buttons" })}
-                                />
-                            }
-                        </div>
-                    }
                 </div>
             </div>
-        </div>
+            {(endCancelButton || submitButton) &&
+                <div className="flex gap-4 mt-20 justify-center">
+                    {endCancelButton &&
+                        <Button
+                            label={t("cancel", { ns: "buttons" })}
+                            onClickFunction={cancelButtonOnClickFunction}
+                        />
+                    }
+
+                    {submitButton &&
+                        <Button
+                            type={"submit"}
+                            label={t("save", { ns: "buttons" })}
+                        />
+                    }
+                </div>
+            }
+        </PopUpContainer>
     )
 }
 

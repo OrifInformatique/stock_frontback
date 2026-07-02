@@ -16,6 +16,8 @@ import { Button } from "@orif-informatique/react-components-library";
 
 import { jumpToAnchor } from "../utils/jumpToAnchor";
 
+import "../style.css"
+
 /**
  * Page where we display the details of an item common and its items.
  *
@@ -153,18 +155,12 @@ const ItemCommonDetails = () => {
 
                     {displayExemplarForm && (
                         <>
-                            <div id="exemplar-form">
-                                <Heading
-                                    headingLevel={2}
-                                    title={exemplarFormData
-                                        ? t("edit_exemplar", { ns: "item" })
-                                        : t("add_exemplar", { ns: "item" })
-                                    }
-                                />
-                            </div>
 
                             <form onSubmit={handleNewExemplarFormSubmit}>
                                 <ItemForm
+                                    title={exemplarFormData
+                                        ? t("edit_exemplar", { ns: "item" })
+                                        : t("add_exemplar", { ns: "item" })}
                                     item={exemplarFormData}
                                     startCancelButton={true}
                                     endCancelButton={true}
@@ -175,34 +171,32 @@ const ItemCommonDetails = () => {
                         </>
                     )}
 
-                    <Heading
-                        headingLevel={2}
-                        title={t("exemplars", { ns: "item" })}
-                    />
-
-                    {!displayExemplarForm && (
-                        <Button
-                            label={t("add_exemplar", { ns: "item" })}
-                            onClick={() => setDisplayExemplarForm(true)}
-                            className={"block w-fit mx-auto"}
-                        />
-                    )}
-                    <div className="flex">
+                    <div className="appear flex flex-row justify-center">
                         <ItemCommonDetailedCard
                             itemCommon={itemCommon}
                             updateItemCommon={isObjectEditMode}
                         />
-
-                        <div className="flex flex-row h-200 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll">
-                            {itemCommon.items?.map(item =>
-                                <ItemDetailedCard
-                                    key={item.id}
-                                    id={item.id}
-                                    item={item}
-                                    isHighlighted={item.id === parseInt(itemId)}
-                                    editExemplarFunction={editExemplar}
+                        <div className="flex flex-col gap-4">
+                            <Heading
+                                headingLevel={2}
+                                title={t("exemplars", { ns: "item" })}
+                            />
+                                <Button
+                                    label={t("add_exemplar", { ns: "item" })}
+                                    onClick={() => setDisplayExemplarForm(true)}
+                                    className={"block w-fit mx-auto"}
                                 />
-                            )}
+                            <div className="appear flex flex-row h-150 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll overflow-x-hidden">
+                                {itemCommon.items?.map(item =>
+                                    <ItemDetailedCard
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        isHighlighted={item.id === parseInt(itemId)}
+                                        editExemplarFunction={editExemplar}
+                                    />
+                                )}
+                            </div>
                         </div>
                     </div>
                 </>
