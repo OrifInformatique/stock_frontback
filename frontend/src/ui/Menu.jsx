@@ -54,7 +54,7 @@ const Menu = ({
     }
 
     return (
-        <div className={`flex flex-col gap-2 w-full p-2 bg-blue-light rounded-[28px] ${className}`}>
+        <div className={`flex flex-col gap-2 w-full p-2 bg-blue-light rounded-md ${className}`}>
             {openMenu &&
                 actions.map(action => (
                     <Button

@@ -39,32 +39,29 @@ const HTMLLink = ({
     icon = null,
     children,
     className = null
-}) =>
-{
+}) => {
     const navigate = useNavigate()
-    if(!to)
-    {
+    if (!to) {
         console.error("HTMLLink must have a link to go to.");
         return;
     }
 
-    if(!children)
-    {
+    if (!children) {
         console.error("HTMLLink must have children.");
         return;
     }
 
     const colorVariants =
     {
-        transparent: "bg-transparent hover:bg-transparent border-transparent text-black "  + (colorOnHover && "hover:text-blue"),
+        transparent: "bg-transparent hover:bg-transparent border-transparent text-black " + (colorOnHover && "hover:text-blue"),
         blue: "bg-blue hover:bg-white border-blue text-white " + (colorOnHover && "hover:text-blue")
     }
-    if(styleAsButton)return(
+    if (styleAsButton) return (
         <Button
             icon={icon}
             label={title}
             variant="secondary"
-            onClick={()=>{navigate(to)}}
+            onClick={() => { navigate(to) }}
         >
             {children}
         </Button>

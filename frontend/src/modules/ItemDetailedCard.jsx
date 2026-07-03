@@ -6,14 +6,13 @@ import { getAllLoanStates } from "../services/api/loan_states"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faCircleInfo,
-    faClockRotateLeft,
-    faPen,
-    faTrash
+    faCircleInfo
 } from "@fortawesome/free-solid-svg-icons";
 
 import HTMLLink from "../ui/HTMLLink";
 import Tag from "../ui/Tag";
+import ToolTip from "../ui/ToolTip";
+
 import MeatballsMenu from "../ui/MeatballsMenu";
 
 import {
@@ -29,6 +28,7 @@ import { notDevelopedFeature } from "../utils/devUtils";
  * @returns {JSX.Element}
  *
  */
+
 const ItemDetailedCard = ({
     id = null,
     item = null,
@@ -85,7 +85,7 @@ const ItemDetailedCard = ({
                     }
                 ]} />
             </div>
-            <div className="space-y-2">
+            <div className="relative space-y-2">
                 <p className="text-2xl">
                     {`${item.inventory_prefix}.${item.id}`}
                 </p>
@@ -125,12 +125,7 @@ const ItemDetailedCard = ({
                     <span>{t("other_infos", { ns: "misc" })}</span>
                 </p>
 
-                <div
-                    className={clsx(
-                        "absolute w-5/6 max-w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md z-50",
-                        !showExtraInfos && "hidden"
-                    )}
-                >
+                <ToolTip showExtraInfos={showExtraInfos}>
                     <p>{`${t("serial_number", { ns: "item" })} : ${item.serial_number}`}</p>
 
                     <p>{`${t("supplier", { ns: "item" })} : ${item.supplier}`}</p>
@@ -145,7 +140,7 @@ const ItemDetailedCard = ({
                         text={item.warranty_state}
                         color={setWarrantyTagColor(item.warranty_state)}
                     />
-                </div>
+                </ToolTip>
             </div>
 
             <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">

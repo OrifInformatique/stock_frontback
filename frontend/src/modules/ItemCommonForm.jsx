@@ -39,19 +39,20 @@ const ItemCommonForm = ({
     }, []);
 
     return (
-        <div className="w-fit mx-auto my-4 space-y-2 sm:p-4 bg-background">
+        <div className="flex flex-col sm:flex-row justify-center w-150 h-180 gap-4 rounded-md mx-auto p-4 bg-background">
             {startCancelButton &&
                 <Button
                     label={t("cancel", { ns: "buttons" })}
                     onClick={cancelButtonOnClickFunction}
+                    variant="secondary"
                     className={"block w-fit mx-auto"}
                 />
             }
 
-            <div className="sm:flex sm:gap-8 p-4">
+            <div className="sm:flex sm:gap-8">
                 <InputFileImage
                     name={"image"}
-                    imagePreviewSize={275}
+                    imagePreviewSize={225}
                 />
 
                 <div>
@@ -120,6 +121,7 @@ const ItemCommonForm = ({
                         <div className="flex gap-2 mt-4">
                             {endCancelButton &&
                                 <Button
+                                    variant="secondary"
                                     label={t("cancel", { ns: "buttons" })}
                                     onClickFunction={cancelButtonOnClickFunction}
                                 />

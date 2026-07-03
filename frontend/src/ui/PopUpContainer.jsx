@@ -11,8 +11,6 @@ import React, { Children } from "react";
 const PopUpContainer = ({
     className = null,
     children,
-    width,
-    height
 }) => {
     return (
         <div className="flex fixed justify-center top-20 w-full h-full my-4 space-y-2 p-4 bg-[#00000050] z-500 backdrop-blur-sm fadeIn">

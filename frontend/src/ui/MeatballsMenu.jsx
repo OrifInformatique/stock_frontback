@@ -56,7 +56,7 @@ const MeatballsMenu = ({
             />
 
             {openMeatballsMenu && (
-                <div className="appearMenu absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md z-500">
+                <div className="appearMenu absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md z-500 shadow-2xl">
                     {actions.map(action => (
                         <div key={action.label}>
                             {action.isLink ? (
@@ -73,7 +73,7 @@ const MeatballsMenu = ({
                                     label={action.label}
                                     keepLabel={true}
                                     onClick={()=>{action.action();setOpenMeatballsMenu(false);}}
-                                    className={"!rounded-md w-[100%]"}
+                                    className={"!rounded-md w-full"}
                                 />
                             )}
                         </div>

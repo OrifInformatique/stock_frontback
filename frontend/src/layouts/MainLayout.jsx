@@ -17,7 +17,7 @@ const MainLayout = () => {
             />
 
             <main>
-                <Outlet />
+                <Outlet/>
             </main>
             <ScrollToTopButton onClick={()=>{}}/>
             <Footer

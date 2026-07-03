@@ -133,7 +133,7 @@ const ItemCommonDetails = () => {
     }, [displayExemplarForm]);
 
     return (
-        <div>
+        <div className="overflow-show">
             <Heading
                 headingLevel={1}
                 title={t("item_common_details", { ns: "titles" })}
@@ -170,8 +170,8 @@ const ItemCommonDetails = () => {
                             </form>
                         </>
                     )}
-
-                    <div className="appear flex flex-row justify-center">
++
+                    <div className="appear flex flex-row justify-center overflow-show">
                         <ItemCommonDetailedCard
                             itemCommon={itemCommon}
                             updateItemCommon={isObjectEditMode}
@@ -184,9 +184,10 @@ const ItemCommonDetails = () => {
                                 <Button
                                     label={t("add_exemplar", { ns: "item" })}
                                     onClick={() => setDisplayExemplarForm(true)}
+                                    icon="plus"
                                     className={"block w-fit mx-auto"}
                                 />
-                            <div className="appear flex flex-row h-150 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll overflow-x-hidden">
+                            <div className="appear flex flex-row h-150 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll overflow-show">
                                 {itemCommon.items?.map(item =>
                                     <ItemDetailedCard
                                         key={item.id}

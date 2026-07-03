@@ -280,6 +280,7 @@ const ItemForm = ({
                 <div className="flex gap-4 mt-20 justify-center">
                     {endCancelButton &&
                         <Button
+                        variant="secondary"
                             label={t("cancel", { ns: "buttons" })}
                             onClickFunction={cancelButtonOnClickFunction}
                         />

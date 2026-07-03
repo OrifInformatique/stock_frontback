@@ -66,7 +66,7 @@ const ItemCommonDetailedCard = ({
                     <Image
                         src={itemCommon.image_url}
                         alt={itemCommon.name}
-                        size={275}
+                        size={225}
                     />
 
                     <div className="flex flex-col gap-2 sm:gap-4 max-w-96">
