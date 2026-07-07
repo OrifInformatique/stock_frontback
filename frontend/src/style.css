@@ -40,5 +40,18 @@
 }
 
 .fadeIn {
-    animation: fadeIn 0.4s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes goRight {
+    from {
+        transform: translateX(-100px);
+    }
+    to  {
+        transform: translateX(0px);
+    }
+}
+
+.goRight {
+    animation: goRight 0.3s linear;
 }

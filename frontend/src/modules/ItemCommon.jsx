@@ -46,7 +46,7 @@ const ItemCommon = ({ itemCommon }) =>
             <HTMLLink
                 to={`/objects/${itemCommon.id}/exemplars`}
                 color={"transparent"}
-                className={"mx-auto w-55"}
+                className={"mx-auto"}
             >
                 <Image
                     src={itemCommon.image_url}

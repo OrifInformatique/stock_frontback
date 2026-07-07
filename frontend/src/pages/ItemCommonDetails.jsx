@@ -37,6 +37,8 @@ const ItemCommonDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const [displayExemplarForm, setDisplayExemplarForm] = useState(false);
+    const [displayObjectForm, setDisplayObjectForm] = useState(false);
+
     const [exemplarFormData, setExemplarFormData] = useState(null)
 
     const [itemCommon, setItemCommon] = useState({});
@@ -139,15 +141,6 @@ const ItemCommonDetails = () => {
                 title={t("item_common_details", { ns: "titles" })}
             />
 
-            <HTMLLink
-                to={"/"}
-                styleAsButton={true}
-                className={"block w-fit mx-auto my-4"}
-                title={t("back_to_list", { ns: "buttons" })}
-            >
-                {t("back_to_list", { ns: "buttons" })}
-            </HTMLLink>
-
             {isLoading ?
                 <Loading />
                 :
@@ -170,24 +163,35 @@ const ItemCommonDetails = () => {
                             </form>
                         </>
                     )}
-+
-                    <div className="appear flex flex-row justify-center overflow-show">
-                        <ItemCommonDetailedCard
-                            itemCommon={itemCommon}
-                            updateItemCommon={isObjectEditMode}
-                        />
+                    <div className="appear flex flex-row justify-center">
+                        <div className="flex flex-col">
+                            <HTMLLink
+                                to={"/"}
+                                styleAsButton={true}
+                                className={"block w-fit my-4"}
+                                icon="arrow-left"
+                                title={t("back_to_list", { ns: "buttons" })}
+                            >
+                                {t("back_to_list", { ns: "buttons" })}
+                            </HTMLLink>
+                            <ItemCommonDetailedCard
+                                setDisplayObjectForm={setDisplayObjectForm}
+                                itemCommon={itemCommon}
+                                updateItemCommon={isObjectEditMode}
+                            />
+                        </div>
                         <div className="flex flex-col gap-4">
                             <Heading
                                 headingLevel={2}
                                 title={t("exemplars", { ns: "item" })}
                             />
-                                <Button
-                                    label={t("add_exemplar", { ns: "item" })}
-                                    onClick={() => setDisplayExemplarForm(true)}
-                                    icon="plus"
-                                    className={"block w-fit mx-auto"}
-                                />
-                            <div className="appear flex flex-row h-150 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll overflow-show">
+                            <Button
+                                label={t("add_exemplar", { ns: "item" })}
+                                onClick={() => setDisplayExemplarForm(true)}
+                                icon="plus"
+                                className={"block w-fit mx-auto"}
+                            />
+                            <div className="appear flex flex-row h-150 w-80 flex-wrap justify-center gap-4 p-4 overflow-y-scroll overflow-x-hide">
                                 {itemCommon.items?.map(item =>
                                     <ItemDetailedCard
                                         key={item.id}
@@ -200,6 +204,14 @@ const ItemCommonDetails = () => {
                             </div>
                         </div>
                     </div>
+                    {displayObjectForm &&
+                        <ItemCommonForm
+                            itemCommon={itemCommon}
+                            endCancelButton={true}
+                            submitButton={true}
+                            cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
+                        />
+                    }
                 </>
             }
         </div>

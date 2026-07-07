@@ -61,6 +61,7 @@ const HTMLLink = ({
             icon={icon}
             label={title}
             variant="secondary"
+            className={className}
             onClick={() => { navigate(to) }}
         >
             {children}

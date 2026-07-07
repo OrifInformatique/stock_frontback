@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { Children } from "react";
-
+import "../style.css"
 /**
  * UI component to display a pop up.
  *
@@ -15,7 +15,7 @@ const ToolTip = ({
     return (
         <div
             className={clsx(
-                "absolute w-5/6 w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md z-50",
+                "appear absolute w-5/6 w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md z-50",
                 !showExtraInfos && "hidden"
             )}>
             { children }

@@ -19,7 +19,8 @@ import { notDevelopedFeature } from "../utils/devUtils";
  */
 const ItemCommonDetailedCard = ({
     itemCommon,
-    updateItemCommon = false
+    updateItemCommon = false,
+    setDisplayObjectForm = ()=>{}
 }) =>
 {
     // FIX : Multiselect not displaying the correct selected count when editing an object from the Home page.
@@ -39,13 +40,12 @@ const ItemCommonDetailedCard = ({
         // Future POST request to backend will go here... //
         // ============================================== //
 
-        setIsUpdated(false);
+        setDisplayObjectForm(false)
     }
 
     return (
         <section>
-            {!isUpdated ? (
-                <div className="flex flex-col sm:flex-row justify-center w-150 h-180 gap-4 rounded-md mx-auto p-4 bg-background">
+                <div className="flex flex-col sm:flex-row justify-center w-200 h-180 gap-4 rounded-md mx-auto p-4 bg-background">
                     <div className="flex justify-end sm:justify-start sm:order-last w-[275px] sm:w-fit">
                         <MeatballsMenu actions={[
                             {
@@ -66,20 +66,12 @@ const ItemCommonDetailedCard = ({
                     <Image
                         src={itemCommon.image_url}
                         alt={itemCommon.name}
-                        size={225}
+                        size={325}
                     />
 
                     <div className="flex flex-col gap-2 sm:gap-4 max-w-96">
                         <p className="text-2xl">
                             {itemCommon.name}
-                        </p>
-
-                        <p className="mr-6">
-                            {itemCommon.description ??
-                                <i>
-                                    {t("no_description", { ns: "misc" })}
-                                </i>
-                            }
                         </p>
 
                         <p>
@@ -104,19 +96,17 @@ const ItemCommonDetailedCard = ({
                             )}
                         </p>
 
+                        <p className="mr-6">
+                            {itemCommon.description ??
+                                <i>
+                                    {t("no_description", { ns: "misc" })}
+                                </i>
+                            }
+                        </p>
+
                     </div>
 
                 </div>
-            ) : (
-                <form onSubmit={handleObjectEditFormSubmit}>
-                    <ItemCommonForm
-                        itemCommon={itemCommon}
-                        endCancelButton={true}
-                        submitButton={true}
-                        cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
-                    />
-                </form>
-            )}
         </section>
     )
 }

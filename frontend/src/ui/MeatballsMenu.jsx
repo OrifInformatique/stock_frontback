@@ -56,7 +56,7 @@ const MeatballsMenu = ({
             />
 
             {openMeatballsMenu && (
-                <div className="appearMenu absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md z-500 shadow-2xl">
+                <div className="appearMenu rounded-md absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md z-500 shadow-2xl">
                     {actions.map(action => (
                         <div key={action.label}>
                             {action.isLink ? (
