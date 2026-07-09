@@ -27,22 +27,6 @@ const ItemCommonDetailedCard = ({
 
     const { t } = useTranslation(["item", "misc"]);
 
-    const [isUpdated, setIsUpdated] = useState(updateItemCommon);
-
-    const handleObjectEditFormSubmit = (event) =>
-    {
-        event.preventDefault();
-
-        const formData = Object.fromEntries(new FormData(event.target).entries());
-        console.log(formData);
-
-        // ============================================== //
-        // Future POST request to backend will go here... //
-        // ============================================== //
-
-        setDisplayObjectForm(false)
-    }
-
     return (
         <section>
                 <div className="flex flex-col sm:flex-row justify-center w-200 h-180 gap-4 rounded-md mx-auto p-4 bg-background">
@@ -52,7 +36,7 @@ const ItemCommonDetailedCard = ({
                                 isLink: false,
                                 label: t("edit_object", { ns: "item" }),
                                 icon: "edit",
-                                action: () => setIsUpdated((prev) => !prev)
+                                action: () => setDisplayObjectForm(true)
                             },
                             {
                                 isLink: false,

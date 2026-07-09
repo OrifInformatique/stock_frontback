@@ -8,6 +8,6 @@
     "menu": "Menu",
     "new": "Nouveau",
     "save": "Enregistrer",
-    "upload": "Ajouter une image...",
-    "browse": "Joindre un fichier..."
+    "upload_image": "Importer une image...",
+    "link_file": "Joindre un fichier..."
 }

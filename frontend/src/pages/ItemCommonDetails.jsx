@@ -6,6 +6,7 @@ import { getItemCommon } from "../services/api/items";
 
 import ItemCommonDetailedCard from "../modules/ItemCommonDetailedCard";
 import ItemDetailedCard from "../modules/ItemDetailedCard";
+import ItemCommonForm from "../modules/ItemCommonForm";
 import ItemForm from "../modules/ItemForm";
 
 import Heading from "../ui/Heading";
@@ -135,7 +136,7 @@ const ItemCommonDetails = () => {
     }, [displayExemplarForm]);
 
     return (
-        <div className="overflow-show">
+        <div className="overflow-show mb-50">
             <Heading
                 headingLevel={1}
                 title={t("item_common_details", { ns: "titles" })}
@@ -145,7 +146,6 @@ const ItemCommonDetails = () => {
                 <Loading />
                 :
                 <>
-
                     {displayExemplarForm && (
                         <>
 
@@ -208,8 +208,9 @@ const ItemCommonDetails = () => {
                         <ItemCommonForm
                             itemCommon={itemCommon}
                             endCancelButton={true}
+                            setDisplayObjectForm={setDisplayObjectForm}
                             submitButton={true}
-                            cancelButtonOnClickFunction={() => setIsUpdated((prev) => !prev)}
+                            cancelButtonOnClickFunction={() => setDisplayObjectForm((prev) => !prev)}
                         />
                     }
                 </>

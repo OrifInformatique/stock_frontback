@@ -8,6 +8,8 @@ import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-infor
 import Menu from "../ui/Menu";
 import SegmentedControl from "../ui/SegmentedControl";
 import Toggle from "../ui/Toggle";
+import Heading from "../ui/Heading";
+import "../style.css"
 
 /**
  * All filters for searching specific exemplars.
@@ -102,7 +104,7 @@ const Filters = ({
                 </div>
 
                 {expandFilters && (
-                    <div className="absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[5px] z-10">
+                    <div className="appear absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[5px] z-10">
                         <div>
                             <Label
                                 htmlFor={"object-type"}

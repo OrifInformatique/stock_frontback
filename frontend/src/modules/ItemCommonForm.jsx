@@ -21,7 +21,8 @@ const ItemCommonForm = ({
     endCancelButton = false,
     submitButton = false,
     cancelButtonOnClickFunction = null,
-    title = ""
+    title = "",
+    setDisplayObjectForm = ()=>{}
 }) => {
     const { t } = useTranslation(["buttons", "item", "misc"]);
 
@@ -38,7 +39,7 @@ const ItemCommonForm = ({
         // Future POST request to backend will go here... //
         // ============================================== //
 
-        setIsUpdated(false);
+        setDisplayObjectForm(false);
     }
 
     /**
@@ -70,6 +71,7 @@ const ItemCommonForm = ({
                         <InputFileImage
                             name={"image"}
                             imagePreviewSize={325}
+                            labelText={t("upload_image", { ns: "buttons" })}
                         />
 
                         <div>
@@ -132,6 +134,7 @@ const ItemCommonForm = ({
                             <InputFile
                                 name={"linked-file"}
                                 className={"mb-2"}
+                                buttonLabel={t("link_file", { ns: "buttons" })}
                             />
 
                             {(endCancelButton || submitButton) &&
