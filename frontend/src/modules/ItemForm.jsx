@@ -81,25 +81,27 @@ const ItemForm = ({
                         <div className="flex">
                             <div className="basis-3/4">
                                 <Label
-                                    forInput={"prefix"}
-                                    label={t("prefix", { ns: "item" })}
-                                />
+                                    htmlFor={"prefix"}
+                                   
+                                >{t("prefix", { ns: "item" })}</Label>
 
                                 <InputText
                                     name={"prefix"}
+                                    className="h-10
+                                    "
                                     defaultValue={item?.inventory_prefix}
                                 />
                             </div>
 
-                            <p className="text-5xl self-end">
+                            <p className="text-5xl self-end mx-5">
                                 .
                             </p>
 
                             <div className="basis-1/4">
                                 <Label
-                                    forInput={"identifier"}
-                                    label={t("identifier", { ns: "item" })}
-                                />
+                                    htmlFor={"identifier"}
+                                
+                                >{t("identifier", { ns: "item" })}</Label>
 
                                 <InputNumber
                                     name={"identifier"}
@@ -126,9 +128,9 @@ const ItemForm = ({
                         </legend>
 
                         <Label
-                            forInput={"serial-number"}
-                            label={t("serial_number", { ns: "item" })}
-                        />
+                            htmlFor={"serial-number"}
+                           
+                        >{t("serial_number", { ns: "item" })}</Label>
 
                         <InputText
                             name={"serial-number"}
@@ -136,32 +138,35 @@ const ItemForm = ({
                         />
 
                         <Label
-                            forInput={"remarks"}
-                            label={t("remarks", { ns: "item" })}
-                        />
+                            htmlFor={"remarks"}
+                         
+                        >{t("remarks", { ns: "item" })}</Label>
 
                         <Textarea
                             name={"remarks"}
                             defaultValue={item?.remarks}
                             rows={5}
+                            className="mb-2"
                         />
 
                         {itemConditions.length > 0 && (
                             <>
                                 <Label
-                                    forInput={"item-condition"}
-                                    label={t("exemplar_condition", { ns: "item" })}
-                                />
+                                    htmlFor={"item-condition"}
+                                
+                                >{t("exemplar_condition", { ns: "item" })}</Label>
 
                                 <SingleSelect
                                     name={"item-condition"}
                                     options={itemConditions?.map(itemCondition => (
                                         {
                                             value: itemCondition.name,
-                                            label: itemCondition.name
+                                            label: itemCondition.name,
                                         }))
+                                        
                                     }
                                     defaultValue={item?.item_condition}
+                                    className="mb-2"
                                 />
                             </>
                         )}
@@ -169,9 +174,9 @@ const ItemForm = ({
                         {stockingPlaces.length > 0 && (
                             <>
                                 <Label
-                                    forInput={"stocking-place"}
-                                    label={t("stocking_place", { ns: "item" })}
-                                />
+                                    htmlFor={"stocking-place"}
+                                
+                                >{t("stocking_place", { ns: "item" })}</Label>
 
                                 <SingleSelect
                                     name={"stocking-place"}
@@ -201,9 +206,8 @@ const ItemForm = ({
                         <div className="flex flex-col justify-between gap-2">
                             <div>
                                 <Label
-                                    forInput={"buying-price"}
-                                    label={t("buying_price", { ns: "item" })}
-                                />
+                                    htmlFor={"buying-price"}
+                                >{t("buying_price", { ns: "item" })}</Label>
 
                                 <InputNumber
                                     name={"buying-price"}
@@ -214,9 +218,9 @@ const ItemForm = ({
 
                             <div>
                                 <Label
-                                    forInput={"buying-date"}
-                                    label={t("buying_date", { ns: "item" })}
-                                />
+                                    htmlFor={"buying-date"}
+                                
+                                >{t("buying_date", { ns: "item" })}</Label>
 
                                 <InputDate
                                     name={"buying-date"}
@@ -226,9 +230,9 @@ const ItemForm = ({
 
                             <div>
                                 <Label
-                                    forInput={"warranty-duration"}
-                                    label={t("warranty_duration", { ns: "item" })}
-                                />
+                                    htmlFor={"warranty-duration"}
+                                
+                                >{t("warranty_duration", { ns: "item" })}</Label>
 
                                 <InputNumber
                                     name={"warranty-duration"}
@@ -249,9 +253,9 @@ const ItemForm = ({
                         </legend>
 
                         <Label
-                            forInput={"supplier"}
-                            label={t("supplier", { ns: "item" })}
-                        />
+                            htmlFor={"supplier"}
+                        
+                        >{t("supplier", { ns: "item" })}</Label>
 
                         {suppliers?.length > 0 && (
                             <SingleSelect
@@ -261,13 +265,14 @@ const ItemForm = ({
                                     label: supplier.name
                                 }))}
                                 defaultValue={item?.supplier}
+                                className="mb-2"
                             />
                         )}
 
                         <Label
-                            forInput={"supplier-ref"}
-                            label={t("supplier_ref", { ns: "item" })}
-                        />
+                            htmlFor={"supplier-ref"}
+                        
+                        >{t("supplier_ref", { ns: "item" })}</Label>
 
                         <InputText
                             name={"supplier-ref"}
