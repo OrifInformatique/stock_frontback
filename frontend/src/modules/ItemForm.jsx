@@ -18,6 +18,7 @@ import "../style.css"
  */
 const ItemForm = ({
     item = null,
+    startCancelButton = false,
     endCancelButton = false,
     submitButton = false,
     cancelButtonOnClickFunction = null,
@@ -51,16 +52,18 @@ const ItemForm = ({
     }
 
     return (
-        <PopUpContainer width="65rem" height="55rem" title={title} >
+        <PopUpContainer title={title} >
+            {startCancelButton &&
                 <Button
                     onClick={cancelButtonOnClickFunction}
                     icon="cross"
                     variant="link"
                     className="hover:cursor-pointer"
                 />
+            }
 
             <Heading
-                headingLevel={1}
+                headingLevel={2}
                 title={title}
             />
 
@@ -78,27 +81,25 @@ const ItemForm = ({
                         <div className="flex">
                             <div className="basis-3/4">
                                 <Label
-                                    htmlFor={"prefix"}
-                                >
-                                    {t("prefix", { ns: "item" })}
-                                </Label>
+                                    forInput={"prefix"}
+                                    label={t("prefix", { ns: "item" })}
+                                />
 
                                 <InputText
                                     name={"prefix"}
                                     defaultValue={item?.inventory_prefix}
-                                    className="h-10.5"
                                 />
                             </div>
 
-                            <p className="text-5xl self-end mx-5">
+                            <p className="text-5xl self-end">
                                 .
                             </p>
 
                             <div className="basis-1/4">
                                 <Label
-                                    htmlFor={"identifier"}
-                                
-                                >{t("identifier", { ns: "item" })}</Label>
+                                    forInput={"identifier"}
+                                    label={t("identifier", { ns: "item" })}
+                                />
 
                                 <InputNumber
                                     name={"identifier"}
@@ -107,13 +108,12 @@ const ItemForm = ({
                                 />
                             </div>
                         </div>
-                        <div className="flex justify-center my-5">
-                            <Button
-                                label={t("generate_inventory_number", { ns: "buttons" })}
-                                onClickFunction={generateInventoryNumber}
-                                className={"mt-2"}
-                            />
-                        </div>
+
+                        <Button
+                            label={t("generate_inventory_number", { ns: "buttons" })}
+                            onClickFunction={generateInventoryNumber}
+                            className={"mt-2"}
+                        />
                     </fieldset>
 
                     {/* Exemplar details fieldset */}
@@ -126,33 +126,32 @@ const ItemForm = ({
                         </legend>
 
                         <Label
-                            htmlFor={"serial-number"}
-                        >{t("serial_number", { ns: "item" })}</Label>
+                            forInput={"serial-number"}
+                            label={t("serial_number", { ns: "item" })}
+                        />
 
                         <InputText
                             name={"serial-number"}
                             defaultValue={item?.serial_number}
-                            className="mb-2"
                         />
 
                         <Label
-                            htmlFor={"remarks"}
-                        >{t("remarks", { ns: "item" })}</Label>
+                            forInput={"remarks"}
+                            label={t("remarks", { ns: "item" })}
+                        />
 
                         <Textarea
                             name={"remarks"}
                             defaultValue={item?.remarks}
                             rows={5}
-                            className="mb-2"
-                            resizeX={false}
-                            resizeY={false}
                         />
 
                         {itemConditions.length > 0 && (
                             <>
                                 <Label
-                                    htmlFor={"item-condition"}
-                                >{t("exemplar_condition", { ns: "item" })}</Label>
+                                    forInput={"item-condition"}
+                                    label={t("exemplar_condition", { ns: "item" })}
+                                />
 
                                 <SingleSelect
                                     name={"item-condition"}
@@ -163,15 +162,16 @@ const ItemForm = ({
                                         }))
                                     }
                                     defaultValue={item?.item_condition}
-                                    className="mb-2"
                                 />
                             </>
                         )}
+
                         {stockingPlaces.length > 0 && (
                             <>
                                 <Label
-                                    htmlFor={"stocking-place"}
-                                >{t("stocking_place", { ns: "item" })}</Label>
+                                    forInput={"stocking-place"}
+                                    label={t("stocking_place", { ns: "item" })}
+                                />
 
                                 <SingleSelect
                                     name={"stocking-place"}
@@ -201,8 +201,9 @@ const ItemForm = ({
                         <div className="flex flex-col justify-between gap-2">
                             <div>
                                 <Label
-                                    htmlFor={"buying-price"}
-                                >{t("buying_price", { ns: "item" })}</Label>
+                                    forInput={"buying-price"}
+                                    label={t("buying_price", { ns: "item" })}
+                                />
 
                                 <InputNumber
                                     name={"buying-price"}
@@ -213,8 +214,9 @@ const ItemForm = ({
 
                             <div>
                                 <Label
-                                    htmlFor={"buying-date"}
-                                >{t("buying_date", { ns: "item" })}</Label>
+                                    forInput={"buying-date"}
+                                    label={t("buying_date", { ns: "item" })}
+                                />
 
                                 <InputDate
                                     name={"buying-date"}
@@ -224,8 +226,9 @@ const ItemForm = ({
 
                             <div>
                                 <Label
-                                    htmlFor={"warranty-duration"}
-                                >{t("warranty_duration", { ns: "item" })}</Label>
+                                    forInput={"warranty-duration"}
+                                    label={t("warranty_duration", { ns: "item" })}
+                                />
 
                                 <InputNumber
                                     name={"warranty-duration"}
@@ -246,8 +249,9 @@ const ItemForm = ({
                         </legend>
 
                         <Label
-                            htmlFor={"supplier"}
-                        >{t("supplier", { ns: "item" })}</Label>
+                            forInput={"supplier"}
+                            label={t("supplier", { ns: "item" })}
+                        />
 
                         {suppliers?.length > 0 && (
                             <SingleSelect
@@ -257,13 +261,13 @@ const ItemForm = ({
                                     label: supplier.name
                                 }))}
                                 defaultValue={item?.supplier}
-                                className="mb-1"
                             />
                         )}
 
                         <Label
-                            htmlFor={"supplier-ref"}
-                        >{t("supplier_ref", { ns: "item" })}</Label>
+                            forInput={"supplier-ref"}
+                            label={t("supplier_ref", { ns: "item" })}
+                        />
 
                         <InputText
                             name={"supplier-ref"}
@@ -273,7 +277,7 @@ const ItemForm = ({
                 </div>
             </div>
             {(endCancelButton || submitButton) &&
-                <div className="flex gap-4 mt-10 justify-center">
+                <div className="flex gap-4 mt-20 justify-center">
                     {endCancelButton &&
                         <Button
                             variant="secondary"
