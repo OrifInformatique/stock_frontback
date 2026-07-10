@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFileExport } from "@fortawesome/free-solid-svg-icons";
 
-import { useTranslation } from "react-i18next";
-
 import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-informatique/react-components-library";
 import Menu from "../ui/Menu";
 import SegmentedControl from "../ui/SegmentedControl";
