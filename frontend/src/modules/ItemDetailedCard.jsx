@@ -33,9 +33,12 @@ const ItemDetailedCard = ({
     id = null,
     item = null,
     isHighlighted = false,
-    editExemplarFunction = null
-}) => {
-    if (!editExemplarFunction) {
+    editExemplarFunction = null,
+    showButtonsAndOptions = true,
+}) =>
+{
+    if(!editExemplarFunction)
+    {
         console.error("No function to edit an exemplar provided.");
         return;
     }
@@ -64,7 +67,8 @@ const ItemDetailedCard = ({
             )}
         >
             <div className="flex justify-end">
-                <MeatballsMenu actions={[
+                {showButtonsAndOptions &&
+                    <MeatballsMenu actions={[
                     {
                         isLink: true,
                         label: t("event_history", { ns: "item" }),
@@ -84,6 +88,7 @@ const ItemDetailedCard = ({
                         action: () => notDevelopedFeature()
                     }
                 ]} />
+                }
             </div>
             <div className="relative space-y-2">
                 <p className="text-2xl">
@@ -143,36 +148,38 @@ const ItemDetailedCard = ({
                 </ToolTip>
             </div>
 
-            <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
-                {item.loan_state !== loanStates[0]?.name ? (
-                    <HTMLLink
-                        to={"/"}
-                        styleAsButton={true}
-                        className={"basis-1/2"}
-                        title={t("return_loan", { ns: "item" })}
-                    >
-                        {t("return_loan", { ns: "item" })}
-                    </HTMLLink>
-                ) : (
-                    <HTMLLink
-                        to={"/"}
-                        styleAsButton={true}
-                        className={"basis-1/2"}
-                        title={t("add_loan", { ns: "item" })}
-                    >
-                        {t("add_loan", { ns: "item" })}
-                    </HTMLLink>
-                )}
+            {showButtonsAndOptions &&
+                <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
+                    {item.loan_state !== loanStates[0]?.name ? (
+                        <HTMLLink
+                            to={"/"}
+                            styleAsButton={true}
+                            className={"basis-1/2"}
+                            title={t("return_loan", { ns: "item" })}
+                        >
+                            {t("return_loan", { ns: "item" })}
+                        </HTMLLink>
+                    ) : (
+                        <HTMLLink
+                            to={"/"}
+                            styleAsButton={true}
+                            className={"basis-1/2"}
+                            title={t("add_loan", { ns: "item" })}
+                        >
+                            {t("add_loan", { ns: "item" })}
+                        </HTMLLink>
+                    )}
 
-                <HTMLLink
-                    to={"/"}
-                    styleAsButton={true}
-                    className={"basis-1/2"}
-                    title={t("add_control", { ns: "item" })}
-                >
-                    {t("add_control", { ns: "item" })}
-                </HTMLLink>
-            </div>
+                    <HTMLLink
+                        to={"/"}
+                        styleAsButton={true}
+                        className={"basis-1/2"}
+                        title={t("add_control", { ns: "item" })}
+                    >
+                        {t("add_control", { ns: "item" })}
+                    </HTMLLink>
+                </div>
+            }
         </div>
     )
 }

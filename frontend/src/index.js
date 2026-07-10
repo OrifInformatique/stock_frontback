@@ -6,6 +6,7 @@ import MainLayout from './layouts/MainLayout';
 
 import Home from './pages/Home';
 import ItemCommonDetails from './pages/ItemCommonDetails';
+import ItemCommonCreation from './pages/ItemCommonCreation';
 
 import Loading from './ui/Loading';
 
@@ -32,6 +33,11 @@ root.render(
                     <Route
                         index
                         element={<Home />}
+                    />
+
+                    <Route
+                        path="objects/add"
+                        element={<ItemCommonCreation />}
                     />
 
                     <Route path="objects/:itemCommonId/">

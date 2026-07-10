@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -20,12 +20,37 @@ import { notDevelopedFeature } from "../utils/devUtils";
 const ItemCommonDetailedCard = ({
     itemCommon,
     updateItemCommon = false,
-    setDisplayObjectForm = ()=>{}
+    setDisplayObjectForm = ()=>{},
+    showButtonsAndOptions = true,
+    setShowButtonsAndOptions = null
 }) =>
 {
-    // FIX : Multiselect not displaying the correct selected count when editing an object from the Home page.
-
     const { t } = useTranslation(["item", "misc"]);
+
+    const [isUpdated, setIsUpdated] = useState(updateItemCommon);
+
+    const handleObjectEditFormSubmit = (event) =>
+    {
+        event.preventDefault();
+
+        const formData = Object.fromEntries(new FormData(event.target).entries());
+        console.log(formData);
+
+        // ============================================== //
+        // Future POST request to backend will go here... //
+        // ============================================== //
+
+        setIsUpdated(false);
+    }
+
+    /**
+     * Toggles the display of buttons and options for item and exemplar
+     * when the item common form is opened or closed.
+     */
+    useEffect(() =>
+    {
+        setShowButtonsAndOptions(!isUpdated);
+    }, [isUpdated])
 
     return (
         <section>

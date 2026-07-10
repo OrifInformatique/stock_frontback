@@ -4,6 +4,7 @@
 
     "object": "Objet",
     "objects": "Objets",
+    "add_object": "Ajouter un objet",
     "edit_object": "Modifier l'objet",
     "delete_object": "Supprimer l'objet",
 

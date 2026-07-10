@@ -8,7 +8,6 @@ import { getAllGroups } from "../services/api/groups";
 import { getAllItemConditions } from "../services/api/item_conditions";
 import { getAllStockingPlaces } from "../services/api/stocking_places";
 
-
 import Loading from "../ui/Loading";
 
 import Filters from "../modules/Filters";
@@ -195,11 +194,7 @@ const Home = () => {
     /**
      * Filters the list of items common when a filter is updated.
      */
-    useEffect(() => {
-        //debugFilters();
-        filterItems();
-
-    }, [displayMode, searchBar, selectedObjectTypes,
+    useEffect(() => filterItems(), [displayMode, searchBar, selectedObjectTypes,
         selectedLoanStates, selectedExemplarConditions,
         selectedGroups, selectedStockingPlaces,
         selectedFilterOption, filterByAscOrder

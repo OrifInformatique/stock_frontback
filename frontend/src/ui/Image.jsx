@@ -22,7 +22,7 @@ const Image = ({
 }) =>
 {
     if(src && !alt)
-        console.warn("For accessibility reasons, it's preferable to add an alternative text to the image");
+        console.warn("For accessibility reasons, it's preferable to add an alternative text to the image.");
 
     const [insertImagePlaceholder, setInsertImagePlaceholder] = useState(false)
 
@@ -33,6 +33,9 @@ const Image = ({
     {
         if(src)
             setInsertImagePlaceholder(false)
+
+        else if(src === "")
+            setInsertImagePlaceholder(true)
     }, [src])
 
     return (

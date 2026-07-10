@@ -68,6 +68,38 @@ const ItemCommon = ({ itemCommon }) =>
                 </HTMLLink>
             </div>
 
+            <div className="flex flex-col gap-2 max-h-[280px] sm:max-h-[250px] overflow-y-auto">
+                {itemCommon.items?.map(exemplar => (
+                    <div
+                        key={exemplar.id}
+                        className="h-20 p-2 rounded-md bg-blue !text-black">
+                        <HTMLLink
+                            to={`/objects/${itemCommon.id}/exemplars/${exemplar.id}`}
+                            color="transparent"
+                            underlineOnHover={true}
+                        >
+                            <Heading
+                            //text is white here
+                                headingLevel={3}
+                                title={`${exemplar.inventory_prefix}.${exemplar.id}`}
+                                className={"!my-0"}
+                            />
+                        </HTMLLink>
+
+                        <div className="flex justify-center gap-2">
+                            <Tag
+                                text={exemplar.item_condition}
+                                color={setConditionTagColor(exemplar.item_condition)}
+                            />
+
+                            <Tag
+                                text={exemplar.loan_state}
+                                color={setLoanTagColor(exemplar.loan_state)}
+                            />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

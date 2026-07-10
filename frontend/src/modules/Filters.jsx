@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFileExport } from "@fortawesome/free-solid-svg-icons";
-
-import { useTranslation } from "react-i18next";
 
 import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-informatique/react-components-library";
 import Menu from "../ui/Menu";
@@ -10,6 +10,8 @@ import SegmentedControl from "../ui/SegmentedControl";
 import Toggle from "../ui/Toggle";
 import Heading from "../ui/Heading";
 import "../style.css"
+
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * All filters for searching specific exemplars.
@@ -30,6 +32,8 @@ const Filters = ({
 }) => {
     const { t } = useTranslation(["buttons", "filters", "item", "misc"]);
     console.log("show:", t("show_filters", { ns: "filters" }));
+    const navigate = useNavigate();
+
     const [expandFilters, setExpandFilters] = useState(false);
     const [filterButtonIcon, setFilterButtonIcon] = useState(faFilter);
     const [filtersButtonLabel, setFilterButtonLabel] = useState(t("show_filters", { ns: "filters" }));
