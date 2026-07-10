@@ -17,27 +17,9 @@ const ItemCommonDetailedCard = ({
     itemCommon,
     updateItemCommon = false,
     setDisplayObjectForm = ()=>{},
-    showButtonsAndOptions = true,
-    setShowButtonsAndOptions = null
 }) =>
 {
     const { t } = useTranslation(["item", "misc"]);
-
-    const [isUpdated, setIsUpdated] = useState(updateItemCommon);
-
-    const handleObjectEditFormSubmit = (event) =>
-    {
-        event.preventDefault();
-
-        const formData = Object.fromEntries(new FormData(event.target).entries());
-        console.log(formData);
-
-        // ============================================== //
-        // Future POST request to backend will go here... //
-        // ============================================== //
-
-        setIsUpdated(false);
-    }
 
     return (
         <section>
