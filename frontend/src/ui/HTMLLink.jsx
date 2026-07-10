@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 import clsx from "clsx";
 
+import { Button } from "@orif-informatique/react-components-library";
+
+import { useNavigate } from "react-router-dom";
+
 /**
  * UI component to navigate between pages.
  *
@@ -18,6 +22,8 @@ import clsx from "clsx";
  *
  * @param {boolean} [styleAsButton=false] Decide whether to display the link as a button. False by default.
  *
+ * @param {any} [icon=null] Icon used for the link button if styleAsButton is true.
+ *
  * @param {string} [className=null] Additional and specific styles for the link. Null by default.
  *
  * @returns {JSX.Element}
@@ -30,10 +36,12 @@ const HTMLLink = ({
     colorOnHover = true,
     underlineOnHover = false,
     styleAsButton = false,
+    icon = null,
     children,
     className = null
 }) =>
 {
+    const navigate = useNavigate()
     if(!to)
     {
         console.error("HTMLLink must have a link to go to.");
@@ -51,7 +59,16 @@ const HTMLLink = ({
         transparent: "bg-transparent hover:bg-transparent border-transparent text-black "  + (colorOnHover && "hover:text-blue"),
         blue: "bg-blue hover:bg-white border-blue text-white " + (colorOnHover && "hover:text-blue")
     }
-
+    if(styleAsButton)return(
+        <Button
+            icon={icon}
+            label={title}
+            variant="secondary"
+            onClick={()=>{navigate(to)}}
+        >
+            {children}
+        </Button>
+    )
     return (
         <Link
             to={to}
@@ -60,7 +77,6 @@ const HTMLLink = ({
                 "transition-all",
                 colorVariants[color],
                 underlineOnHover && "hover:underline",
-                styleAsButton && `block px-4 py-2 rounded-md border-2 text-center duration-300`,
                 className
             )}
         >

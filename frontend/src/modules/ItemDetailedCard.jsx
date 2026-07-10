@@ -51,15 +51,12 @@ const ItemDetailedCard = ({
     /**
      * Fetches all loan states, to determine the correct loan to display on each exemplar.
      */
-    useEffect(() =>
-    {
-        const fetchLoanStates = async () =>
-        {
+    useEffect(() => {
+        const fetchLoanStates = async () => {
             setLoanStates(await getAllLoanStates());
         }
         fetchLoanStates();
     }, [])
-
     return (
         <div
             id={id}
@@ -111,7 +108,7 @@ const ItemDetailedCard = ({
 
                 <p>
                     {item.loan_state !== loanStates[0]?.name
-                        ? `${t("loaned_at", {ns: "misc" })} ${item.item_localization}`
+                        ? `${t("loaned_at", { ns: "misc" })} ${item.item_localization}`
                         : `${t("in", { ns: "misc" })} ${item.stocking_place}`
                     }
                 </p>
