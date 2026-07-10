@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import useOnclickOutside from "react-cool-onclickoutside";
 import clsx from "clsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-import ItemCommonForm from "../modules/ItemCommonForm";
-
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
 import Tag from "../ui/Tag";
@@ -42,15 +38,6 @@ const ItemCommonDetailedCard = ({
 
         setIsUpdated(false);
     }
-
-    /**
-     * Toggles the display of buttons and options for item and exemplar
-     * when the item common form is opened or closed.
-     */
-    useEffect(() =>
-    {
-        setShowButtonsAndOptions(!isUpdated);
-    }, [isUpdated])
 
     return (
         <section>
