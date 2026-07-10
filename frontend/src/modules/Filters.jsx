@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { faFilter, faXmark, faRotate, faArrowDownAZ, faArrowDownZA, faPlus, faFileExport } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,6 +10,8 @@ import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-infor
 import Menu from "../ui/Menu";
 import SegmentedControl from "../ui/SegmentedControl";
 import Toggle from "../ui/Toggle";
+
+import { notDevelopedFeature } from "../utils/devUtils";
 
 /**
  * All filters for searching specific exemplars.
@@ -28,6 +32,7 @@ const Filters = ({
 }) =>
 {
     const { t } = useTranslation(["buttons", "filters", "item", "misc"]);
+    const navigate = useNavigate();
 
     const [expandFilters, setExpandFilters] = useState(false);
     const [filterButtonIcon, setFilterButtonIcon] = useState(faFilter);
@@ -219,11 +224,13 @@ const Filters = ({
                     actions={[
                         {
                             icon: faPlus,
-                            label: t("new", { ns: "buttons" })
+                            label: t("new", { ns: "buttons" }),
+                            action: () => navigate("/objects/add")
                         },
                         {
                             icon: faFileExport,
-                            label: t("export", { ns: "buttons" })
+                            label: t("export", { ns: "buttons" }),
+                            action: () => notDevelopedFeature()
                         }
                     ]}
                     className={"sm:flex-col-reverse"}

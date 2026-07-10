@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-
 import Heading from "../ui/Heading";
 import Image from "../ui/Image";
 import MeatballsMenu from "../ui/MeatballsMenu";
