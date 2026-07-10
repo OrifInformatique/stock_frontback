@@ -33,7 +33,8 @@ const ItemDetailedCard = ({
     id = null,
     item = null,
     isHighlighted = false,
-    editExemplarFunction = null
+    editExemplarFunction = null,
+    showButtonsAndOptions = true,
 }) =>
 {
     if(!editExemplarFunction)
@@ -68,26 +69,28 @@ const ItemDetailedCard = ({
             )}
         >
             <div className="flex justify-end">
-                <MeatballsMenu actions={[
-                    {
-                        isLink: true,
-                        label: t("event_history", { ns: "item" }),
-                        icon: faClockRotateLeft,
-                        action: `${item.id}/event-history`
-                    },
-                    {
-                        isLink: false,
-                        label: t("edit_exemplar", { ns: "item" }),
-                        icon: faPen,
-                        action: () => editExemplarFunction(item)
-                    },
-                    {
-                        isLink: false,
-                        label: t("delete_exemplar", { ns: "item" }),
-                        icon: faTrash,
-                        action: () => notDevelopedFeature()
-                    }
-                ]}/>
+                {showButtonsAndOptions &&
+                    <MeatballsMenu actions={[
+                        {
+                            isLink: true,
+                            label: t("event_history", { ns: "item" }),
+                            icon: faClockRotateLeft,
+                            action: `${item.id}/event-history`
+                        },
+                        {
+                            isLink: false,
+                            label: t("edit_exemplar", { ns: "item" }),
+                            icon: faPen,
+                            action: () => editExemplarFunction(item)
+                        },
+                        {
+                            isLink: false,
+                            label: t("delete_exemplar", { ns: "item" }),
+                            icon: faTrash,
+                            action: () => notDevelopedFeature()
+                        }
+                    ]}/>
+                }
             </div>
             <div className="space-y-2">
                 <p className="text-2xl">
@@ -152,33 +155,35 @@ const ItemDetailedCard = ({
                 </div>
             </div>
 
-            <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
-                {item.loan_state !== loanStates[0]?.name ? (
-                    <HTMLLink
-                        to={"/"}
-                        styleAsButton={true}
-                        className={"basis-1/2"}
-                    >
-                        {t("return_loan", { ns: "item" })}
-                    </HTMLLink>
-                ) : (
-                    <HTMLLink
-                        to={"/"}
-                        styleAsButton={true}
-                        className={"basis-1/2"}
-                    >
-                        {t("add_loan", { ns: "item" })}
-                    </HTMLLink>
-                )}
+            {showButtonsAndOptions &&
+                <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
+                        {item.loan_state !== loanStates[0]?.name ? (
+                            <HTMLLink
+                                to={"/"}
+                                styleAsButton={true}
+                                className={"basis-1/2"}
+                            >
+                                {t("return_loan", { ns: "item" })}
+                            </HTMLLink>
+                        ) : (
+                            <HTMLLink
+                                to={"/"}
+                                styleAsButton={true}
+                                className={"basis-1/2"}
+                            >
+                                {t("add_loan", { ns: "item" })}
+                            </HTMLLink>
+                        )}
 
-                <HTMLLink
-                    to={"/"}
-                    styleAsButton={true}
-                    className={"basis-1/2"}
-                >
-                    {t("add_control", { ns: "item" })}
-                </HTMLLink>
-            </div>
+                        <HTMLLink
+                            to={"/"}
+                            styleAsButton={true}
+                            className={"basis-1/2"}
+                        >
+                            {t("add_control", { ns: "item" })}
+                        </HTMLLink>
+                </div>
+            }
         </div>
     )
 }

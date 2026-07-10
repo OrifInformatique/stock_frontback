@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 import { useTranslation } from "react-i18next";
 
 import clsx from "clsx";
@@ -43,8 +44,6 @@ const MultiSelect = ({
     className = null
 }) =>
 {
-    // BUG : Internal state not resetting when clicking the reset filters on the Home page.
-
     if(!name)
     {
         console.error("MultiSelect must have a name.");
@@ -52,6 +51,8 @@ const MultiSelect = ({
     }
 
     const { t } = useTranslation("misc");
+
+    const ref = useOnclickOutside(() => setIsOpen(false))
 
     const [selectedCount, setSelectedCount] = useState(0);
     const [selectedOptions, setSelectedOptions] = useState(defaultValues)
@@ -79,6 +80,26 @@ const MultiSelect = ({
         );
     };
 
+    /**
+     * Synchronizes the internal state when we update the selectedValues prop outside of this component.
+     */
+    useEffect(() => {
+        if (onChangeFunction !== null)
+            setSelectedOptions(selectedValues);
+    }, [selectedValues, onChangeFunction]);
+
+    /**
+     * Synchronizes the internal state when a uncontrolled multiselect have default values.
+     */
+    useEffect(() =>
+    {
+        if(onChangeFunction === null && defaultValues.length > 0)
+            setSelectedOptions(defaultValues)
+    }, [defaultValues]);
+
+    /**
+     * Updates the count of selected items when the selectedOptions list is updated.
+     */
     useEffect(() => setSelectedCount(selectedOptions.length), [selectedOptions]);
 
     return (
@@ -117,8 +138,9 @@ const MultiSelect = ({
 
                 <div
                     id={`${name}-multiselect`}
-                    className={`${!isOpen && "!hidden"} block absolute border border-blue min-w-max w-full py-2 space-y-2 rounded-md z-50 bg-white`}
+                    ref={ref}
                     onClick={(e) => e.stopPropagation()}
+                    className={`${!isOpen && "!hidden"} block absolute border border-blue min-w-max w-full py-2 space-y-2 rounded-md z-50 bg-white`}
                 >
                     {options.map((option, index) => (
                         <div
