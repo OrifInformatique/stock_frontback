@@ -11,8 +11,6 @@ import HTMLLink from "../ui/HTMLLink";
 import { setConditionTagColor, setLoanTagColor } from "../utils/tagColors";
 import { notDevelopedFeature } from "../utils/devUtils";
 import "../style.css"
-
-import { faClock } from "@fortawesome/free-solid-svg-icons";
 /**
  * Exemplary card, with minimal info.
  *

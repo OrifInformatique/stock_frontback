@@ -115,7 +115,8 @@ const ItemCommonDetails = () => {
      *
      */
     const editExemplar = async (exemplarData) => {
-        if (displayExemplarForm) await cancelForm();
+        if (displayExemplarForm) await
+         cancelForm();
         setDisplayExemplarForm(true);
         setExemplarFormData(exemplarData);
     }
@@ -155,7 +156,7 @@ const ItemCommonDetails = () => {
     useEffect(() =>
     {
         setFilteredExemplars(itemCommon.items?.filter(item =>
-            exemplarFormData === null || item.id !== exemplarFormData.id));
+            exemplarFormData == null || item.id !== exemplarFormData.id));
     }, [exemplarFormData])
 
     return (
