@@ -16,7 +16,8 @@ i18n
 
         backend:
         {
-            loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : ""}/locales/{{lng}}/{{ns}}.json`
+          //  loadPath: `${process.env.APP_ROOT !== "/" ? process.env.APP_ROOT : ""}/locales/{{lng}}/{{ns}}.json`
+            loadPath: `/locales/{{lng}}/{{ns}}.json` //Ca répare le problème de traduction, mais je sais pas si ca en ajoute.
         },
 
         ns: ["buttons", "filters", "item", "misc", "titles"],

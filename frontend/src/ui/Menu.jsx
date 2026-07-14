@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import clsx from "clsx";
+
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import { Button } from "@orif-informatique/react-components-library";
-
+import "../style.css"
 /**
  * UI component to add a menu with personalized actions.
  *
@@ -54,7 +56,8 @@ const Menu = ({
     }
 
     return (
-        <div className={`flex flex-col gap-2 w-full p-2 bg-blue-light rounded-[28px] ${className}`}>
+        <div className={`absolute flex flex-col p-2 bg-blue-light ${className}`}>
+            {openMenu && <div className="flex flex-col justify-center bg-[#005ba9] p-1 rounded-b-md appear">
             {openMenu &&
                 actions.map(action => (
                     <Button
@@ -62,18 +65,25 @@ const Menu = ({
                         icon={action.icon}
                         label={action.label}
                         keepLabel={true}
+                        variant="secondary"
                         onClick={action.action}
-                        className={"!rounded-full !min-w-max"}
+                        className={clsx(
+                            "!rounded-full !min-w-max appear"
+                        )}
                     />
                 )
             )}
+            </div>}
 
             <Button
                 icon={menuButtonIcon}
                 label={menuButtonLabel}
                 keepLabel={openMenu}
                 onClick={toggleMenu}
-                className={"!rounded-full !min-w-max"}
+                className={clsx(
+                    "w-37",
+                    openMenu && "rounded-b-[0]"
+                )}
             />
         </div>
     )

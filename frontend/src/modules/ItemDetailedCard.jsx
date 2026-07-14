@@ -6,14 +6,13 @@ import { getAllLoanStates } from "../services/api/loan_states"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faCircleInfo,
-    faClockRotateLeft,
-    faPen,
-    faTrash
+    faCircleInfo
 } from "@fortawesome/free-solid-svg-icons";
 
 import HTMLLink from "../ui/HTMLLink";
 import Tag from "../ui/Tag";
+import ToolTip from "../ui/ToolTip";
+
 import MeatballsMenu from "../ui/MeatballsMenu";
 
 import {
@@ -29,6 +28,7 @@ import { notDevelopedFeature } from "../utils/devUtils";
  * @returns {JSX.Element}
  *
  */
+
 const ItemDetailedCard = ({
     id = null,
     item = null,
@@ -62,34 +62,35 @@ const ItemDetailedCard = ({
             id={id}
             className={clsx(
                 "w-80 lg:w-[450px] p-4 rounded-md",
-                isHighlighted ? "bg-amber-300" : "bg-background"
+                isHighlighted ? "bg-amber-200" : "bg-background",
+                isHighlighted ? "border-t-3 border-amber-400" : ""
             )}
         >
             <div className="flex justify-end">
                 {showButtonsAndOptions &&
                     <MeatballsMenu actions={[
-                        {
-                            isLink: true,
-                            label: t("event_history", { ns: "item" }),
-                            icon: faClockRotateLeft,
-                            action: `${item.id}/event-history`
-                        },
-                        {
-                            isLink: false,
-                            label: t("edit_exemplar", { ns: "item" }),
-                            icon: faPen,
-                            action: () => editExemplarFunction(item)
-                        },
-                        {
-                            isLink: false,
-                            label: t("delete_exemplar", { ns: "item" }),
-                            icon: faTrash,
-                            action: () => notDevelopedFeature()
-                        }
-                    ]}/>
+                    {
+                        isLink: true,
+                        label: t("event_history", { ns: "item" }),
+                        icon: "history",
+                        action: `${item.id}/event-history`
+                    },
+                    {
+                        isLink: false,
+                        label: t("edit_exemplar", { ns: "item" }),
+                        icon: "edit",
+                        action: () => editExemplarFunction(item)
+                    },
+                    {
+                        isLink: false,
+                        label: t("delete_exemplar", { ns: "item" }),
+                        icon: "delete",
+                        action: () => notDevelopedFeature()
+                    }
+                ]} />
                 }
             </div>
-            <div className="space-y-2">
+            <div className="relative space-y-2">
                 <p className="text-2xl">
                     {`${item.inventory_prefix}.${item.id}`}
                 </p>
@@ -129,12 +130,7 @@ const ItemDetailedCard = ({
                     <span>{t("other_infos", { ns: "misc" })}</span>
                 </p>
 
-                <div
-                    className={clsx(
-                        "absolute w-5/6 max-w-72 lg:max-w-max bg-white border-2 border-black px-4 py-2 rounded-md z-50",
-                        !showExtraInfos && "hidden"
-                    )}
-                >
+                <ToolTip showExtraInfos={showExtraInfos}>
                     <p>{`${t("serial_number", { ns: "item" })} : ${item.serial_number}`}</p>
 
                     <p>{`${t("supplier", { ns: "item" })} : ${item.supplier}`}</p>
@@ -149,36 +145,39 @@ const ItemDetailedCard = ({
                         text={item.warranty_state}
                         color={setWarrantyTagColor(item.warranty_state)}
                     />
-                </div>
+                </ToolTip>
             </div>
 
             {showButtonsAndOptions &&
                 <div className="flex flex-1 flex-col sm:flex-row justify-center gap-2 mt-4">
-                        {item.loan_state !== loanStates[0]?.name ? (
-                            <HTMLLink
-                                to={"/"}
-                                styleAsButton={true}
-                                className={"basis-1/2"}
-                            >
-                                {t("return_loan", { ns: "item" })}
-                            </HTMLLink>
-                        ) : (
-                            <HTMLLink
-                                to={"/"}
-                                styleAsButton={true}
-                                className={"basis-1/2"}
-                            >
-                                {t("add_loan", { ns: "item" })}
-                            </HTMLLink>
-                        )}
-
+                    {item.loan_state !== loanStates[0]?.name ? (
                         <HTMLLink
                             to={"/"}
                             styleAsButton={true}
                             className={"basis-1/2"}
+                            title={t("return_loan", { ns: "item" })}
                         >
-                            {t("add_control", { ns: "item" })}
+                            {t("return_loan", { ns: "item" })}
                         </HTMLLink>
+                    ) : (
+                        <HTMLLink
+                            to={"/"}
+                            styleAsButton={true}
+                            className={"basis-1/2"}
+                            title={t("add_loan", { ns: "item" })}
+                        >
+                            {t("add_loan", { ns: "item" })}
+                        </HTMLLink>
+                    )}
+
+                    <HTMLLink
+                        to={"/"}
+                        styleAsButton={true}
+                        className={"basis-1/2"}
+                        title={t("add_control", { ns: "item" })}
+                    >
+                        {t("add_control", { ns: "item" })}
+                    </HTMLLink>
                 </div>
             }
         </div>

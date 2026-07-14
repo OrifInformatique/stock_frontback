@@ -67,7 +67,7 @@ const SegmentedControl = ({
     return (
         <>
             <div className={clsx(
-                "flex h-full justify-stretch items-stretch rounded-full divide-x-2 border-black",
+                "flex h-full justify-stretch items-stretch rounded-[5px] divide-x-2",
                 errors.length > 0 && "border-2 border-solid border-red-500"
             )}>
                 {options.map(option => {
@@ -79,12 +79,13 @@ const SegmentedControl = ({
                             key={option}
                             onClick={() => handleSelection(option)}
                             className={clsx(
-                                "flex flex-1 justify-center align-center bg-background first:rounded-l-full last:rounded-r-full px-2 py-1 transition-colors hover:cursor-pointer text-center",
+                                "flex flex-1 justify-center align-center items-center bg-background first:rounded-l-[5px] last:rounded-r-[5px] px-2 py-1 transition-colors hover:cursor-pointer text-center",
                                 className
-                            )} //defined colors no longer work after the new tailwind update
+                            )} //defined colors no longer work after the new tailwind update, might wanna fix that
                             style={{
                                 backgroundColor: isSelected && '#005ba9',
                                 color: isSelected && '#ffffff',
+                                fontWeight: isSelected && 600
                             }}
                         >
                             <input
@@ -102,6 +103,7 @@ const SegmentedControl = ({
 
                             <Label
                                 htmlFor={option}
+                                className="hover:cursor-pointer"
                             >
                                 <Label.Title unstyled>{option}</Label.Title>
                             </Label>

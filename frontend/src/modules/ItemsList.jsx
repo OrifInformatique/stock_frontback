@@ -4,7 +4,7 @@ import NoResults from "../ui/NoResults";
 
 import Item from "../modules/Item";
 import ItemCommon from "../modules/ItemCommon";
-
+import Heading from "../ui/Heading";
 /**
  * List of all exemplars corresponding to the selected filters.
  *
@@ -16,26 +16,25 @@ import ItemCommon from "../modules/ItemCommon";
 const ItemsList = ({
     items = [],
     displayExemplars
-}) =>
-{
+}) => {
     return (
-        <section className="flex flex-wrap justify-center gap-4 mt-36 lg:mt-24 p-4">
-            {items.length > 0 ? (
-                displayExemplars ? items.map(itemCommon =>
-                    <ItemCommon
-                        key={itemCommon.id}
-                        itemCommon={itemCommon}
-                    />
-                ) : items.map(exemplar =>
-                    <Item
-                        key={exemplar.id}
-                        item={exemplar}
-                    />
-                )
-            ) :
-                <NoResults />
-            }
-        </section>
+            <section className="flex flex-wrap justify-center gap-4 mt-36 lg:mt-24 p-4">
+                {items.length > 0 ? (
+                    displayExemplars ? items.map(itemCommon =>
+                        <ItemCommon
+                            key={itemCommon.id}
+                            itemCommon={itemCommon}
+                        />
+                    ) : items.map(exemplar =>
+                        <Item
+                            key={exemplar.id}
+                            item={exemplar}
+                        />
+                    )
+                ) :
+                    <NoResults />
+                }
+            </section>
     )
 }
 

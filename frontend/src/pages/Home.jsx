@@ -19,8 +19,7 @@ import ItemsList from "../modules/ItemsList";
  * @returns {JSX.Element}
  *
  */
-const Home = () =>
-{
+const Home = () => {
     const { t } = useTranslation("item");
 
     const [isLoading, setIsLoading] = useState(true);
@@ -60,10 +59,8 @@ const Home = () =>
         { label: t("stocking_place", { ns: "item" }), value: "stocking_place" }
     ];
 
-    const filterItems = () =>
-    {
-        if(displayMode === t("objects", { ns: "item" }))
-        {
+    const filterItems = () => {
+        if (displayMode === t("objects", { ns: "item" })) {
             setFilteredItems(itemsCommon
                 .filter(itemCommon => !searchBar
                     || itemCommon.name.toLowerCase().includes(searchBar.toLowerCase()))
@@ -99,7 +96,7 @@ const Home = () =>
                 .filter(itemCommon => itemCommon.items.length > 0)
 
                 .sort((a, b) => {
-                    if(!a[selectedFilterOption])
+                    if (!a[selectedFilterOption])
                         return filterByAscOrder
                             ? a[filterOptionsObjects[0].value].localeCompare(filterOptionsObjects[0].value)
                             : b[filterOptionsObjects[0].value].localeCompare(a[filterOptionsObjects[0].value])
@@ -111,8 +108,7 @@ const Home = () =>
             )
         }
 
-        else
-        {
+        else {
             const exemplars = itemsCommon.flatMap(itemCommon =>
                 itemCommon.items.map(exemplar => ({
                     ...exemplar,
@@ -146,7 +142,7 @@ const Home = () =>
                     || selectedStockingPlaces.some(place => exemplar.stocking_place === place))
 
                 .sort((a, b) => {
-                    if(!a[selectedFilterOption])
+                    if (!a[selectedFilterOption])
                         return filterByAscOrder
                             ? a[filterOptionsExemplars[0].value].localeCompare(b[filterOptionsExemplars[0].value])
                             : b[filterOptionsExemplars[0].value].localeCompare(a[filterOptionsExemplars[0].value])
@@ -162,10 +158,8 @@ const Home = () =>
     /**
      * Fetch data from the API.
      */
-    useEffect(() =>
-    {
-        const fetchData = async () =>
-        {
+    useEffect(() => {
+        const fetchData = async () => {
             setItemsCommon(await getItems());
 
             setObjectTypes(await getAllObjectTypes());
@@ -181,8 +175,7 @@ const Home = () =>
     /**
      * Initializes the items after fetching the data.
      */
-    useEffect(() =>
-    {
+    useEffect(() => {
         filterItems();
         setIsLoading(false);
     }, [itemsCommon]);
@@ -195,7 +188,7 @@ const Home = () =>
         displayMode === t("objects", { ns: "item" })
             ? "name"
             : "inventory_prefix"
-        ), [displayMode]
+    ), [displayMode]
     );
 
     /**
@@ -206,51 +199,51 @@ const Home = () =>
         selectedGroups, selectedStockingPlaces,
         selectedFilterOption, filterByAscOrder
     ]);
-
     return (
-        <div className="relative">
-            <Filters
-                setDisplayModeFunction={setDisplayMode}
-                selectedDisplayMode={displayMode}
 
-                searchBar={searchBar}
-                setSearchbar={setSearchbar}
+            <div className="flex flex-col mb-100">
+                <Filters
+                    setDisplayModeFunction={setDisplayMode}
+                    selectedDisplayMode={displayMode}
 
-                objectTypes={objectTypes?.map(objectType => objectType.name)}
-                selectedObjectTypes={selectedObjectTypes}
-                setSelectedObjectTypes={setSelectedObjectTypes}
+                    searchBar={searchBar}
+                    setSearchbar={setSearchbar}
 
-                loanStates={loanStates?.map(loanState => loanState.name)}
-                selectedLoanStates={selectedLoanStates}
-                setSelectedLoanStates={setSelectedLoanStates}
+                    objectTypes={objectTypes?.map(objectType => objectType.name)}
+                    selectedObjectTypes={selectedObjectTypes}
+                    setSelectedObjectTypes={setSelectedObjectTypes}
 
-                exemplarConditions={exemplarConditions?.map(exemplarCondition => exemplarCondition.name)}
-                selectedExemplarConditions={selectedExemplarConditions}
-                setSelectedExemplarConditions={setSelectedExemplarConditions}
+                    loanStates={loanStates?.map(loanState => loanState.name)}
+                    selectedLoanStates={selectedLoanStates}
+                    setSelectedLoanStates={setSelectedLoanStates}
 
-                groups={groups?.map(group => group.name)}
-                selectedGroups={selectedGroups}
-                setSelectedGroups={setSelectedGroups}
+                    exemplarConditions={exemplarConditions?.map(exemplarCondition => exemplarCondition.name)}
+                    selectedExemplarConditions={selectedExemplarConditions}
+                    setSelectedExemplarConditions={setSelectedExemplarConditions}
 
-                stockingPlaces={stockingPlaces?.map(stockingPlace => stockingPlace.name)}
-                selectedStockingPlaces={selectedStockingPlaces}
-                setSelectedStockingPlaces={setSelectedStockingPlaces}
+                    groups={groups?.map(group => group.name)}
+                    selectedGroups={selectedGroups}
+                    setSelectedGroups={setSelectedGroups}
 
-                filterOptions={displayMode === t("objects", { ns: "item" })
-                    ? filterOptionsObjects
-                    : filterOptionsExemplars}
-                selectedFilterOption={selectedFilterOption}
-                setSelectedFilterOption={setSelectedFilterOption}
+                    stockingPlaces={stockingPlaces?.map(stockingPlace => stockingPlace.name)}
+                    selectedStockingPlaces={selectedStockingPlaces}
+                    setSelectedStockingPlaces={setSelectedStockingPlaces}
 
-                filterByAscOrder={filterByAscOrder}
-                setFilterByAscOrder={setFilterByAscOrder}
-            />
+                    filterOptions={displayMode === t("objects", { ns: "item" })
+                        ? filterOptionsObjects
+                        : filterOptionsExemplars}
+                    selectedFilterOption={selectedFilterOption}
+                    setSelectedFilterOption={setSelectedFilterOption}
 
+                    filterByAscOrder={filterByAscOrder}
+                    setFilterByAscOrder={setFilterByAscOrder}
+                />
             {isLoading ? (
                 <div className="mt-28">
                     <Loading />
                 </div>
             ) : (
+
                 <ItemsList
                     items={filteredItems}
                     displayExemplars={displayMode == t("objects", { ns: "item" })}

@@ -1,6 +1,7 @@
 import React from "react";
 
 import clsx from "clsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /**
  * UI component to display a tag for an element.
@@ -17,22 +18,26 @@ import clsx from "clsx";
 const Tag = ({
     text,
     color = "bg-blue",
-    className = null
-}) =>
-{
-    if(!text)
-    {
+    className = null,
+    icon = null
+}) => {
+    if (!text) {
         console.error("Tag must contain text.");
         return;
     }
 
     return (
         <span className={clsx(
-            "text-white w-fit px-1 rounded-md",
+            "text-white px-1 py-0.5 rounded-md",
             color,
             className
         )}>
-            {text}
+            <FontAwesomeIcon
+                icon={icon}
+                size="1xl"
+            />
+
+            {!icon && text}
         </span>
     )
 }

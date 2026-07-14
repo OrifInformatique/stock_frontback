@@ -7,5 +7,7 @@
     "generate_inventory_number": "Générer un numéro d'inventaire",
     "menu": "Menu",
     "new": "Nouveau",
-    "save": "Sauvegarder"
+    "save": "Enregistrer",
+    "upload_image": "Importer une image...",
+    "link_file": "Joindre un fichier..."
 }

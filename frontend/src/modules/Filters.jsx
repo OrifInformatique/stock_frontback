@@ -8,6 +8,8 @@ import { Button, Label, MultiSelect, InputText, SingleSelect } from "@orif-infor
 import Menu from "../ui/Menu";
 import SegmentedControl from "../ui/SegmentedControl";
 import Toggle from "../ui/Toggle";
+import Heading from "../ui/Heading";
+import "../style.css"
 
 import { notDevelopedFeature } from "../utils/devUtils";
 
@@ -27,9 +29,9 @@ const Filters = ({
     stockingPlaces, selectedStockingPlaces, setSelectedStockingPlaces,
     filterOptions, selectedFilterOption, setSelectedFilterOption,
     filterByAscOrder, setFilterByAscOrder
-}) =>
-{
+}) => {
     const { t } = useTranslation(["buttons", "filters", "item", "misc"]);
+    console.log("show:", t("show_filters", { ns: "filters" }));
     const navigate = useNavigate();
 
     const [expandFilters, setExpandFilters] = useState(false);
@@ -38,12 +40,11 @@ const Filters = ({
 
     const handleSearchBar = (event) => setSearchbar(event.target.value.trimStart());
 
-    const handleToggleFilters = () =>
-    {
+    const handleToggleFilters = () => {
         setExpandFilters(prev => {
             const areFiltersExpanded = !prev
 
-            setFilterButtonIcon(areFiltersExpanded ? faXmark : faFilter )
+            setFilterButtonIcon(areFiltersExpanded ? faXmark : faFilter)
             setFilterButtonLabel(areFiltersExpanded ? t("hide_filters", { ns: "filters" }) : t("show_filters", { ns: "filters" }))
 
             return areFiltersExpanded;
@@ -55,8 +56,7 @@ const Filters = ({
      *
      * @returns {void}
      */
-    const resetFilters = () =>
-    {
+    const resetFilters = () => {
         setSearchbar("");
 
         setSelectedObjectTypes([]);
@@ -72,48 +72,49 @@ const Filters = ({
     }
 
     return (
-        <section className="fixed top-8 left-0 sm:flex flex-wrap lg:flex-nowrap justify-between lg:justify-center lg:gap-2 w-full p-2 my-2 z-[100]">
-            <div className="w-full sm:w-1/2 lg:w-1/4 h-[56px] p-2 bg-gray-300 rounded-full">
+        <section className="top-25 left-0 sm:flex flex-wrap lg:flex-nowrap justify-between lg:justify-center lg:gap-2 w-full p-2 my-2 z-[100]">
+            <div className="w-full sm:w-1/2 lg:w-1/4 h-[56px] p-2 bg-gray-300 rounded-[5px]">
                 <SegmentedControl
                     name={"displayMode"}
-                    options={[t("objects", { ns: "item"}), t("exemplars", { ns: "item"})]}
+                    options={[t("objects", { ns: "item" }), t("exemplars", { ns: "item" })]}
                     selectedValue={selectedDisplayMode}
                     onChangeFunction={setDisplayModeFunction}
                 />
             </div>
 
-            <div className="relative flex flex-col sm:order-last lg:order-none w-full lg:w-3/5 h-fit rounded-[28px] my-2 lg:my-0 p-2 bg-gray-300">
+            <div className="relative flex flex-col sm:order-last lg:order-none w-full lg:w-3/5 h-fit rounded-[5px] my-2 lg:my-0 p-2 bg-gray-300">
                 <div className="flex justify-between z-20">
                     <div className="w-full pr-2">
                         <InputText
                             name={"searchbar"}
                             placeholder={selectedDisplayMode === t("objects", { ns: "item" })
-                                ? t("home_searchbar_placeholder_objects", { ns: "filters"})
-                                : t("home_searchbar_placeholder_exemplars", { ns: "filters"})}
+                                ? t("home_searchbar_placeholder_objects", { ns: "filters" })
+                                : t("home_searchbar_placeholder_exemplars", { ns: "filters" })}
                             value={searchBar}
                             onChangeFunction={handleSearchBar}
-                            className={"!rounded-full"}
+                            className={"!rounded-[5px]"}
                         />
                     </div>
 
                     <div className="shrink-0">
                         <Button
-                            icon={filterButtonIcon}
+                            icon="filter"
                             label={filtersButtonLabel}
                             onClick={handleToggleFilters}
                             variant="secondary"
-                            className={"!rounded-full"}
+                            className={"!rounded-[5px]"}
                         />
                     </div>
                 </div>
 
                 {expandFilters && (
-                    <div className="absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[25px] z-10">
+                    <div className="appear absolute left-0 right-0 grid grid-cols-2 sm:grid-cols-3 gap-4 justify-items-stretch items-end w-full p-4 pt-16 bg-gray-300 rounded-[5px] z-10">
                         <div>
                             <Label
-                                forInput={"object-type"}
-                                label={t("object_type", { ns: "item" })}
-                            />
+                                htmlFor={"object-type"}
+                            >
+                                {t("object_type", { ns: "item" })}
+                            </Label>
 
                             <MultiSelect
                                 name={"object-type"}
@@ -125,9 +126,10 @@ const Filters = ({
 
                         <div>
                             <Label
-                                forInput={"loan-state"}
-                                label={t("loan_state", { ns: "item" })}
-                            />
+                                htmlFor={"loan-state"}
+                            >
+                                {t("loan_state", { ns: "item" })}
+                            </Label>
 
                             <MultiSelect
                                 name={"loan-state"}
@@ -139,10 +141,10 @@ const Filters = ({
 
                         <div>
                             <Label
-                                forInput={"exemplar-condition"}
-                                label={t("exemplar_condition", { ns: "item" })}
-                            />
-
+                                htmlFor={"exemplar-condition"}
+                            >
+                                {t("exemplar_condition", { ns: "item" })}
+                            </Label>
                             <MultiSelect
                                 name={"exemplar-condition"}
                                 options={exemplarConditions}
@@ -153,10 +155,10 @@ const Filters = ({
 
                         <div>
                             <Label
-                                forInput={"group"}
-                                label={t("group", { ns: "item" })}
-                            />
-
+                                htmlFor={"group"}
+                            >
+                                {t("group", { ns: "item" })}
+                            </Label>
                             <MultiSelect
                                 name={"group"}
                                 options={groups}
@@ -167,9 +169,10 @@ const Filters = ({
 
                         <div>
                             <Label
-                                forInput={"stocking-places"}
-                                label={t("stocking_place", { ns: "item" })}
-                            />
+                                htmlFor={"stocking-places"}
+                            >
+                                {t("stocking_place", { ns: "item" })}
+                            </Label>
 
                             <MultiSelect
                                 name={"stocking-places"}
@@ -181,10 +184,10 @@ const Filters = ({
 
                         <div>
                             <Label
-                                forInput={"filter-by"}
-                                label={t("filter_order", { ns: "filters" })}
-                            />
-
+                                htmlFor={"filter-by"}
+                            >
+                                {t("filter_order", { ns: "filters" })}
+                            </Label>
                             <SingleSelect
                                 name={"filter-by"}
                                 options={filterOptions}
@@ -206,7 +209,7 @@ const Filters = ({
 
                         <div className="col-span-full sm:col-auto">
                             <Button
-                                icon={faRotate}
+                                icon="restore"
                                 label={t("reset_filters", { ns: "filters" })}
                                 keepLabel={true}
                                 variant="secondary"
@@ -221,14 +224,12 @@ const Filters = ({
                 <Menu
                     actions={[
                         {
-                            icon: faPlus,
-                            label: t("new", { ns: "buttons" }),
-                            action: () => navigate("/objects/add")
+                            icon: "plus",
+                            label: t("new", { ns: "buttons" })
                         },
                         {
-                            icon: faFileExport,
-                            label: t("export", { ns: "buttons" }),
-                            action: () => notDevelopedFeature()
+                            icon: "export",
+                            label: t("export", { ns: "buttons" })
                         }
                     ]}
                     className={"sm:flex-col-reverse"}

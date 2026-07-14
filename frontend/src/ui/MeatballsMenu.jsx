@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import useOnclickOutside from "react-cool-onclickoutside";
+import React, { useEffect, useState, useRef } from "react";
 import clsx from "clsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +7,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import HTMLLink from "./HTMLLink";
 
 import { Button } from "@orif-informatique/react-components-library";
-
+import "../style.css"
 /**
  * UI component to add a meatballs menu with personalized actions.
  *
@@ -25,6 +24,7 @@ const MeatballsMenu = ({
     actions,
 }) =>
 {
+    const ref = useRef(null);
     if(!actions || actions.length < 1)
     {
         console.error("MeatballsMenu must have at least one action");
@@ -33,22 +33,31 @@ const MeatballsMenu = ({
 
     const [openMeatballsMenu, setOpenMeatballsMenu] = useState(false);
 
-    const ref = useOnclickOutside(() => setOpenMeatballsMenu(false));
+    //Hide the menu when user clicks elsewhere
+    useEffect(()=>{
+        function hasClickedElsewhere(eevent){
+            if(ref.current && !ref.current.contains(eevent.target)){
+                setOpenMeatballsMenu(false);
+            }
+        }
+
+        document.addEventListener('mouseup',hasClickedElsewhere);
+        return(()=>{
+            document.removeEventListener('mouseup',hasClickedElsewhere);
+        })
+    },[]);
 
     return (
-        <div className={`relative w-fit`}>
+        <div ref={ref} className={`relative w-fit`}>
             <FontAwesomeIcon
                 icon={faEllipsis}
-                size="2xl"
+                size="1xl"
                 onClick={() => setOpenMeatballsMenu(prev => !prev)}
                 className="hover:cursor-pointer"
             />
 
             {openMeatballsMenu && (
-                <div
-                    ref={ref}
-                    className="absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md"
-                >
+                <div className="appearMenu rounded-md absolute top-8 right-0 flex flex-col min-w-max gap-2 p-2 bg-gray-300 rounded-md z-500 shadow-2xl">
                     {actions.map(action => (
                         <div key={action.label}>
                             {action.isLink ? (
@@ -64,8 +73,8 @@ const MeatballsMenu = ({
                                     icon={action.icon}
                                     label={action.label}
                                     keepLabel={true}
-                                    onClick={action.action}
-                                    className={"!rounded-md"}
+                                    onClick={()=>{action.action();setOpenMeatballsMenu(false);}}
+                                    className={"!rounded-md w-full"}
                                 />
                             )}
                         </div>
